@@ -1,0 +1,8 @@
+- content_for :calendar_js_and_css do
+  = stylesheet_link_tag "event_calendar"
+  = javascript_include_tag "event_calendar"
+
+/- content_for :middle_content do
+%h1 New event
+= render 'form'
+= link_to 'Back', class_room_path(@class.id)

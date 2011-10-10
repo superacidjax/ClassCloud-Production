@@ -1,0 +1,21 @@
+%h1 edit user
+= form_tag admin_admin_path(@user.id),:method =>:put do
+  -if @user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this discussion from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+  = label_tag 'first_name'
+  = text_field_tag 'user[first_name]',@user.first_name
+  %br
+  = label_tag 'last_name'
+  = text_field_tag 'user[last_name]',@user.last_name
+  %br
+  = label_tag 'username'
+  = text_field_tag 'user[username]',@user.username
+  %br
+  = label_tag 'time zone'
+  = time_zone_select 'user','time_zone',nil, :default=>@user.time_zone
+  %br
+  = submit_tag 'Save'   

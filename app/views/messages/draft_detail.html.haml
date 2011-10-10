@@ -1,0 +1,15 @@
+/- content_for :middle_content do
+-@draft_detail.each do |draft|
+  -if draft.id.eql?(@message_id.to_i)
+
+    %br
+
+    %br
+      %b
+        ='Topic :'
+      =draft.topic
+    %br
+      %b
+        ='Description:'
+    %br
+      =draft.body

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @upload_file.title
+
+%p
+  %b Posted by:
+  = first_name(@upload_file.user_id).full_name
+
+- unless current_user.is_observer?
+  = link_to 'Edit', edit_class_room_upload_file_path(@class.id,@upload_file)
+  = "|"
+- if @student
+  = link_to 'Back', student_upload_files_index_class_room_upload_files_path(@class.id, @student.id)
+- elsif @teacher
+  = link_to 'Back', teacher_upload_files_index_class_room_upload_files_path(@class.id, @teacher.id)
+

@@ -1,0 +1,6 @@
+= form_for(@assignment_category,:url=>create_assignment_category_class_room_assignments_path(@class.id) ,:method =>:post) do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+  .action
+    = f.submit 'save'

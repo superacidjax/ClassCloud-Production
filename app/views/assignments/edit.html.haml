@@ -1,0 +1,4 @@
+/- content_for :middle_content do
+%h1 Editing assignment
+= render 'form'
+= link_to 'Show', comment_new_class_room_assignment_path(@class.id, @assignment)

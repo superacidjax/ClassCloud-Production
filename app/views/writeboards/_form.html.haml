@@ -1,0 +1,63 @@
+- if @writeboard.new_record?
+  = form_for(@writeboard, :url => class_room_assignment_writeboards_path(@class.id, params[:assignment_id])) do |f|
+
+    - if @writeboard.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@writeboard.errors.count, "error")
+          prohibited this CloudPad from being saved:
+        %ul
+          - @writeboard.errors.full_messages.each do |msg|
+            %li= msg
+
+    .field
+      = f.label :title
+      %br/
+      = f.text_field :title
+    .field
+      = f.label :body
+      %br/
+      = f.text_area :body
+      = f.hidden_field :is_public, :value =>false
+    .actions
+      = f.submit "Save"
+- else
+  = form_for(@writeboard, :url => class_room_assignment_writeboard_path(@class.id, @assignment.id, @writeboard.id)) do |f|
+
+    - if @writeboard.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@writeboard.errors.count, "error")
+          prohibited this create writeboard from being saved:
+        %ul
+          - @writeboard.errors.full_messages.each do |msg|
+            %li= msg
+
+    .field
+      -title ="#{@writeboard.title}"
+      = f.hidden_field :title ,:value=>title
+    .field
+      = f.label :title
+      %br
+      = f.text_field :title
+      %br
+      %br
+      = label_tag 'Body'
+      %br
+        = f.text_area :body
+      %br
+      -if @writeboard.user_id.eql?(current_user.id)
+        = check_box_tag "version",@writeboard.version
+        = "Minor edit,don't save new version"
+    - if current_user.is_teacher?
+      .field
+        = f.label :grade
+        %br
+        = f.text_field :grade
+      .field
+        = label_tag 'make public'
+        = f.check_box :is_public
+        - if current_user.is_student?
+          = hidden_field_tag 'id',nil,@whiteboard.id
+    .actions
+      = f.submit "Save"

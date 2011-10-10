@@ -1,0 +1,115 @@
+!!!
+%html
+  %head
+    %title ClassCloud
+    = stylesheet_link_tag :all
+    = javascript_include_tag :defaults
+    = yield :calendar_js_and_css
+    = csrf_meta_tag
+    %meta{:name => "google-site-verification", :content =>"okQIcxqP1cCBYhBhs2NtJXc4PO9ReSekIQtF0VlaYSE"}
+  %body
+    - if current_user and (((current_user and current_user.is_teacher?) or (!current_user.is_teacher? and current_user.username)))
+      - if not ((params[:controller].eql?('dashboard') and params[:action].eql?('index')) or (params[:controller].eql?('class_rooms') and params[:action].eql?('new')))
+        .header
+          .nav
+            = "#{@class.name}"
+            - if current_user.is_observer?
+              - if @student
+                = link_to "Switch class", student_dashboard_path(@student)
+              - elsif @teacher
+                = link_to "Switch class", teacher_dashboard_path(@teacher)
+              = "|"
+              - if @student
+                = "#{@student.full_name}'s class"
+                = "|"
+                = link_to "#{current_user.received_messages.unread.count} New Messages", student_observer_message_inbox_class_room_messages_path(@class.id, @student.id)
+                = "|"
+              - elsif @teacher
+                = "#{@teacher.full_name}'s class"
+                = "|"
+                = link_to "#{current_user.received_messages.unread.count} New Messages", teacher_observer_message_inbox_class_room_messages_path(@class.id, @teacher.id)
+                = "|"
+            - else
+              = link_to "Switch Class", root_path
+              = "|"
+              = link_to "#{current_user.received_messages.unread.count} New Messages", class_room_messages_path(@class.id)
+              = "|"
+            = "Hello, #{current_user.full_name}"
+            = "|"
+            = link_to "My Settings", class_room_edit_user_path(@class.id ,current_user.id)
+            = "|"
+            = link_to "Sign Out", destroy_user_session_path, :method => :delete
+        #main_nav
+          .tabs
+            %h1
+            - unless current_user.is_observer?
+              = link_to "Assignments", class_room_assignments_path(@class.id)
+            - else
+              - if @student
+                = link_to "Assignments", student_assignments_index_class_room_assignments_path(@class.id, @student.id)
+              - elsif @teacher
+                = link_to "Assignments", teacher_assignments_index_class_room_assignments_path(@class.id, @teacher.id)
+            = "|"
+            - unless current_user.is_observer? or  current_user.is_student?
+              = link_to "Assignment Categories",assignment_category_class_room_assignments_path(@class.id)
+              = "|"
+
+            - unless current_user.is_observer?
+              = link_to "Class Notes", class_room_notes_path(@class.id)
+            - else
+              - if @student
+                = link_to "Class Notes", student_notes_index_class_room_notes_path(@class.id, @student.id)
+              - elsif @teacher
+                = link_to "Class Notes", teacher_notes_index_class_room_notes_path(@class.id, @teacher.id)
+            = "|"
+            - unless current_user.is_observer?
+              = link_to "Discussions", class_room_discussions_path(@class.id)
+            - else
+              - if @student
+                = link_to "Discussions", student_discussion_index_class_room_discussions_path(@class.id, @student.id)
+              - elsif @teacher
+                = link_to "Discussions", teacher_discussion_index_class_room_discussions_path(@class.id, @teacher.id)
+            = "|"
+            - unless current_user.is_observer?
+              = link_to "Calendar", class_room_path(@class.id)
+            - else
+              - if @student
+                = link_to "Calendar", class_room_student_path(@class.id, @student.id)
+              - elsif @teacher
+                = link_to "Calendar", class_room_teacher_path(@class.id, @teacher.id)
+            = "|"
+            - unless current_user.is_observer?
+              = link_to "Files", class_room_upload_files_path(@class.id)
+            - else
+              - if @student
+                = link_to "Files", student_upload_files_index_class_room_upload_files_path(@class.id, @student.id)
+              - elsif @teacher
+                = link_to "Files", teacher_upload_files_index_class_room_upload_files_path(@class.id, @teacher.id)
+            - if current_user.is_teacher?
+              = "|"
+              = link_to "People", class_room_people_path(@class.id)
+              = "|"
+              = link_to "To-dos", class_room_to_dos_path(@class.id)
+              = "|"
+              = link_to "Messages", class_room_messages_path(@class.id)
+            = "|"
+            - unless current_user.is_observer?
+              = link_to "CloudPads", class_room_writeboards_path(@class.id)
+            - else
+              - if @student
+                = link_to "CloudPads", student_writeboards_index_class_room_writeboards_path(@class.id, @student.id)
+              - elsif @teacher
+                = link_to "CloudPads", teacher_writeboards_index_class_room_writeboards_path(@class.id, @teacher.id)
+            = yield
+        - if current_user.is_teacher?
+          %br
+          #students
+            %h1 My Students
+            %h2
+            - @students.each do |student|
+              = link_to student.full_name, class_room_user_profile_path(@class.id, student.id)
+              %br
+      - else
+        = yield
+    - else
+      = yield
