@@ -315,6 +315,10 @@ div.field, div.actions {
   margin-top: 36px;
   width: 850px;
   white-space: normal; }
+  #main_content_area h1 {
+    font: normal 18px Helvetica, Arial, sans-serif;
+    color: #3f3d32;
+    -webkit-font-smoothing: anti-aliased; }
   #main_content_area h2 {
     font: normal 18px Helvetica, Arial, sans-serif;
     color: #00009c;
@@ -325,6 +329,14 @@ div.field, div.actions {
     color: #c67171;
     -webkit-font-smoothing: anti-aliased; }
   #main_content_area h4 {
+    font: normal 14px Helvetica, Arial, sans-serif;
+    color: #3f3d32;
+    -webkit-font-smoothing: anti-aliased; }
+  #main_content_area h5 {
+    font: normal 14px Helvetica, Arial, sans-serif;
+    color: #3f3d32;
+    -webkit-font-smoothing: anti-aliased; }
+  #main_content_area h6 {
     font: normal 14px Helvetica, Arial, sans-serif;
     color: #00009c;
     -webkit-font-smoothing: anti-aliased; }

@@ -7,45 +7,6 @@ class DiscussionsController < ApplicationController
 
   before_filter :authenticate_user!
   before_filter :get_my_students_and_class
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
-  # GET /discussions
-  # GET /discussions.json
-  def index
-    @discussions = @class.discussions
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @discussions }
-    end
-  end
-
-  # GET /discussions/1
-  # GET /discussions/1.json
-  def show
-    @discussion = Discussion.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @discussion }
-    end
-  end
-
-  # GET /discussions/new
-  # GET /discussions/new.json
-  def new
-    @discussion = Discussion.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @discussion }
-    end
-  end
-
-  # GET /discussions/1/edit
-<<<<<<< HEAD
-=======
 
   def index
     @discussions = @class.discussions
@@ -59,23 +20,10 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.new
   end
 
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def edit
     @discussion = Discussion.find(params[:id])
   end
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  # POST /discussions
-  # POST /discussions.json
-=======
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-  # POST /discussions
-  # POST /discussions.json
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def create
     @discussion = Discussion.new(params[:discussion])
     @discussion.class_room_id = params[:class_room_id]
@@ -87,38 +35,6 @@ class DiscussionsController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
-  # PUT /discussions/1
-  # PUT /discussions/1.json
-  def update
-    @discussion = Discussion.find(params[:id])
-
-    respond_to do |format|
-      if @discussion.update_attributes(params[:discussion])
-        format.html { redirect_to (class_room_discussions_url(@class.id)), notice: 'Discussion was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @discussion.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /discussions/1
-  # DELETE /discussions/1.json
-  def destroy
-    @discussion = Discussion.find(params[:id])
-    @discussion.destroy
-
-    respond_to do |format|
-      format.html { redirect_to (class_room_discussions_url(@class.id)) }
-      format.json { head :ok }
-    end
-<<<<<<< HEAD
-=======
   def update
     @discussion = Discussion.find(params[:id])
 
@@ -134,9 +50,6 @@ class DiscussionsController < ApplicationController
     @discussion.destroy
     
     redirect_to (class_room_discussions_url(@class.id))
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   end
   
   def comment_new

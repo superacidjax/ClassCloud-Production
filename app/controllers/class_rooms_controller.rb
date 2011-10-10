@@ -13,14 +13,6 @@ class ClassRoomsController < ApplicationController
   end
 
   def index    
-<<<<<<< HEAD
-<<<<<<< HEAD
-    # @class = ClassRoom.first
-=======
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-    # @class = ClassRoom.first
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     render :layout => false
   end
 

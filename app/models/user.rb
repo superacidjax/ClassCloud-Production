@@ -9,21 +9,10 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :user_type, :username, :login, :time_zone
   attr_accessor :is_not_teacher, :user_type, :login, :user_pick_username_and_password
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   validates :first_name, :presence => true
   validates :user_type, :presence => true, :if => Proc.new{|user| user.is_not_teacher.eql?(true)}
   validates :username, :presence => true, :if => Proc.new{|user| user.user_pick_username_and_password.eql?(true)}
   validates :username, :uniqueness => true, :if => Proc.new{|user| user.user_pick_username_and_password.eql?(true)}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   has_many :assignments, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   has_many :events, :dependent => :destroy
@@ -40,9 +29,6 @@ class User < ActiveRecord::Base
   :required   => [:topic, :body]    ,              # default [:topic, :body]
   :class_name => "ActsAsMessageable::Message"       # default "ActsAsMessageable::Message"
   acts_as_voter
-<<<<<<< HEAD
-=======
-
   with_options :dependent => :destroy do |user|
     user.has_many :assignments
     user.has_many :comments
@@ -61,13 +47,9 @@ class User < ActiveRecord::Base
 
   acts_as_messageable  :table_name => "messages", # default 'messages'
   :required   => [:topic, :body]    ,              # default [:topic, :body]
-  :class_name => "ActsAsMessageable::Message"       # default "ActsAsMessageable::Message"
-  
+  :class_name => "ActsAsMessageable::Message"       # default "ActsAsMessageable::Message"  
   acts_as_voter
 
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   USER_TYPE = [
     ["Student", "student"],
     ["Observer", "observer"]
@@ -127,15 +109,8 @@ class User < ActiveRecord::Base
     where(["username = :value OR email = :value", { :value => login }]).first
   end
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
   def self.generate_random_string(size = 8)
     charset = %w{ 2 3 4 6 7 9 A C D E F G H J K M N P Q R T V W X Y Z}
     (0...size).map{ charset.to_a[rand(charset.size)] }.join
   end
-
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
 end

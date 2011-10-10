@@ -1,31 +1,12 @@
 class CommentsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_my_students_and_class
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
-  def index
-    commentable_type = params[:commentable_type]
-    #    debugger
-    post = Comment.find(params[:comment_id])
-    current_user.vote_for(post)
-    respond_to do |format|
-      format.html { redirect_to class_room_url(@class.id) }
-      format.json { head :ok }
-    end
-
-<<<<<<< HEAD
-=======
   
   def index
     commentable_type = params[:commentable_type]
     post = Comment.find(params[:comment_id])
     current_user.vote_for(post)
     redirect_to class_room_url(@class.id)
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   end
 
   private
