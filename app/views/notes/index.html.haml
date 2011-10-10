@@ -25,5 +25,5 @@
 
 %hr
 -if current_user.is_teacher? and !current_user.class_rooms.blank?
-  =link_to 'New note', new_class_room_note_path(@class.id)
+  =link_to 'Add new Class Notes', new_class_room_note_path(@class.id)
   

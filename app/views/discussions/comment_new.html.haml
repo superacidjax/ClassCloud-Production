@@ -1,58 +1,43 @@
-%table{:width => "50%"}
-  %tr
-    %td
-      %b= @discussion.title
+#main_content_area
+  %h3 Discussion started #{distance_of_time_in_words(@discussion.created_at, Time.now)} ago by #{@discussion.user.full_name}.
+  %hr
+  - if current_user.id.eql?(@discussion.user_id) or current_user.is_teacher?
+    = link_to "Edit", edit_class_room_discussion_path(@class.id, @discussion)
+    = "|"
+    = link_to "Delete", class_room_discussion_path(@class.id, @discussion), :confirm => "Are you sure ?", :method => :delete
+  %td
+    %br
+      %h2
+        = @discussion.title
     %td{:align => "right"}
-      - unless current_user.is_observer?
-        = link_to "New", new_class_room_discussion_path(@class.id)
-      - if current_user.id.eql?(@discussion.user_id) or current_user.is_teacher?
-        = "|"
-        = link_to "Edit", edit_class_room_discussion_path(@class.id, @discussion)
-        = "|"
-        = link_to "Delete", class_room_discussion_path(@class.id, @discussion), :confirm => "Are you sure ?", :method => :delete
+      
  
   %tr
-    %td{:colspan => "2"}
-      From: #{@discussion.user.full_name}
+    %h4
+      != @discussion.description
+    %br
   %tr
-    %td{:colspan => "2"}
-      Date: #{date_format(@discussion.created_at)}
-  
-  %tr
-    %td{:colspan => "2"}
-      %hr{:noshade => ""}
-  %tr
-    %td{:colspan => "2"}
-      = @discussion.description
-  %tr
-    %td{:colspan => "2"}
-      %hr{:noshade => ""}
+    %hr
+    %hr
   %tr
     %td{:colspan => "3"}
       #comments_container
+        %h4 Comments
+        %br
         - @discussion.comments.each do |comment|
           %table{:width => "100%"}
             %tr
-              %td{:rowspan => "3"}= image_tag "bakso.jpg", :width => "48", :height => "48"
-              %td{:colspan => "3"}
+              %h6{:colspan => "3"}
                 = "#{comment.user.full_name}"
                 - unless vote_count(comment.id).eql?(0) or !current_user.is_teacher?
                   = '('
                   = vote_count(comment.id)
                   = ')'
-                = "#{date_format(comment.created_at)}"
+                said this #{distance_of_time_in_words(comment.created_at, Time.now)} ago:
             %tr
-              %td
-                = comment.comment
-                - unless comment.file_updated_at.nil?
-                  %br
-                  = 'file :'
-                  - if current_user.is_observer?
-                    = comment.file_file_name
-                  - else
-                    = link_to comment.file_file_name, download_class_room_note_path(@class.id, comment.id)
-                    - if current_user.id.eql?(comment.user_id) or current_user.is_teacher?
-                      | #{link_to 'remove',remove_file_class_room_discussion_path(@class.id, comment.id), :confirm => "Are you sure ?", :method => :put}
+            %br
+            %h4
+              = comment.comment
               %td{:align => "right"}
                 - if current_user.id.eql?(comment.user_id) 
                   = link_to "Edit", class_room_comment_edit_discussions_path(@class.id, @discussion, comment.id)
@@ -74,7 +59,6 @@
     .field
       = text_area_tag "comment[comment]", nil, :rows => 4, :cols => 40
       %br
-      = file_field_tag 'comment[file]'
       = hidden_field_tag 'comment[user_id]',current_user.id
       = hidden_field_tag 'comment[class_room_id]',@class.id
     .actions
