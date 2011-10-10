@@ -90,6 +90,7 @@ class WriteboardsController < ApplicationController
 
     else
 <<<<<<< HEAD
+<<<<<<< HEAD
       if current_user.is_teacher?
         
         @writeboard = Writeboard.find(params[:id])
@@ -97,6 +98,11 @@ class WriteboardsController < ApplicationController
       @writeboard = Writeboard.find(params[:id])
       if current_user.is_teacher?
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+      if current_user.is_teacher?
+        
+        @writeboard = Writeboard.find(params[:id])
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
         params[:writeboard][:body] = params[:body]
         params[:writeboard][:edited_by_teacher] =true
         if @writeboard.update_attributes(params[:writeboard])
@@ -107,10 +113,15 @@ class WriteboardsController < ApplicationController
         end
       else
 <<<<<<< HEAD
+<<<<<<< HEAD
         @writeboard = Writeboard.find(params[:id])
 
 =======
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+        @writeboard = Writeboard.find(params[:id])
+
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
         if @writeboard.update_attributes(params[:writeboard],:version =>'2')
           if current_user.is_student?
             redirect_to (class_room_assignments_url(@class.id)), notice: 'Writeboard was successfully updated.'

@@ -2,11 +2,16 @@ class ToDosController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_my_students_and_class
 <<<<<<< HEAD
+<<<<<<< HEAD
   # GET /to_dos
   # GET /to_dos.json
 =======
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+  # GET /to_dos
+  # GET /to_dos.json
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def index
     if params[:selected_time].eql?("all")
       @to_dos = ToDo.all 
@@ -21,6 +26,9 @@ class ToDosController < ApplicationController
       @to_dos = ToDo.where("date <=? and date>=?",Time.now.next_week.end_of_week.strftime("%Y-%m-%d"),Time.now.next_week.strftime("%Y-%m-%d"))
     elsif params[:selected_time].eql?("later")
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
        @to_dos = ToDo.where("date>=?",Time.now.next_week.end_of_week.strftime("%Y-%m-%d"))
     else
       @to_dos = ToDo.all
@@ -54,6 +62,7 @@ class ToDosController < ApplicationController
   end
 
   # GET /to_dos/1/edit
+<<<<<<< HEAD
 =======
       @to_dos = ToDo.where("date>=?",Time.now.next_week.end_of_week.strftime("%Y-%m-%d"))
     else
@@ -70,21 +79,31 @@ class ToDosController < ApplicationController
   end
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def edit
     @to_do = ToDo.find(params[:id])
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   # POST /to_dos
   # POST /to_dos.json
 =======
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+  # POST /to_dos
+  # POST /to_dos.json
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def create
     params[:to_do][:date] =  Time.new(params[:date][:year],params[:date][:month],params[:date][:day],params[:date][:hour],params[:date][:minute])
 
     @to_do = ToDo.new(params[:to_do])
    
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     respond_to do |format|
       if @to_do.save
         format.html { redirect_to (class_room_to_dos_url(@class.id)), notice: 'To do was successfully created.' }
@@ -114,6 +133,7 @@ class ToDosController < ApplicationController
 
   # DELETE /to_dos/1
   # DELETE /to_dos/1.json
+<<<<<<< HEAD
 =======
     if @to_do.save
       redirect_to (class_room_to_dos_url(@class.id)), notice: 'To do was successfully created.'
@@ -133,18 +153,26 @@ class ToDosController < ApplicationController
   end
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def destroy
     to_do = ToDo.find(params[:id])
     to_do.destroy
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     respond_to do |format|
       format.html { redirect_to (class_room_to_dos_url(@class.id)) }
       format.json { head :ok }
     end
+<<<<<<< HEAD
 =======
     redirect_to (class_room_to_dos_url(@class.id))
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   end
 
   private

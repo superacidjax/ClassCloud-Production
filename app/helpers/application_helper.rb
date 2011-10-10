@@ -55,6 +55,9 @@ module ApplicationHelper
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
 def vote_count(voteable_id)
   Vote.where("voteable_id =?",voteable_id).count
 end
@@ -74,6 +77,7 @@ def vote_comment(voteable_id)
   Vote.where("voteable_id =? and voter_id=? and voteable_type=?",voteable_id, current_user.id,'Comment').first
 
 end
+<<<<<<< HEAD
 =======
   def vote_count(voteable_id)
     Vote.where("voteable_id =?",voteable_id).count
@@ -97,4 +101,6 @@ end
   end
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
 end

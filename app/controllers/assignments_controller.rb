@@ -5,6 +5,9 @@ class AssignmentsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_my_students_and_class, :except => :show
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   # GET /assignments
   # GET /assignments.json
   def index
@@ -40,6 +43,7 @@ class AssignmentsController < ApplicationController
   end
 
   # GET /assignments/1/edit
+<<<<<<< HEAD
 =======
   
   def index
@@ -56,22 +60,32 @@ class AssignmentsController < ApplicationController
   end
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def edit
     @categories = AssignmentCategory.all
     @assignment = Assignment.find(params[:id])
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   # POST /assignments
   # POST /assignments.json
 =======
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+  # POST /assignments
+  # POST /assignments.json
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def create
     @assignment = Assignment.new(params[:assignment])
     @assignment.user_id = current_user.id
     @assignment.class_room_id = params[:class_room_id]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     respond_to do |format|
       if @assignment.valid?
         if params[:assignment][:group_allowed].eql?("0")
@@ -105,6 +119,7 @@ class AssignmentsController < ApplicationController
 
   # PUT /assignments/1
   # PUT /assignments/1.json
+<<<<<<< HEAD
 =======
     if @assignment.valid?
       if params[:assignment][:group_allowed].eql?("0")
@@ -132,6 +147,8 @@ class AssignmentsController < ApplicationController
   end
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def update
     @assignment = Assignment.find(params[:id])
     @assignment.due_date = if params[:assignment]["due_date(1i)"].blank? and params[:assignment]["due_date(2i)"].blank? and params[:assignment]["due_date(3i)"].blank?
@@ -144,6 +161,9 @@ class AssignmentsController < ApplicationController
         :group_allowed => params[:assignment][:group_allowed],:file =>params[:assignment][:file]})
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     respond_to do |format|
       if @assignment.valid?
         if params[:assignment][:group_allowed].eql?("0") and params[:my_student].blank?
@@ -192,6 +212,7 @@ class AssignmentsController < ApplicationController
 
   # DELETE /assignments/1
   # DELETE /assignments/1.json
+<<<<<<< HEAD
 =======
     if @assignment.valid?
       if params[:assignment][:group_allowed].eql?("0") and params[:my_student].blank?
@@ -235,18 +256,26 @@ class AssignmentsController < ApplicationController
   end
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def destroy
     @assignment = Assignment.find(params[:id])
     @assignment.destroy
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     respond_to do |format|
       format.html { redirect_to class_room_assignments_url(@class.id) }
       format.json { head :ok }
     end
+<<<<<<< HEAD
 =======
     redirect_to class_room_assignments_url(@class.id)
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   end
 
   def comment_new
@@ -321,19 +350,28 @@ class AssignmentsController < ApplicationController
     @assignment_category.destroy
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     respond_to do |format|
       format.html { redirect_to(assignment_category_class_room_assignments_url(@class.id)) }
       format.json { head :ok }
     end
+<<<<<<< HEAD
 =======
     redirect_to(assignment_category_class_room_assignments_url(@class.id))
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   end
 
   def update_assignment_category
     @assignment_category = AssignmentCategory.find(params[:id])
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     respond_to do |format|
       if @assignment_category.update_attributes(params[:assignment_category])
         format.html { redirect_to assignment_category_class_room_assignments_url(@class.id), notice: 'Assignment Category was successfully updated.' }
@@ -343,6 +381,7 @@ class AssignmentsController < ApplicationController
         format.json { render json: @assignment_category.errors, status: :unprocessable_entity }
       end
     end
+<<<<<<< HEAD
 =======
       if @assignment_category.update_attributes(params[:assignment_category])
         redirect_to assignment_category_class_room_assignments_url(@class.id), notice: 'Assignment Category was successfully updated.'
@@ -350,6 +389,8 @@ class AssignmentsController < ApplicationController
         render action: "edit_assignment_category"
       end
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   end
 
   def edit_assignment_category
@@ -360,6 +401,9 @@ class AssignmentsController < ApplicationController
     post = Assignment.find(params[:id])
     current_user.vote_for(post)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     respond_to do |format|
       format.html { redirect_to class_room_assignments_url(@class.id) }
       format.json { head :ok }
@@ -367,11 +411,14 @@ class AssignmentsController < ApplicationController
   end
 
   
+<<<<<<< HEAD
 =======
     redirect_to class_room_assignments_url(@class.id)
   end
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   private
 
   def get_my_students_and_class

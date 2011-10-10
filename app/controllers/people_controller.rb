@@ -13,9 +13,12 @@ class PeopleController < ApplicationController
     @existing_observers = []
     @existing_students = []
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     current_user.class_rooms.where(["id <> ?", params[:class_room_id]]).each do |class_room|
       class_room.observers.each do |observer|
         @existing_observers << observer if observer.class_room_observers.where(class_room_id: params[:class_room_id]).blank?

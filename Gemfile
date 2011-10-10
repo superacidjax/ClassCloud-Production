@@ -11,10 +11,14 @@ gem "prototype-rails"
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'sass'
 <<<<<<< HEAD
+<<<<<<< HEAD
 #gem 'sqlite3'
 =======
 gem 'sqlite3'
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+#gem 'sqlite3'
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
 # Use unicorn as the web server
 # gem 'unicorn'
 gem 'barista'

@@ -15,6 +15,9 @@ class MessagesController < ApplicationController
   
   def sent_detail
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     @sent_detail=current_user.sent_messages
     @message_id=params[:id]
   end
@@ -25,6 +28,7 @@ class MessagesController < ApplicationController
       @sender.send_message(current_user ,params[:acts_as_messageable_message][:topic],params[:acts_as_messageable_message][:body])
     else
       @receivers=params[:chk_ids]
+<<<<<<< HEAD
 =======
     @sent_detail = current_user.sent_messages
     @message_id = params[:id]
@@ -37,19 +41,27 @@ class MessagesController < ApplicationController
     else
       @receivers = params[:chk_ids]
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
       @receivers.each do |receiver|
         @receiver = User.find(receiver)
         @sender.send_message(@receiver ,params[:acts_as_messageable_message][:topic],params[:acts_as_messageable_message][:body])
       end
     end
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     respond_to do |format|
       format.html { redirect_to(class_room_messages_url) }
       format.xml  { head :ok }
     end
+<<<<<<< HEAD
 =======
     redirect_to(class_room_messages_url)
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   end
 
   def destroy
@@ -69,6 +81,7 @@ class MessagesController < ApplicationController
       @users = @students + @class.observers
     elsif current_user.is_student?
 <<<<<<< HEAD
+<<<<<<< HEAD
       @users=User.where("roles=?",[['teacher']])
     else
       @users=User.where("roles=?",[['teacher']])
@@ -77,15 +90,24 @@ class MessagesController < ApplicationController
     else
       @users = User.where("roles=?",[['teacher']])
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+      @users=User.where("roles=?",[['teacher']])
+    else
+      @users=User.where("roles=?",[['teacher']])
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     end
   end
 
   def create
 <<<<<<< HEAD
+<<<<<<< HEAD
     @sender=current_user
 =======
     @sender = current_user
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+    @sender=current_user
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     unless (current_user.is_student? or current_user.is_observer?)
       if params[:chk_ids].nil?
         redirect_to :back
@@ -124,9 +146,12 @@ class MessagesController < ApplicationController
     @message_id=params[:id]
   end
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def inbox_detail
     @message_id=params[:id]
     @inbox_detail=current_user.messages.where('id=?',@message_id).first
@@ -136,9 +161,13 @@ class MessagesController < ApplicationController
 
   def edit_draft
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+    
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   end
   
   def destroy_all_data
@@ -151,27 +180,39 @@ class MessagesController < ApplicationController
     end
     
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     respond_to do |format|
       format.html { redirect_to(class_room_url(@class.id),:notice =>'.delete') }
       format.xml  { head :ok }
     end
+<<<<<<< HEAD
 =======
     redirect_to(class_room_url(@class.id),:notice =>'.delete')
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   end
 
   def download
     file = MessageFile.find(params[:id])
     send_file file.file.path, :type => file.file_content_type
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
 
   end
 
 
+<<<<<<< HEAD
 =======
   end
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   private
 
   def get_my_students_and_class

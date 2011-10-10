@@ -5,17 +5,25 @@ class Admin::AdminsController < ApplicationController
     @students = User.where("roles =?",[["student"]])
     @observers = User.where("roles =?",[["observer"]])
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   end
 =======
   end
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+
+  end
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def edit
     @user = User.find(params[:id])
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
 
   def new
     @user = User.new
@@ -23,15 +31,21 @@ class Admin::AdminsController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @user }
     end
+<<<<<<< HEAD
 =======
   def new
     @user = User.new
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   end
 
   def create
     @user = User.new(params[:user])
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     @user.password = "123456"
     @user.password_confirmation = "123456"
     respond_to do |format|
@@ -55,6 +69,7 @@ class Admin::AdminsController < ApplicationController
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+<<<<<<< HEAD
 =======
     tmp = User.generate_random_string
     @user.password = tmp
@@ -78,11 +93,16 @@ class Admin::AdminsController < ApplicationController
     else
       render action: "new"
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     end
   end
 
   def update
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     params
     @user = User.find(params[:id])
 
@@ -94,6 +114,7 @@ class Admin::AdminsController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+<<<<<<< HEAD
 =======
     @user = User.find(params[:id])
 
@@ -102,6 +123,8 @@ class Admin::AdminsController < ApplicationController
     else
       render action: "edit"
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     end
   end
 
@@ -110,13 +133,19 @@ class Admin::AdminsController < ApplicationController
     user.destroy
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     respond_to do |format|
       format.html { redirect_to (admin_admins_url),notice: 'User was succesfully deleted'  }
       format.json { head :ok }
     end
+<<<<<<< HEAD
 =======
     redirect_to (admin_admins_url), notice: 'User was succesfully deleted'
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   end
 
 end

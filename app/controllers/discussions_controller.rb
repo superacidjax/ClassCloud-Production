@@ -8,6 +8,9 @@ class DiscussionsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_my_students_and_class
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   # GET /discussions
   # GET /discussions.json
   def index
@@ -41,6 +44,7 @@ class DiscussionsController < ApplicationController
   end
 
   # GET /discussions/1/edit
+<<<<<<< HEAD
 =======
 
   def index
@@ -56,15 +60,22 @@ class DiscussionsController < ApplicationController
   end
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def edit
     @discussion = Discussion.find(params[:id])
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   # POST /discussions
   # POST /discussions.json
 =======
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+  # POST /discussions
+  # POST /discussions.json
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def create
     @discussion = Discussion.new(params[:discussion])
     @discussion.class_room_id = params[:class_room_id]
@@ -77,6 +88,9 @@ class DiscussionsController < ApplicationController
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   # PUT /discussions/1
   # PUT /discussions/1.json
   def update
@@ -103,6 +117,7 @@ class DiscussionsController < ApplicationController
       format.html { redirect_to (class_room_discussions_url(@class.id)) }
       format.json { head :ok }
     end
+<<<<<<< HEAD
 =======
   def update
     @discussion = Discussion.find(params[:id])
@@ -120,6 +135,8 @@ class DiscussionsController < ApplicationController
     
     redirect_to (class_room_discussions_url(@class.id))
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   end
   
   def comment_new

@@ -5,14 +5,20 @@
 # below each fixture, per the syntax in the comments below
 #
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
 one: {}
 # column: value
 #
 two: {}
+<<<<<<< HEAD
 =======
 #one: {}
 # column: value
 #
 #two: {}
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
 #  column: value

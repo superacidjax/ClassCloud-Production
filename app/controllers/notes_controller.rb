@@ -5,16 +5,24 @@ class NotesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_my_students_and_class
 <<<<<<< HEAD
+<<<<<<< HEAD
   # GET /notes
   # GET /notes.json
 =======
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+  # GET /notes
+  # GET /notes.json
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def index
     @notes = @class.notes
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   # GET /notes/1
   # GET /notes/1.json
   def show
@@ -38,6 +46,7 @@ class NotesController < ApplicationController
   end
 
   # GET /notes/1/edit
+<<<<<<< HEAD
 =======
   def show
     @note = Note.find(params[:id])
@@ -48,15 +57,22 @@ class NotesController < ApplicationController
   end
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def edit
     @note = Note.find(params[:id])
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   # POST /notes
   # POST /notes.json
 =======
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+  # POST /notes
+  # POST /notes.json
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def create
     @note = Note.new(params[:note])
     @note.class_room_id = @class.id
@@ -69,6 +85,9 @@ class NotesController < ApplicationController
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   # PUT /notes/1
   # PUT /notes/1.json
   def update
@@ -87,6 +106,7 @@ class NotesController < ApplicationController
 
   # DELETE /notes/1
   # DELETE /notes/1.json
+<<<<<<< HEAD
 =======
   def update
     @note = Note.find(params[:id])
@@ -99,18 +119,26 @@ class NotesController < ApplicationController
   end
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   def destroy
     @note = Note.find(params[:id])
     @note.destroy
     
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     respond_to do |format|
       format.html { redirect_to(class_room_notes_url(@class.id)) }
       format.json { head :ok }
     end
+<<<<<<< HEAD
 =======
     redirect_to(class_room_notes_url(@class.id))
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   end
   
   def comment_new
@@ -176,9 +204,13 @@ class NotesController < ApplicationController
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   private
 
   def get_my_students_and_class
@@ -200,8 +232,12 @@ class NotesController < ApplicationController
     @students = @class.students
   end
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   
 end

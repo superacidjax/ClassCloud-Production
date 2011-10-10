@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
 #main_content_area
   %h3 Class Notes posted #{distance_of_time_in_words(@note.created_at, Time.now)} ago
   %hr
@@ -14,6 +17,7 @@
       != @note.description
   %br
   %br
+<<<<<<< HEAD
 =======
 %table{:width => "50%"}
   -if current_user.id.eql?(@note.user_id)
@@ -43,11 +47,16 @@
     %td{:colspan => "2"}
       = @note.description
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   %tr
     %td{:colspan => "2"}
       %hr{:noshade => ""}
   %tr
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
     %td{:colspan => "3"} 
       #comments_container
         - @note.comments.each do |comment| 
@@ -56,6 +65,7 @@
               %td{:colspan => "3"}
                 = "#{comment.user.full_name}"
                 said this #{distance_of_time_in_words(comment.created_at, Time.now)} ago:
+<<<<<<< HEAD
 =======
     %td{:colspan => "3"}
       
@@ -68,12 +78,17 @@
               %td{:colspan => "3"}
                 = "#{comment.user.full_name}"
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
                 - unless vote_count(comment.id).eql?(0) or !current_user.is_teacher?
                   = '('
                   = vote_count(comment.id)
                   = ')'
                 %br
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
             %tr
             %td
               = comment.comment
@@ -94,6 +109,7 @@
                   = link_to "Delete", class_room_comment_destroy_notes_path(@class.id, @note, comment.id), :method => :delete
                 - unless vote_comment(comment).nil?
                   = 'Weee!!'
+<<<<<<< HEAD
 =======
                 = "#{date_format(comment.created_at)}"
             %tr
@@ -117,6 +133,8 @@
                 - unless vote_comment(comment).nil?
                   = 'Wee!!'
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
                 - else
                   = link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@note.id,comment,:commentable_type =>"#{params[:controller]}")
 
@@ -131,9 +149,12 @@
             .field
               = text_area_tag "comment[comment]", nil, :rows => 4, :cols => 40
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
               = file_field_tag 'comment[file]'
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
               = hidden_field_tag 'comment[user_id]',current_user.id
               = hidden_field_tag 'comment[class_room_id]',@class.id
             .actions

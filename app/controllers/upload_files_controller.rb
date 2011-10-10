@@ -5,9 +5,12 @@ class UploadFilesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_my_students_and_class
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   # GET /upload_files
   # GET /upload_files.json
   def index
@@ -178,9 +181,14 @@ class UploadFilesController < ApplicationController
     @students = @class.students
   end
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 =======
   
 >>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+=======
+
+
+>>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
 end
