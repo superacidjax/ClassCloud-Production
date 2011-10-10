@@ -1,0 +1,30 @@
+%center
+  %div{:style => "text-align:right; width:50%"}
+    = current_user.full_name
+    = link_to_function "Settings", "return false"
+    = link_to "Sign Out", destroy_user_session_path, :method => :delete
+    .clear
+    %br
+    %br
+    %div{:style => "text-align:left"}
+      %h2 Add a class
+      = form_for(@class_room, :url => class_rooms_path(:without_student => true), :html => {:method => :post}) do |f|
+        - if @class_room.errors.any?
+          #error_explanation
+            %h2
+              = pluralize(@class_room.errors.count, "error")
+              prohibited this create class from being saved:
+            %ul
+              - @class_room.errors.full_messages.each do |msg|
+                %li= msg
+        %div
+          = f.label :name, "Class name"
+        %br
+          = f.text_field :name
+        %div= f.submit "Save"
+      = link_to "Back", root_path
+  %div{:style => "margin-left: 930px; margin-top: -151px; position:absolute"}
+    %h3 My Students
+    - @students.each do |student|
+      = link_to_function student.full_name, "return false"
+      %br

@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+<<<<<<< HEAD
+one:
+  title: MyString
+  body: MyText
+  user_id: 1
+  assignment_id: 1
+
+two:
+  title: MyString
+  body: MyText
+=======
+writeboard1:
+  title: writeboard1
+  body: it's so amazing
+  user_id: 563825498
+  assignment_id: 1
+
+writeboard2:
+  title: writeboard2
+  body: Hii...you're so beautifull
+>>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+  user_id: 1
+  assignment_id: 1

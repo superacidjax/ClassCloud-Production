@@ -1,0 +1,42 @@
+/- content_for :middle_content do
+%h1 Sent Messages
+%table{:border=>'1'}
+  %tr
+    %td
+      %b Mail To
+    %td
+      %b Subject
+    %td
+      %b Sent at
+    %td
+      %b Delete
+  -@sent_mails.each do |sent|
+    -if sent.received_messageable_id.nil?
+      -true
+    -else
+      -if sent.received_messageable_id.eql?(current_user.id)
+        -false
+      -else
+        %tr
+          %td
+            - user = users_first_name(sent.received_messageable_id)
+            - if user
+              - if @student
+                =link_to user.full_name, class_room_student_observer_sent_detail_path(@class.id, sent.id, @student.id)
+              - elsif @teacher
+                =link_to user.full_name, class_room_teacher_observer_sent_detail_path(@class.id, sent.id, @teacher.id)
+              - else
+                =link_to user.full_name, class_room_sent_detail_path(@class.id,sent.id)
+          %td
+            = sent.body
+          %td
+            = date_format(sent.created_at)
+          %td
+            - if @student
+              = link_to 'Delete', student_observer_message_destroy_class_room_message_path(@class.id, sent, @student.id),:confirm => 'Are you sure?', :method => :delete
+            - elsif @teacher
+              = link_to 'Delete', teacher_observer_message_destroy_class_room_message_path(@class.id, sent, @teacher.id),:confirm => 'Are you sure?', :method => :delete
+            - else
+              = link_to 'Delete', class_room_message_path(@class.id,sent),:confirm => 'Are you sure?', :method => :delete
+
+

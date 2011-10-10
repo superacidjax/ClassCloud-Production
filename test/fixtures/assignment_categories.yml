@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+<<<<<<< HEAD
+one:
+  name: MyString
+
+two:
+  name: MyString
+=======
+#one:
+#  name: MyString
+#
+#two:
+#  name: MyString
+math:
+  name: Math
+english:
+  name: English
+franch:
+  name: Franch
+>>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de

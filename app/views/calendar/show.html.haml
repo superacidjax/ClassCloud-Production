@@ -1,0 +1,88 @@
+- content_for :calendar_js_and_css do
+  = stylesheet_link_tag "event_calendar"
+  = javascript_include_tag "event_calendar"
+
+/- content_for :middle_content do
+%p#notice
+  = notice
+
+%p
+  %b
+    = 'Name:'
+    = @event.name
+
+%p
+  %b
+    = 'Start at:'
+    = time(@event.start_at)
+
+%p
+  %b
+    = 'End at:'
+    = time(@event.end_at)
+
+%p
+  %b
+    = 'Creator:'
+    = @event.user.full_name
+%p
+  %b
+    
+    - if !@event.file_updated_at.nil? and current_user.id.eql?(@event.user_id)
+      = 'File:'
+      - if current_user.is_observer?
+        = @event.file_file_name
+      - else
+        =link_to @event.file_file_name, download_class_room_event_path(@class.id, @event.id)
+      -if @event.user.id.eql?(current_user.id)
+        =link_to '[remove]',remove_file_class_room_event_path(@class.id ,@event.id),:method =>:put,:confirm =>'are you sure?'
+
+
+- if current_user.is_teacher?
+  = link_to 'Edit', edit_class_room_event_path(@class.id, @event)
+  = '|'
+  = link_to 'Remove', class_room_event_path(@class.id, @event), :confirm => 'Are you sure ?', :method => :delete
+  = '|'
+- if @student
+  = link_to 'Back', class_room_student_url(@class.id, @student.id)
+- elsif @teacher
+  = link_to 'Back', class_room_teacher_url(@class.id, @teacher.id)
+
+%hr
+
+- @event.comments.each do |comment|
+  %tables{:width => "50%"}
+    %tr
+      %td{:rowspan => "3"}= image_tag "bakso.jpg", :width => "48", :height => "48"
+      %td{:colspan => "3"}
+        = "#{comment.user.full_name}"
+        - unless vote_count(comment.id).eql?(0) or !current_user.is_teacher?
+          = '('
+          = vote_count(comment.id)
+          = ')'
+        %br
+        = "#{date_format(comment.created_at)}"
+    %tr
+      %td= comment.comment
+      %td{:align =>'right'}
+        - if current_user.id.eql?(comment.user_id)
+          = link_to 'Edit', class_room_comment_edit_event_path(@class.id,@event,comment)
+          = '|'
+        - if current_user.is_teacher? or current_user.id.eql?(comment.user_id)
+          = link_to 'Remove', class_room_comment_destroy_event_path(@class.id, @event,comment), :confirm => 'Are you sure ?', :method => :delete
+        - unless vote_comment(comment).nil?
+          = 'Wee!!'
+        - else
+          = link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@event.id,comment,:commentable_type =>"#{params[:controller]}")
+
+    %tr
+      %td{:colspan => "3"}
+        %hr{:noshade => ""}
+- unless current_user.is_observer?
+  %h1 Leave a comment
+  = form_tag(comment_create_class_room_event_path(@class.id, @event)) do
+    .field
+      = text_area_tag "comment", nil, :rows => 4, :cols => 40
+    .actions
+      = submit_tag "Add this Comment"
+      %span#assignment_comment_ajax_loader{:style => "display: none"}= image_tag "LoaderIcon.gif"

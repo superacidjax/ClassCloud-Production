@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+<<<<<<< HEAD
+one:
+  name: MyString
+  user_id: 1
+
+two:
+  name: MyString
+  user_id: 1
+=======
+class_english:
+  name: English
+  user_id: 563825498
+
+class_math:
+  name: Math
+  user_id: 357581546
+>>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de

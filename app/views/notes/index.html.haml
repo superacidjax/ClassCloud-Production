@@ -1,0 +1,62 @@
+<<<<<<< HEAD
+%br
+%br
+  .headings Class Notes
+%table.board
+  %tr.blue
+    %th Title
+    %th Notes
+    %th Posted
+    
+    - @notes.each do |note|
+      %tr
+        - unless current_user.is_observer?
+        %td! = link_to note.title, comment_new_class_room_note_path(@class.id, note)
+        - else
+          - if @student
+          %td! = link_to note.title, go_to_student_note_class_room_note_path(@class.id, note, @student.id)
+          - elsif @teacher
+            %td! = link_to note.title, go_to_teacher_note_class_room_note_path(@class.id, note, @teacher.id)
+        %td! = truncate(note.description, :length =>100, :separator => ' ')
+        %td! #{distance_of_time_in_words(note.created_at, Time.now)} ago
+        -if current_user.is_teacher? and !current_user.class_rooms.blank?
+          %td
+          %td= link_to 'Edit', edit_class_room_note_path(@class.id, note)
+          %td= link_to 'Destroy', class_room_note_path(@class.id, note), :confirm => 'Are you sure?', :method => :delete
+=======
+%h1 Listing notes
+%table
+  %tr
+    %th Title
+    %th Description
+    %th
+    %th
+    %th
+
+    - @notes.each do |note|
+      %tr
+        %td
+          - unless current_user.is_observer?
+            = link_to note.title, comment_new_class_room_note_path(@class.id, note)
+          - else
+            - if @student
+              = link_to note.title, go_to_student_note_class_room_note_path(@class.id, note, @student.id)
+            - elsif @teacher
+              = link_to note.title, go_to_teacher_note_class_room_note_path(@class.id, note, @teacher.id)
+        %td= note.description
+        -if current_user.is_teacher? and !current_user.class_rooms.blank?
+          %td= link_to 'Show', class_room_note_path(@class.id, note),:method =>:get
+          %td= link_to 'Edit', edit_class_room_note_path(@class.id, note)
+          %td= link_to 'Destroy', class_room_note_path(@class.id, note), :confirm => 'Are you sure?', :method => :delete
+          %td= link_to "Comment notes", comment_new_class_room_note_path(@class.id, note)
+>>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+        -else
+          -true
+        - unless vote_notes(note).nil?
+          %td= 'Weee!!'
+        - else
+          %td= link_to 'Weee!!',vote_up_class_room_note_path(@class.id ,note)
+    %br
+-if current_user.is_teacher? and !current_user.class_rooms.blank?
+  =link_to 'New note', new_class_room_note_path(@class.id)
+  

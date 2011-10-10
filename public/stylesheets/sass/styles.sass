@@ -1,0 +1,241 @@
+@import "mixins"
+@import "common"
+
+pre
+  background-color: #eee
+  padding: 10px
+  font-size: 11px
+
+div
+  &.field, &.actions
+    margin-bottom: 10px
+
+#writeboards
+  margin-left: 72px
+.headings
+  margin-top: 18px
+  h4
+  font: normal 18px Helvetica, Arial, sans-serif
+  color: #3f3d32
+  -webkit-font-smoothing: anti-aliased
+  h2
+    font: normal 18px Helvetica, Arial, sans-serif
+    color: #3f3d32
+    -webkit-font-smoothing: anti-aliased
+
+#main_content_area
+  margin-top: 36px
+  width: 850px
+  white-space: normal
+  h2
+    font: normal 18px Helvetica, Arial, sans-serif
+    color: #00009C
+    -webkit-font-smoothing: anti-aliased
+    text-align: center
+  h3
+    font: normal 12px 'Lucida Console', Monaco, monospace
+    color: #C67171
+    -webkit-font-smoothing: anti-aliased
+  h4
+    font: normal 14px Helvetica, Arial, sans-serif
+    color: #00009C
+    -webkit-font-smoothing: anti-aliased
+    
+table.board
+  width: 640px
+  margin-top: 36px
+  text-align: left
+  tr.blue
+    border-top: 1px solid #000
+    border-bottom: 1px solid #000
+    background: #fff
+    font: normal 18px Helvetica, Arial, sans-serif
+    color: #3f3d32
+    -webkit-font-smoothing: anti-aliased
+  td
+    border-bottom: 1px solid #fff
+    padding-top: 8px
+    padding-bottom: 8px
+    overflow: hidden
+  td.assignments
+    font: normal 18px Helvetica, Arial, sans-serif
+    color: #3f3d32
+    -webkit-font-smoothing: anti-aliased
+  td.grade
+    text-align: center
+  td.title
+    width: 150px
+    text-overflow: ellipsis
+  td.show
+    text-align: center
+  th
+    padding: 0 0.5em
+    width: 150px
+  th.grade
+    padding: 0 0.5em
+    width: 72px
+  th.postedby
+    padding: 0 0.5em
+    width: 72px
+
+table.assignments
+  width: 640px
+  margin-top: 36px
+  text-align: left
+  white-space: normal
+  tr.white
+    border-top: 1px solid #000
+    border-bottom: 1px solid #000
+    background: #fff
+    font: normal 18px Helvetica, Arial, sans-serif
+    color: #3f3d32
+    -webkit-font-smoothing: anti-aliased
+  td
+    border-bottom: 1px solid #fff
+    padding-top: 8px
+    padding-bottom: 8px
+    overflow: hidden
+  td.assignments
+    font: normal 9px Helvetica, Arial, sans-serif
+    color: #3f3d32
+    -webkit-font-smoothing: anti-aliased
+  td.assignments_desc
+    font: normal 12px Helvetica, Arial, sans-serif
+    color: #3f3d32
+    -webkit-font-smoothing: anti-aliased
+    width: 640px   
+  td.grade
+    text-align: center
+  td.title
+    width: 150px
+    text-overflow: ellipsis
+  td.show
+    text-align: center
+  th
+    padding: 0 0.5em
+    width: 150px
+  th.grade
+    padding: 0 0.5em
+    width: 72px
+  th.postedby
+    padding: 0 0.5em
+    width: 72px
+  tr.desc
+    width: 640px
+    text-align: left
+  td.due
+    font: normal 12px Helvetica, Arial, sans-serif
+    color: #E3170D
+    -webkit-font-smoothing: anti-aliased
+
+.notice
+  color: red
+
+.field_with_errors
+  padding: 2px
+  color: red
+  text-align: center
+
+#error_explanation2
+  text-align: center
+  width: 450px
+  border: 2px solid red
+  padding: 7px
+  padding-bottom: 0
+  margin-bottom: 20px
+  background-color: #f0f0f0
+  h2
+    text-align: left
+    font-weight: bold
+    padding: 5px 5px 5px 15px
+    font-size: 12px
+    margin: -7px
+    margin-bottom: 0px
+    background-color: #c00
+    color: #fff
+  ul li
+    font-size: 12px
+    list-style: square
+
+.align_centered
+  text-align: center
+  
+#background
+  margin-top: 18px
+  margin-left: 18px
+  h1
+    margin-top: 18px
+    text-align: center
+    font: normal 18px Helvetica, Arial, sans-serif
+    color: #3f3d32
+    -webkit-font-smoothing: anti-aliased
+  .login_form
+    text-align: right
+    margin-right: 72px
+  .email_field
+    background: url('/images/form-field.png')
+    height: 18px
+  .password_field
+    background: url('/images/form-field.png')
+    height: 18px
+  .submit
+    +gradient-bg(#fff, #00AEEF)
+    height: 26px
+    width: 72px
+    margin-top: 9px
+    +border-top-right-radius(18px)
+    +border-top-left-radius(12px)
+    +border-bottom-left-radius(25px)
+    +border-bottom-right-radius(25px)      
+  .notice_launch
+    color: red
+    text-align: right
+    margin-right: 250px
+    margin-top: 9px
+    font: normal 12px Helvetica, Arial, sans-serif
+    color: #B22222
+    -webkit-font-smoothing: anti-aliased
+
+#main_nav
+  margin-left: 36px
+  width: 640px
+  float: left
+  .tabs
+    white-space: nowrap
+    h1
+      font: normal 12px Helvetica, Arial, sans-serif
+      color: #3f3d32
+      -webkit-font-smoothing: anti-aliased
+    a
+      font: normal 12px Helvetica, Arial, sans-serif
+      color: #3f3d32
+      -webkit-font-smoothing: anti-aliased
+      text-decoration: underline
+#students
+  position: abs
+  float: right
+  margin-right: 36px
+  white-space: nowrap
+  h1
+    font: normal 18px Helvetica, Arial, sans-serif
+    color: #3f3d32
+    -webkit-font-smoothing: anti-aliased
+  h2
+    font: normal 12px Helvetica, Arial, sans-serif
+    color: #3f3d32
+    -webkit-font-smoothing: anti-aliased
+  a
+    font: normal 12px Helvetica, Arial, sans-serif
+    color: #3f3d32
+    -webkit-font-smoothing: anti-aliased
+    text-decoration: underline
+#info
+  margin-top: 200px
+  h1
+    text-align: center
+    font: normal 12px Helvetica, Arial, sans-serif
+    color: #3f3d32
+    -webkit-font-smoothing: anti-aliased
+      
+a
+  text-decoration: underline

@@ -1,0 +1,22 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+<<<<<<< HEAD
+one:
+  title: MyString
+  description: MyText
+
+two:
+  title: MyString
+  description: MyText
+=======
+note1:
+  title: Hello
+  description: You're so awesome
+  user_id: 563825498
+  class_room_id: 1
+note2:
+  title: Hii...
+  description: blablabla...
+  user_id: 624604774
+  class_room_id: 1
+>>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de

@@ -1,0 +1,141 @@
+<<<<<<< HEAD
+#main_content_area
+  %h3 Class Notes posted #{distance_of_time_in_words(@note.created_at, Time.now)} ago
+  %hr
+  -if current_user.id.eql?(@note.user_id)
+    #{link_to "Edit", edit_class_room_note_path(@class.id, @note)} | #{link_to "Delete", class_room_note_path(@class.id, @note), :confirm => "Are you sure ?", :method => :delete}
+  %td
+    %br
+      %h2
+        = @note.title
+  -else
+    -true
+    %td{:colspan => "2"}
+      != @note.description
+  %br
+  %br
+=======
+%table{:width => "50%"}
+  -if current_user.id.eql?(@note.user_id)
+    %tr
+      %td
+        %b= @note.title
+      %td{:align => "right"}
+        = link_to "New", new_class_room_note_path(@class.id)
+        | #{link_to "Edit", edit_class_room_note_path(@class.id, @note)} | #{link_to "Delete", class_room_note_path(@class.id, @note), :confirm => "Are you sure ?", :method => :delete}
+  -else
+    -true
+  %tr
+    %td{:colspan => "2"}
+      From: #{@note.user.full_name}
+      - unless vote_count(@note.id).eql?(0) or !current_user.is_teacher?
+        = '('
+        = vote_count(@note.id)
+        = ')'
+  %tr
+    %td{:colspan => "2"}
+      Date: #{date_format(@note.created_at)}
+  
+  %tr
+    %td{:colspan => "2"}
+      %hr{:noshade => ""}
+  %tr
+    %td{:colspan => "2"}
+      = @note.description
+>>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+  %tr
+    %td{:colspan => "2"}
+      %hr{:noshade => ""}
+  %tr
+<<<<<<< HEAD
+    %td{:colspan => "3"} 
+      #comments_container
+        - @note.comments.each do |comment| 
+          %table{:width => "100%"}
+            %tr
+              %td{:colspan => "3"}
+                = "#{comment.user.full_name}"
+                said this #{distance_of_time_in_words(comment.created_at, Time.now)} ago:
+=======
+    %td{:colspan => "3"}
+      
+      #comments_container
+        - @note.comments.each do |comment|
+          
+          %table{:width => "100%"}
+            %tr
+              %td{:rowspan => "3"}= image_tag "bakso.jpg", :width => "48", :height => "48"
+              %td{:colspan => "3"}
+                = "#{comment.user.full_name}"
+>>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+                - unless vote_count(comment.id).eql?(0) or !current_user.is_teacher?
+                  = '('
+                  = vote_count(comment.id)
+                  = ')'
+                %br
+<<<<<<< HEAD
+            %tr
+            %td
+              = comment.comment
+              - unless comment.file_updated_at.nil? 
+                %br
+                = 'file :'
+                - if current_user.is_observer?
+                  = comment.file_file_name
+                - else
+                  = link_to comment.file_file_name, download_class_room_note_path(@class.id, comment.id)
+                  -if current_user.id.eql?(comment.user_id) or current_user.is_teacher?
+                    | #{link_to 'remove',remove_file_class_room_note_path(@class.id, comment.id), :confirm => "Are you sure ?", :method => :put}
+              %td{:align => "right"}
+                - if current_user.id.eql?(comment.user_id) 
+                  = link_to "Edit", class_room_comment_edit_notes_path(@class.id, @note, comment.id)
+                  #{link_to "Delete", class_room_comment_destroy_notes_path(@class.id, @note, comment.id), :method => :delete}
+                - elsif current_user.id.eql?(comment.user_id) or current_user.is_teacher?
+                  = link_to "Delete", class_room_comment_destroy_notes_path(@class.id, @note, comment.id), :method => :delete
+                - unless vote_comment(comment).nil?
+                  = 'Weee!!'
+=======
+                = "#{date_format(comment.created_at)}"
+            %tr
+              %td
+                = comment.comment
+                - unless comment.file_updated_at.nil? 
+                  %br
+                  = 'file :'
+                  - if current_user.is_observer?
+                    = comment.file_file_name
+                  - else
+                    = link_to comment.file_file_name, download_class_room_note_path(@class.id, comment.id)
+                    -if current_user.id.eql?(comment.user_id) or current_user.is_teacher?
+                      | #{link_to 'remove',remove_file_class_room_note_path(@class.id, comment.id), :confirm => "Are you sure ?", :method => :put}
+              %td{:align => "right"}
+                - if current_user.id.eql?(comment.user_id) 
+                  = link_to "Edit", class_room_comment_edit_notes_path(@class.id, @note, comment.id)
+                  | #{link_to "Delete", class_room_comment_destroy_notes_path(@class.id, @note, comment.id), :method => :delete}
+                - elsif current_user.id.eql?(comment.user_id) or current_user.is_teacher?
+                  = link_to "Delete", class_room_comment_destroy_notes_path(@class.id, @note, comment.id), :method => :delete
+                - unless vote_comment(comment).nil?
+                  = 'Wee!!'
+>>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+                - else
+                  = link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@note.id,comment,:commentable_type =>"#{params[:controller]}")
+
+              
+            %tr
+              %td{:colspan => "3"}
+                %hr{:noshade => ""}
+             
+        - unless current_user.is_observer?
+          %h1 Leave a comment
+          = form_tag(comment_create_class_room_note_path(@class.id, @note), :multipart => true)   do |f|
+            .field
+              = text_area_tag "comment[comment]", nil, :rows => 4, :cols => 40
+<<<<<<< HEAD
+=======
+              = file_field_tag 'comment[file]'
+>>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+              = hidden_field_tag 'comment[user_id]',current_user.id
+              = hidden_field_tag 'comment[class_room_id]',@class.id
+            .actions
+              = submit_tag "Add this Comment"
+              %span#assignment_comment_ajax_loader{:style => "display: none"}= image_tag "LoaderIcon.gif"

@@ -1,0 +1,55 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+<<<<<<< HEAD
+one: {}
+# column: value
+#
+two: {}
+#  column: value
+=======
+david:
+  email: david@yahoo.com
+  current_sign_in_at: 2011-10-10 03:24:24.323694
+  last_sign_in_at: 2011-10-10 03:23:10.442268
+  current_sign_in_ip: 127.0.0.1
+  last_sign_in_ip: 127.0.0.1
+  confirmed_at: 2011-10-10 03:23:10.384555
+  confirmation_sent_at: 2011-10-10 03:22:57.485429
+  roles: teacher
+  first_name: david
+  last_name: andromeda
+  username: david
+  time_zone: Mountain Time (US & Canada)
+
+indra:
+  email: indra@yahoo.com
+  current_sign_in_at: 2011-10-10 03:24:24.323694
+  last_sign_in_at: 2011-10-10 03:23:10.442268
+  current_sign_in_ip: 127.0.0.1
+  last_sign_in_ip: 127.0.0.1
+  confirmed_at: 2011-10-10 03:23:10.384555
+  confirmation_sent_at: 2011-10-10 03:22:57.485429
+  roles: student
+  first_name: indra
+  last_name: herdiansyah
+  username: ndra
+  time_zone: Hawaii
+
+ahmad:
+  email: ahmad@yahoo.com
+  current_sign_in_at: 2011-10-10 03:24:24.323694
+  last_sign_in_at: 2011-10-10 03:23:10.442268
+  current_sign_in_ip: 127.0.0.1
+  last_sign_in_ip: 127.0.0.1
+  confirmed_at: 2011-10-10 03:23:10.384555
+  confirmation_sent_at: 2011-10-10 03:22:57.485429
+  roles: obsrver
+  first_name: ahmad
+  last_name: gulam
+  username: amad
+  time_zone: Hawaii
+>>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de

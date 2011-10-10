@@ -1,0 +1,42 @@
+/- content_for :middle_content do
+%h2 Edit User
+= form_for(@person, :url => class_room_person_path(@class.id, @person), :html => { :method => :put }) do |f|
+  - if @person.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@person.errors.count, "error")
+        prohibited this edit user from being saved:
+      %ul
+        - @person.errors.full_messages.each do |msg|
+          %li= msg
+  %div
+    = f.label :first_name
+    %br/
+    = f.text_field :first_name
+  %div
+    = f.label :last_name
+    %br/
+    = f.text_field :last_name
+  %div
+    = f.label :email
+    %br/
+    = f.email_field :email
+  %div
+    = f.label :password
+    %i (leave blank if you don't want to change it)
+    %br/
+    = f.password_field :password
+  %div
+    = f.label :password_confirmation
+    %br/
+    = f.password_field :password_confirmation
+  %div
+    = f.label :user_type
+    %br/
+    = f.select :user_type, User::USER_TYPE, :include_blank => true
+  %div= f.submit "Update"
+= link_to "Delete", class_room_person_path(@class.id, @person), :confirm => "Are you sure ?", :method => :delete
+= "|"
+= link_to "Remove from this class", remove_from_class_class_room_person_path(@class.id, @person.id), :method => :delete
+= "|"
+= link_to "Back", :back

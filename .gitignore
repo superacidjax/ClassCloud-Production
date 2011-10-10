@@ -1,0 +1,7 @@
+config/database.yml
+db/schema.rb
+log/development.log
+<<<<<<< HEAD
+.DS_Store
+=======
+>>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de

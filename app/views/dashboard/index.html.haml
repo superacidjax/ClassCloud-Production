@@ -1,0 +1,233 @@
+- if (current_user.is_teacher? and !current_user.class_rooms.blank?) or (current_user.is_student? and !current_user.class_room_students.blank?) or (current_user.is_observer? and !current_user.class_room_observers.blank?)
+  #sitewrapper 
+    .header
+      .nav
+        %h1
+          - if current_user.is_observer?
+            = link_to "Switch user", root_path
+          = current_user.full_name
+          |
+          = link_to "Settings",class_room_edit_user_path(@my_class_rooms ,current_user.id)
+          |
+          = link_to "Sign Out", destroy_user_session_path, :method => :delete
+          - unless current_user.is_observer?
+            .clear
+            %br
+            %br
+      .main
+        .myclasses
+          - unless current_user.is_observer? 
+            %h1 My Classes
+            %br
+            %h2
+            
+              - @my_class_rooms.each_with_index do |class_room, index|
+                %div
+                  %fieldset
+                    %legend
+                      = link_to "#{class_room.name}", class_room_path(class_room.id)
+          %br
+          %h3
+            = link_to "Add new class", new_class_room_path if current_user.is_teacher?
+          %br
+          %br
+          %br
+          %br
+        .myactivityfeed
+          .feed 
+            - if current_user.is_teacher? and @student
+              %h1
+                = "#{@student.full_name}'s activity feed"
+            - else
+              %h1 My class activity feed
+            %table
+              - if current_user.is_teacher? and @student
+                - @activity_streams.each do |activity_stream|
+                  - if activity_stream.actor_id.to_s.eql?(@student.id.to_s)
+                    - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
+                    - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
+                    %tr
+                      %td
+                        = "#{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}"
+                  - else
+                    - @activity_streams.each do |activity_stream|
+                      - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
+                      - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
+                      %tr
+                        %td
+                          ="#{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} "
+                          = link_to "#{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}", link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "))
+              - else
+                - if !@student.blank? and @teacher.blank?
+                  .clear
+                  %br
+                  %br
+                  %br
+                  %div{:style => "text-align:left"}
+                    %h2 "#{@student.first_name}"'s Classes
+                    %div{:style => "width: 800px"}
+                      - @my_class_rooms.each_with_index do |class_room, index|
+                        %div{:style => "float: left;width: 300px"}
+                          %fieldset{:style => "width:150px; height: 50px"}
+                            %legend
+                              = link_to "Class #{class_room.name}", class_room_student_path(class_room.id, @student.id)
+                  %br
+                  %br
+                  %br
+                  %br
+                  %br
+                  %div{:style => "text-align:left"}
+                    %h2
+                      = "#{@student.full_name}'s activity feed"
+                    %table
+                      - @activity_streams.each do |activity_stream|
+                        - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
+                        - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
+                        %tr
+                          %td
+                            = "#{activity_stream.created_at.strftime("%Y-%m-%d %H:%M")} #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}"
+                - elsif @student.blank? and !@teacher.blank? and !@my_class_rooms.nil?
+                  .clear
+                  %br
+                  %br
+                  %div{:style => "text-align:left"}
+                    %h2 "#{@teacher.first_name}"'s Classes
+                    %div{:style => "width: 800px"}
+                      - @my_class_rooms.each_with_index do |class_room, index|
+                        %div{:style => "float: left;width: 300px"}
+                          %fieldset{:style => "width:150px; height: 50px"}
+                            %legend
+                              = link_to "Class #{class_room.name}", class_room_teacher_path(class_room.id, @teacher.id)
+                  %br
+                    %br
+                      %br
+                        %br
+                          %br
+                            %br
+                            %div
+                              %h2
+                                = "#{@teacher.full_name}'s activity feed"
+                              %table
+                                - @activity_streams.each do |activity_stream|
+                                  - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
+                                  - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
+                                  %tr
+                                    %td
+                                      = "#{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}"
+                    - elsif @student and @teacher and !@my_class_rooms.nil?
+                      .clear
+                      %br
+                      %br
+                      %div{:style => "text-align:left"}
+                        %h2 "#{@teacher.first_name}"'s Classes
+                        %div{:style => "width: 800px"}
+                          - @my_class_rooms.each_with_index do |class_room, index|
+                            %div{:style => "float: left;width: 300px"}
+                              %fieldset{:style => "width:150px; height: 50px"}
+                                %legend
+                                  = link_to "Class #{class_room.name}", class_room_teacher_path(class_room.id, @teacher.id)
+                      %br
+                      %br
+                      %br
+                      %br
+                      %br
+                      %div{:style => "text-align:left"}
+                        %h2
+                          = "#{@student.full_name}'s activity feed"
+                        %table
+                          - @activity_streams.each do |activity_stream|
+                            - if activity_stream.actor_id.to_s.eql?(@student.id.to_s)
+                              - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
+                              - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
+                              %tr
+                                %td
+                                  = "#{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}"
+                %div{:style => "margin-right: 300px"}
+                  - if current_user.is_teacher?
+                    %h3 My Students
+                    - @students.each do |student|
+                      = link_to student.full_name, student_dashboard_path(student.id)
+                      %br
+                  - elsif current_user.is_observer? and @student.blank?
+                    %h3 Students
+                    - @students.each do |student|
+                      - unless params[:teacher_id]
+                        = link_to student.full_name, student_dashboard_path(student.id)
+                      - else
+                        = link_to student.full_name, student_activity_feed_path(@teacher.id, student.id)
+                      %br
+                    - if params[:teacher_id].blank?
+                      %h3 Teacher
+                      = link_to @teacher.full_name, teacher_dashboard_path(@teacher.id)
+                  - elsif current_user.is_observer? and @student and @teacher
+                    %h3 Students
+                    - @students.each do |student|
+                      = link_to student.full_name, student_activity_feed_path(@teacher.id, student.id)
+                      %br
+- elsif current_user.is_teacher?
+  %center
+    %div{:style => "text-align:right; width:50%"}
+      = current_user.full_name
+      = link_to_function "Settings", edit_user_registration_path
+      = link_to "Sign Out", destroy_user_session_path, :method => :delete
+      %div{:class => "clear"}
+      %br
+      %br
+      %div{:style => "text-align:left"}
+        %h2 Welcome to ClassCloud!
+        %h3 To get started, you'll need to add a class.
+        = form_tag(class_rooms_path, :method => :post) do
+          - if !@error_messages.blank?
+            #error_explanation
+              %h2
+                = pluralize(@error_messages.count, "error")
+                prohibited this create class from being saved:
+              %ul
+                - @error_messages.each do |msg|
+                  %li= msg
+          %div
+            = "Add a class"
+            - unless params[:class_room].blank?
+              = text_field_tag "class_room[name]", params[:class_room][:name]
+            - else
+              = text_field_tag "class_room[name]", nil
+          %h3 Now you'll add students, you can always edit or add students later..
+          %div
+            = "Add Student"
+            - unless params[:user].blank?
+              = text_field_tag "user[first_name]", params[:user][:first_name], {:placeholder=>'First Name', :size => 10}
+              = text_field_tag "user[last_name]", params[:user][:last_name], {:placeholder=>'Last Name', :size => 10}
+              = email_field_tag "user[email]", params[:user][:email], {:placeholder=>'Email', :size => 10}
+            - else
+              = text_field_tag "user[first_name]", nil, {:placeholder=>'First Name', :size => 10}
+              = text_field_tag "user[last_name]", nil, {:placeholder=>'Last Name', :size => 10}
+              = email_field_tag "user[email]", nil, {:placeholder=>'Email', :size => 10}
+            %br
+            %br
+            %div{:style => "text-align:right"}
+              = submit_tag "I'm done adding students"
+- elsif (current_user.is_observer? and current_user.class_room_observers.blank?)
+  
+  #sitewrapper
+    .header
+      .nav
+        %h1
+          - if current_user.is_observer?
+            = link_to "Switch user", root_path
+          = current_user.full_name
+
+          |
+          = link_to "Sign Out", destroy_user_session_path, :method => :delete
+          - unless current_user.is_observer?
+            .clear
+            %br
+            %br
+      .main
+        %p
+<<<<<<< HEAD
+          = "I'm so sorry, you can not get into classes before you are invited by teacher."
+=======
+          = "I'm so sorry, you can not get into classes until you are invited by teacher."
+>>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
+          %br
+          = "after you are invited by teacher, you will receive confirmation from us.thank you"

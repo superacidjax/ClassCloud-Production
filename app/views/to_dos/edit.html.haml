@@ -1,0 +1,8 @@
+
+%h1 Editing to_do
+
+= render 'form'
+
+= link_to 'Show', class_room_to_do_path(@class.id,@to_do)
+\|
+= link_to 'Back', class_room_to_dos_path(@class.id)

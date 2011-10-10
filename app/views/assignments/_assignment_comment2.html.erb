@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <td rowspan="3"><%= image_tag "bakso.jpg", :width => "48", :height => "48" %></td>
+    <td><%= "#{@assignment.comment.user.full_name} #{@assignment.comment.created_at}" %></td>
+  </tr>
+  <tr>
+    <td><%= @assignment.comment.comment %></td>
+  </tr>
+  <tr>
+    <td><hr noshade /></td>
+  </tr>
+</table>
