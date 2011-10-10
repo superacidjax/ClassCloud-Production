@@ -1,0 +1,43 @@
+%h3 Cloud Pad posted by #{@writeboard.user.full_name} for assignment #{@writeboard.assignment.title}
+
+.field
+  = "Title"
+  %br/
+  = text_field_tag "title", @writeboard.title
+.field
+  = "Body"
+  %br/
+  = text_area_tag "body", @writeboard.body, :rows => 4, :cols => 40
+
+#comments_container
+  - @writeboard.comments.each do |comment|
+    %table{:width => "100%"}
+      %tr
+        %td{:rowspan => "3"}= image_tag "bakso.jpg", :width => "48", :height => "48"
+        %td{:colspan => "3"}
+          = "#{comment.user.full_name}"
+          = date_format(comment.created_at)
+
+      %tr
+        %td= comment.comment
+        %td{:align => "right"}
+          - if current_user.id.eql?(comment.user_id) or current_user.is_teacher?
+            =link_to "Edit", edit_writeboard_assignment_class_room_writeboard_path(@class.id, @writeboard, comment.id)
+            =link_to "Delete", destroy_writeboard_comment_class_room_writeboard_path(@class.id, @writeboard, comment.id), :method => :delete
+          %td= link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@note.id,comment,:commentable_type =>"#{params[:controller]}")
+
+      %tr
+        %td{:colspan => "3"}
+          %hr{:noshade => ""}
+
+- unless current_user.is_observer?
+  %h1 Update a comment
+  = form_tag(update_writeboard_comment_class_room_writeboard_path(@class.id, @writeboard, @comment.id), :method => :put) do |f|
+    .field
+      = text_area_tag "comment", @comment.comment, :rows => 4, :cols => 40
+    .actions
+      = submit_tag "Update this Comment"
+      %span#assignment_comment_ajax_loader{:style => "display: none"}= image_tag "LoaderIcon.gif"
+
+
+= link_to 'Back', class_room_writeboards_path(@class.id)

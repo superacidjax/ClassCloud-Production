@@ -1,0 +1,7 @@
+%h1 Editing upload_file
+
+= render 'form'
+
+= link_to 'Show', class_room_upload_file_path(@class.id ,@upload_file)
+\|
+= link_to 'Back', class_room_upload_files_path(@class.id)

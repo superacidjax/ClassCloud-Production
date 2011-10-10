@@ -1,0 +1,51 @@
+%h1 Welcome #{current_user.full_name}!! 
+= link_to 'Add User',new_admin_admin_path
+%table{:border =>'1',:align =>'left'}
+  %caption
+    %b Teacher
+  %tr
+    %td
+      %b Full name
+    %td
+      %b Edit?
+    %td
+      %b Delete?
+    - @teachers.each do |teacher|
+      %tr
+        %td= teacher.full_name
+        %td= link_to 'edit?',edit_admin_admin_path(teacher.id)
+        %br
+        %td= link_to 'delete?',admin_admin_path(teacher.id),:confirm =>'Are you sure?',:method =>:delete
+
+%table{:border =>'1',:align =>'left'}
+  %caption
+    %b Student
+  %tr
+    %td
+      %b Full name
+    %td
+      %b Edit?
+    %td
+      %b Delete?
+    - @students.each do |student|
+      %tr
+        %td= student.full_name
+        %td= link_to 'edit?',edit_admin_admin_path(student.id)
+        %td= link_to 'delete?',admin_admin_path(student.id),:confirm =>'Are you sure?',:method =>:delete
+%table{:border =>'1',:align =>'left'}
+  %caption
+    %b Observer
+  %tr
+    %td
+      %b Full name
+    %td
+      %b Edit?
+    %td
+      %b Delete?
+    - @observers.each do |observer|
+      %tr
+        %td= observer.full_name
+        %td= link_to 'edit?',edit_admin_admin_path(observer.id)
+        %td= link_to 'delete?',admin_admin_path(observer.id),:confirm =>'Are you sure?',:method =>:delete
+
+%br

@@ -1,0 +1,44 @@
+/- content_for :middle_content do
+%h1 All To-dos List
+
+%table
+  %tr
+    %th Title
+    %th Date
+    %th Status
+    %th
+    %th
+    %th
+
+  - @to_dos.each do |to_do|
+    %tr
+      %td= to_do.title
+      %td= time(to_do.date)
+      = form_tag class_room_to_do_path(@class.id,to_do),:method=>:put ,:remote => true do
+        = hidden_field_tag 'to_do[title]',to_do.title
+        = hidden_field_tag 'to_do[date]', to_do.date
+        = hidden_field_tag 'to_do[description]',to_do.description
+        = hidden_field_tag 'to_do[user_id]',current_user.id
+        = hidden_field_tag :class_room_id,"#{params[:class_room_id]}"
+        %td
+          - if to_do.status.eql?(true)
+            = check_box_tag 'to_do[status]', 0,false,{:onchange =>'this.form.submit()', :onclick => "$('#loading').show()"}
+            = 'undone'
+            %td= link_to 'Show', class_room_to_do_path(:class_room_id =>@class.id,:id =>to_do)
+            %td= link_to 'Edit', edit_class_room_to_do_path(:class_room_id => @class.id,:id => to_do)
+            %td= link_to 'Destroy', class_room_to_do_path(:class_room_id => @class.id,:id => to_do), :confirm => 'Are you sure?', :method => :delete
+            %td
+             
+          - else
+            = check_box_tag 'to_do[status]', 1,false,{:onchange =>'this.form.submit()', :onclick => "$('#loading').show()"}
+            = 'done'
+            %td= link_to 'Show', class_room_to_do_path(:class_room_id =>@class.id,:id => to_do),:method =>:get
+           
+          #loading{:style=> "display: none;"}
+            = image_tag ('LoaderIcon.gif')
+                  
+  %br
+
+    = link_to 'New To do', new_class_room_to_do_path(@class.id),:method =>:get
+= form_tag class_room_to_dos_path(@class.id),:method=>:get ,:remote => true do
+  =select_tag("selected_time", options_for_select( ToDo::TIME_TYPE),:onchange =>'this.form.submit()',:prompt => "Select Time")

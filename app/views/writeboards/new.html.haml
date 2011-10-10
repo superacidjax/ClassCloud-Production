@@ -1,0 +1,5 @@
+/- content_for :middle_content do
+%h1 
+  = "Cloud Pad for #{@assignment.title}"
+= render 'form'
+= link_to 'Back', class_room_assignments_path(@class.id)
