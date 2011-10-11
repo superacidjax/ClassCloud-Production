@@ -17,36 +17,43 @@ class ClassRoomsController < ApplicationController
   end
 
   def create
+   
     if params[:without_student].eql?("true")
-      @class_room = ClassRoom.new(:name => params[:class_room][:name], :user_id => current_user.id)
-      
-      if @class_room.save
+      params[:class_room][:name].each do |name|
+        @class_room = ClassRoom.new(:name => name, :user_id => current_user.id)
+        @class_room.save
+      end
+      debugger
+      if @class_room.save.eql?(true)
         redirect_to root_url
-      else        
+      else
         @students = User.all(:conditions => "roles LIKE '%student%'")
         render :action => "new"
       end
+      
     else
       class_room = ClassRoom.new(:name => params[:class_room][:name], :user_id => current_user.id)
-
       if class_room.save!
         if !params[:user][:first_name].blank? or !params[:user][:last_name].blank? or !params[:user][:email].blank?
-          student = User.new(params[:user])
-          student.is_not_teacher = true
-          student.password = "123456"
-          student.password_confirmation = "123456"
-          student.user_type = "student"
-
-          if student.save
-            student.add_role "student"
-            student.save
-            ClassRoomStudent.create(:user_id => student.id, :class_room_id => class_room.id)
+          params[:user][:first_name].each_with_index do |val, index|
+            @student = User.new(:first_name => params[:user][:first_name][index.to_i], :last_name => params[:user][:last_name][index.to_i], :email => params[:user][:email][index.to_i])
+            @student.is_not_teacher = true
+            @student.password = "123456"
+            @student.password_confirmation = "123456"
+            @student.user_type = "student"
+            @student.save
+            @student.add_role "student"
+            @student.save
+            ClassRoomStudent.create(:user_id => @student.id, :class_room_id => class_room.id)
+          end
+          if @student.save.eql?(true)
             redirect_to root_url
           else            
-            @error_messages = student.errors.full_messages
+            @error_messages = @student.errors.full_messages
             class_room.destroy
             render :template => "dashboard/index", :layout => false
           end
+         
         else
           redirect_to root_url
         end

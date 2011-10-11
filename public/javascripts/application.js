@@ -98,3 +98,26 @@ function checkField(){
     }
     
 }
+
+function cloneElement(){
+    obj = $("#form1").clone()
+    obj.appendTo("#clone");
+}
+
+function checkTextField(){
+    if($(".first_name").val().length==0){
+        alert('first name must not empty ');
+        return false;
+    }
+    else if ($(".last_name").val().length==0){
+        alert('last name must not empty ');
+        return false;
+    }
+    else if ($(".email").val().length==0){
+        alert('email must not empty ');
+        return false;
+    }
+    else{
+        return true;
+    }
+}
