@@ -1,20 +1,4 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
-one:
-  title: MyText
-  file: MyString
-  user_id: MyString
-
-two:
-  title: MyText
-  file: MyString
-  user_id: MyString
-<<<<<<< HEAD
-=======
 file1:
   title: File1
   file_file_name: filename1.jpg
@@ -24,6 +8,3 @@ file2:
   title: File2
   file_file_name: filename2.png
   user_id: 2
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36

@@ -1,12 +1,6 @@
 require 'test_helper'
 
 class DiscussionTest < ActiveSupport::TestCase
-<<<<<<< HEAD
-<<<<<<< HEAD
-  # test "the truth" do
-  #   assert true
-  # end
-=======
   test "display first name user of first discussion" do
     discussion = Discussion.first.user_id
     first_name = User.find(discussion).first_name
@@ -25,10 +19,4 @@ class DiscussionTest < ActiveSupport::TestCase
     discussion.user_id = 127326141
     assert_equal false, discussion.save
   end
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-  # test "the truth" do
-  #   assert true
-  # end
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
 end

@@ -3,18 +3,6 @@
 # This model initially had no columns defined.  If you add columns to the
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
-#
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
-one: {}
-# column: value
-#
-two: {}
-#  column: value
-<<<<<<< HEAD
-=======
 david:
   email: david@yahoo.com
   current_sign_in_at: 2011-10-10 03:24:24.323694
@@ -56,6 +44,3 @@ ahmad:
   last_name: gulam
   username: amad
   time_zone: Hawaii
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36

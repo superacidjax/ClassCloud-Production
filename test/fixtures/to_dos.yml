@@ -1,22 +1,4 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
-one:
-  title: MyText
-  date: MyText
-  user_id: MyString
-  status: false
-
-two:
-  title: MyText
-  date: MyText
-  user_id: MyString
-  status: false
-<<<<<<< HEAD
-=======
 todo1:
   title: ToDo1
   date: <%= Time.now.to_s(:db) %>
@@ -44,6 +26,3 @@ todo5:
   user_id: 2
   status: false
   description: Yesterday is our future hehh..
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
