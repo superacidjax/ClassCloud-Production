@@ -193,7 +193,7 @@
               = text_field_tag "class_room[name]", nil
           %h3 Now you'll add students, you can always edit or add students later..
           %div#form1
-            = "Add Student"
+            = "Add A student"
             - unless params[:user].blank?
               = text_field_tag "user[first_name][]", params[:user][:first_name], {:placeholder=>'First Name', :size => 10}
               = text_field_tag "user[last_name][]", params[:user][:last_name], {:placeholder=>'Last Name', :size => 10}
@@ -207,7 +207,7 @@
             %div#clone
           %div{:style => "text-align:right"}
             = submit_tag "I'm done adding students",:onclick =>'return checkTextField()'
-          = link_to 'Add More student', '#', :onclick =>'cloneElement()'
+          = link_to 'Add more students', '#', :onclick =>'cloneElement()'
 - elsif (current_user.is_observer? and current_user.class_room_observers.blank?)
   
   #sitewrapper
