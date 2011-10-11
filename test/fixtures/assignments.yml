@@ -1,22 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
-one:
-  title: MyString
-  description: MyText
-  category_id: 1
-  user_id: 1
-
-two:
-  title: MyString
-  description: MyText
-  category_id: 1
-  user_id: 1
-<<<<<<< HEAD
-=======
 assignment1:
   title: assignment1
   description: Lorem ipsum
@@ -28,6 +11,3 @@ assignment2:
   description: Hello world
   assignment_category_id: 2
   user_id: 357581546
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36

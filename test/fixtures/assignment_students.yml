@@ -1,18 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
-one:
-  assignment_id: 1
-  user_id: 1
 
-two:
-  assignment_id: 1
-  user_id: 1
-<<<<<<< HEAD
-=======
 assignment1:
   assignment_id: 1
   user_id: 127326141
@@ -20,6 +8,3 @@ assignment1:
 assignment2:
   assignment_id: 2
   user_id: 624604774
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36

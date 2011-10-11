@@ -1,13 +1,6 @@
 require 'test_helper'
 
 class ClassRoomTest < ActiveSupport::TestCase
-<<<<<<< HEAD
-<<<<<<< HEAD
-  # test "the truth" do
-  #   assert true
-  # end
-=======
- 
   test "class room must have user id" do
     class_room = ClassRoom.new
     class_room.name = 'sunda'
@@ -20,10 +13,4 @@ class ClassRoomTest < ActiveSupport::TestCase
     first_name = User.find(class_room).first_name
     assert_equal 'indra', first_name
   end
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-  # test "the truth" do
-  #   assert true
-  # end
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
 end

@@ -1,12 +1,6 @@
 require 'test_helper'
 
 class ToDoTest < ActiveSupport::TestCase
-<<<<<<< HEAD
-<<<<<<< HEAD
-  # test "the truth" do
-  #   assert true
-  # end
-=======
   test "the size of time type" do
     assert_equal 6, ToDo::TIME_TYPE.size
   end
@@ -41,12 +35,4 @@ class ToDoTest < ActiveSupport::TestCase
     todo = ToDo.where("user_id =?",357581546).first
     assert_equal 357581546,todo.user_id
   end
-
-  
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-  # test "the truth" do
-  #   assert true
-  # end
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
 end

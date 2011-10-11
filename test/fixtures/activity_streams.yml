@@ -2,51 +2,21 @@
 # Released under the BSD license found in the file 
 # LICENSE included with this ActivityStreams plug-in.
 
---- 
-<<<<<<< HEAD
-<<<<<<< HEAD
-one: 
-  updated_at: 2008-07-24 04:22:54
-  actor_id: "3"
-=======
 one:
   updated_at: 2008-07-24 04:22:54
   actor_id: "127326141"
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-one: 
-  updated_at: 2008-07-24 04:22:54
-  actor_id: "3"
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   id: "1"
   verb: "downloaded"
   activity: "download"
   status: "0"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
-  object_type: Torrent
-  object_name_method: title
-  count: "1"
-  actor_type: User
-  actor_name_method: friendly_name
-  object_id: "1"
-  created_at: 2008-07-24 04:22:54
-two: 
-<<<<<<< HEAD
-=======
   object_type: Assignment
   object_name_method: title
   count: "1"
   actor_type: User
-  actor_name_method: first_name
+  actor_name_method: full_name
   object_id: "1"
   created_at: 2008-07-24 04:22:54
 two:
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   updated_at: 2008-07-24 04:22:54
   actor_id: "3"
   id: "2"
@@ -60,15 +30,7 @@ two:
   actor_name_method: friendly_name
   object_id: "1"
   created_at: 2008-07-24 04:22:54
-<<<<<<< HEAD
-<<<<<<< HEAD
 three: 
-=======
-three:
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-three: 
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   updated_at: 2008-07-24 04:22:54
   actor_id: "3"
   id: "3"
@@ -82,15 +44,7 @@ three:
   actor_name_method: friendly_name
   object_id: "1"
   created_at: 2008-07-24 04:22:54
-<<<<<<< HEAD
-<<<<<<< HEAD
-four: 
-=======
 four:
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-four: 
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   updated_at: 2008-07-24 04:22:54
   actor_id: "3"
   id: "4"
@@ -104,15 +58,7 @@ four:
   actor_name_method: friendly_name
   object_id: "1"
   created_at: 2008-07-24 04:22:54
-<<<<<<< HEAD
-<<<<<<< HEAD
 five: 
-=======
-five:
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-five: 
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   updated_at: 2008-07-24 04:22:54
   actor_id: "3"
   id: "5"
@@ -126,15 +72,7 @@ five:
   actor_name_method: friendly_name
   object_id: "1"
   created_at: 2008-07-24 04:22:54
-<<<<<<< HEAD
-<<<<<<< HEAD
 six: 
-=======
-six:
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-six: 
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   updated_at: 2008-07-24 04:22:54
   actor_id: "3"
   id: "6"
@@ -148,15 +86,7 @@ six:
   actor_name_method: friendly_name
   object_id: "1"
   created_at: 2008-07-24 04:22:54
-<<<<<<< HEAD
-<<<<<<< HEAD
 seven: 
-=======
-seven:
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-seven: 
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   updated_at: 2008-07-24 04:22:54
   actor_id: "3"
   id: "7"
@@ -170,15 +100,7 @@ seven:
   actor_name_method: friendly_name
   object_id: "1"
   created_at: 2008-07-24 04:22:54
-<<<<<<< HEAD
-<<<<<<< HEAD
-eight: 
-=======
 eight:
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-eight: 
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   updated_at: 2008-07-24 04:22:54
   actor_id: "3"
   id: "8"
@@ -192,15 +114,7 @@ eight:
   actor_name_method: friendly_name
   object_id: "1"
   created_at: 2008-07-24 04:22:54
-<<<<<<< HEAD
-<<<<<<< HEAD
 nine: 
-=======
-nine:
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-nine: 
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   updated_at: 2008-07-24 04:22:54
   actor_id: "3"
   id: "9"
@@ -214,15 +128,7 @@ nine:
   actor_name_method: friendly_name
   object_id: "1"
   created_at: 2008-07-24 04:22:54
-<<<<<<< HEAD
-<<<<<<< HEAD
 ten: 
-=======
-ten:
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-ten: 
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   updated_at: 2008-07-24 04:22:54
   actor_id: "3"
   id: "10"
@@ -236,15 +142,7 @@ ten:
   actor_name_method: friendly_name
   object_id: "1"
   created_at: 2008-07-24 04:22:54
-<<<<<<< HEAD
-<<<<<<< HEAD
 eleven: 
-=======
-eleven:
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-eleven: 
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   updated_at: 2008-07-24 04:22:54
   actor_id: "3"
   id: "11"
@@ -258,15 +156,7 @@ eleven:
   actor_name_method: friendly_name
   object_id: "1"
   created_at: 2008-07-24 04:22:54
-<<<<<<< HEAD
-<<<<<<< HEAD
 twelve: 
-=======
-twelve:
->>>>>>> 06aff02a73ca1ec4a4ed69921c1971e6036684de
-=======
-twelve: 
->>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
   updated_at: 2008-07-24 04:22:54
   actor_id: "3"
   id: "12"
