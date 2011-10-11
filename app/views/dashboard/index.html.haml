@@ -6,9 +6,9 @@
           - if current_user.is_observer?
             = link_to "Switch user", root_path
           = current_user.full_name
-          |
-          = link_to "Settings",class_room_edit_user_path(@my_class_rooms ,current_user.id)
-          |
+          
+          =# link_to "Settings",class_room_edit_user_path(@my_class_rooms ,current_user.id)
+          
           = link_to "Sign Out", destroy_user_session_path, :method => :delete
           - unless current_user.is_observer?
             .clear

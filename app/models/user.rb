@@ -13,22 +13,8 @@ class User < ActiveRecord::Base
   validates :user_type, :presence => true, :if => Proc.new{|user| user.is_not_teacher.eql?(true)}
   validates :username, :presence => true, :if => Proc.new{|user| user.user_pick_username_and_password.eql?(true)}
   validates :username, :uniqueness => true, :if => Proc.new{|user| user.user_pick_username_and_password.eql?(true)}
-  has_many :assignments, :dependent => :destroy
-  has_many :comments, :dependent => :destroy
-  has_many :events, :dependent => :destroy
-  has_many :to_dos, :dependent => :destroy
-  has_many :class_rooms, :dependent => :destroy
-  has_many :assignment_students, :dependent => :destroy
-  has_many :class_room_students, :dependent => :destroy
-  has_many :class_room_observers, :dependent => :destroy
-  has_many :notes, :dependent => :destroy
-  has_many :writeboards, :dependent => :destroy
-  has_many :upload_files, :dependent => :destroy
-  after_create :define_user_role, :if => Proc.new{|user| user.is_not_teacher.eql?(false) || user.is_not_teacher.blank?}
-  acts_as_messageable  :table_name => "messages", # default 'messages'
-  :required   => [:topic, :body]    ,              # default [:topic, :body]
-  :class_name => "ActsAsMessageable::Message"       # default "ActsAsMessageable::Message"
-  acts_as_voter
+ 
+ 
   with_options :dependent => :destroy do |user|
     user.has_many :assignments
     user.has_many :comments

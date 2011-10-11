@@ -1,8 +1,5 @@
 class UploadFile < ActiveRecord::Base
   belongs_to :user
-  scope :class_room,lambda{|cri|where("class_room_id =?",cri)}
-  scope :file_size_desc ,:order =>'file_file_size DESC'
-  scope :created_desc ,:order =>'created_at DESC'
   
   scope :pdf_category,where("file_content_type=?",COMPRESS_TYPE[0])
   scope :file_name_category,where("file_content_type=? or  file_content_type=?",COMPRESS_TYPE[0] ,COMPRESS_TYPE[1])
@@ -28,10 +25,6 @@ class UploadFile < ActiveRecord::Base
   validates_attachment_content_type :file, :content_type =>
     ['image/png' ,'image/jpeg', 'image/gif', 'application/pdf' , 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ,'text/plain' ,'application/zip' , 'application/x-rar',  'application/msword' , 'application/vnd.ms-excel' ]
   validates_attachment_size :file, :less_than => 10.megabytes
-
-  acts_as_commentable
-
-  acts_as_commentable
 
   acts_as_commentable
  

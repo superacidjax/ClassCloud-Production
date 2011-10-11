@@ -19,10 +19,10 @@ class ClassRoomsController < ApplicationController
   def create
     if params[:without_student].eql?("true")
       @class_room = ClassRoom.new(:name => params[:class_room][:name], :user_id => current_user.id)
-
+      
       if @class_room.save
         redirect_to root_url
-      else
+      else        
         @students = User.all(:conditions => "roles LIKE '%student%'")
         render :action => "new"
       end

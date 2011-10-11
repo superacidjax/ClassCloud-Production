@@ -1,9 +1,5 @@
 class ToDo < ActiveRecord::Base
   default_scope :order =>("date DESC")
-  belongs_to :user
-  scope :today ,lambda{where("date like ?",Time.now.strftime("%Y-%m-%d")+"%")}
-  validates :title, :description,:date, :presence => true
-  default_scope :order => ("date DESC")
 
   belongs_to :user
 
