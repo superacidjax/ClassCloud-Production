@@ -1,18 +1,5 @@
 class Event < ActiveRecord::Base
   acts_as_commentable
-  has_event_calendar
-  belongs_to :user
-  belongs_to :class_room
-  belongs_to :assignment
-  validates :name, :start_at, :end_at, :user_id, :presence => true
-  validates :name, :uniqueness => {:scope => :user_id}
-  validate :beginning_must_before_ending_date
-  scope :user_id,lambda{|user|where("user_id =?",user)}
-
-  scope :updated_not_null,where("file_updated_at IS NOT NULL")
-  def beginning_must_before_ending_date
-    errors.add(:base, 'Start date must be before ending date') if self.start_at > self.end_at
-  end
 
   has_event_calendar
   belongs_to :user
