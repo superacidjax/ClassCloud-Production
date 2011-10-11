@@ -17,4 +17,4 @@ user = User.new( #:city                 => City.first,
 user.skip_confirmation!
 user.save!
 user.admin = true
-user.save!git pull
+user.save!
