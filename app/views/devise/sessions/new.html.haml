@@ -4,6 +4,8 @@
 
 #background
   .login_form
+    %h4
+      = link_to "Account Help", account_help_path
     = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
       %div
         = f.text_field :login,{:placeholder=>'  Class Cloud ID',:class=>'email_field'}

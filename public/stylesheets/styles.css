@@ -340,6 +340,8 @@ div.field, div.actions {
     font: normal 14px Helvetica, Arial, sans-serif;
     color: #00009c;
     -webkit-font-smoothing: anti-aliased; }
+  #main_content_area .helppage {
+    margin-left: 72px; }
 
 table.board {
   width: 640px;
