@@ -10,11 +10,11 @@ user = User.new( #:city                 => City.first,
   :first_name           => 'admin',
   :last_name            => 'admin',
   :admin                => 1,
-  :email                => 'admin@classcloud.me',
+  :email                => 'admin1@classcloud.me',
   :password   => 'password',
   :password_confirmation  => 'password'
 )
 user.skip_confirmation!
 user.save!
 user.admin = true
-user.save!
+user.save!git pull
