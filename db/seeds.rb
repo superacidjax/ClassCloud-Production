@@ -10,7 +10,7 @@ user = User.new( #:city                 => City.first,
   :first_name           => 'admin',
   :last_name            => 'admin',
   :admin                => 1,
-  :email                => 'admin1@classcloud.me',
+  :email                => 'admin_brian@classcloud.me',
   :password   => 'password',
   :password_confirmation  => 'password'
 )
