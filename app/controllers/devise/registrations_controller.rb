@@ -85,7 +85,7 @@ class Devise::RegistrationsController < ApplicationController
   # in your own RegistrationsController.
   def after_sign_up_path_for(resource)
 
-    redirect_to after_sign_url
+    redirect_to welcome_url
   end
 
   # Returns the inactive reason translated.

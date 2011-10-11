@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable,
     :token_authenticatable, :confirmable, :lockable, :timeoutable,:omniauthable
-
+#:confirmable : removed to disable confirmation email
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :user_type, :username, :login, :time_zone
   attr_accessor :is_not_teacher, :user_type, :login, :user_pick_username_and_password
