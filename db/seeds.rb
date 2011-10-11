@@ -5,12 +5,12 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
-AssignmentCategory.create([{:name => "Math"}, {:name => "English"}, {:name => "Physics"}, {:name => "Chemical"}, {:name => "Biology"}])
+AssignmentCategory.create([{:name => "Homework"}, {:name => "Essay"}, {:name => "Journal"}, {:name => "Problem Set"}, {:name => "Project"}])
 user = User.new( #:city                 => City.first,
   :first_name           => 'admin',
   :last_name            => 'admin',
   :admin                => 1,
-  :email                => 'admin@classcloud.com',
+  :email                => 'admin@classcloud.me',
   :password   => 'password',
   :password_confirmation  => 'password'
 )
