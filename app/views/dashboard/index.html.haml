@@ -192,20 +192,22 @@
             - else
               = text_field_tag "class_room[name]", nil
           %h3 Now you'll add students, you can always edit or add students later..
-          %div
+          %div#form1
             = "Add Student"
             - unless params[:user].blank?
-              = text_field_tag "user[first_name]", params[:user][:first_name], {:placeholder=>'First Name', :size => 10}
-              = text_field_tag "user[last_name]", params[:user][:last_name], {:placeholder=>'Last Name', :size => 10}
-              = email_field_tag "user[email]", params[:user][:email], {:placeholder=>'Email', :size => 10}
+              = text_field_tag "user[first_name][]", params[:user][:first_name], {:placeholder=>'First Name', :size => 10}
+              = text_field_tag "user[last_name][]", params[:user][:last_name], {:placeholder=>'Last Name', :size => 10}
+              = email_field_tag "user[email][]", params[:user][:email], {:placeholder=>'Email', :size => 10}
             - else
-              = text_field_tag "user[first_name]", nil, {:placeholder=>'First Name', :size => 10}
-              = text_field_tag "user[last_name]", nil, {:placeholder=>'Last Name', :size => 10}
-              = email_field_tag "user[email]", nil, {:placeholder=>'Email', :size => 10}
+              = text_field_tag "user[first_name][]", nil, {:placeholder=>'First Name', :size => 10,:class =>'first_name'}
+              = text_field_tag "user[last_name][]", nil, {:placeholder=>'Last Name', :size => 10,:class =>'last_name'}
+              = email_field_tag "user[email][]", nil, {:placeholder=>'Email', :size => 10,:class =>'email'}
             %br
             %br
-            %div{:style => "text-align:right"}
-              = submit_tag "I'm done adding students"
+            %div#clone
+          %div{:style => "text-align:right"}
+            = submit_tag "I'm done adding students",:onclick =>'return checkTextField()'
+          = link_to 'Add More student', '#', :onclick =>'cloneElement()'
 - elsif (current_user.is_observer? and current_user.class_room_observers.blank?)
   
   #sitewrapper

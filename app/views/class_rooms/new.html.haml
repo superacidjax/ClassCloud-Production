@@ -6,9 +6,10 @@
     .clear
     %br
     %br
-    %div{:style => "text-align:left"}
-      %h2 Add a class
-      = form_for(@class_room, :url => class_rooms_path(:without_student => true), :html => {:method => :post}) do |f|
+    %h2 Add a class
+    
+    = form_for(@class_room, :url => class_rooms_path(:without_student => true), :html => {:method => :post, :multipart =>true}) do |f|
+      %div#form1{:style => "text-align:left"}
         - if @class_room.errors.any?
           #error_explanation
             %h2
@@ -20,9 +21,14 @@
         %div
           = f.label :name, "Class name"
         %br
-          = f.text_field :name
-        %div= f.submit "Save"
+          = text_field_tag 'class_room[name][]'
+        %div#clone
+      %div#submit{:style => "text-align:center"}
+        = f.submit "Save"
+    %div{:style => "text-align:center"}
       = link_to "Back", root_path
+      = link_to 'Add More Class', '#', :onclick =>'cloneElement()'
+    
   %div{:style => "margin-left: 930px; margin-top: -151px; position:absolute"}
     %h3 My Students
     - @students.each do |student|
