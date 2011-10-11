@@ -7,6 +7,16 @@
     = yield :calendar_js_and_css
     = csrf_meta_tag
     %meta{:name => "google-site-verification", :content =>"okQIcxqP1cCBYhBhs2NtJXc4PO9ReSekIQtF0VlaYSE"}
+    %script
+      \type="text/javascript"
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-21822274-7']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
   %body
     - if current_user and (((current_user and current_user.is_teacher?) or (!current_user.is_teacher? and current_user.username)))
       - if not ((params[:controller].eql?('dashboard') and params[:action].eql?('index')) or (params[:controller].eql?('class_rooms') and params[:action].eql?('new')))
