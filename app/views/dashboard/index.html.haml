@@ -204,11 +204,7 @@
           %div#clone
           %div{:style => "text-align:right"}
             = submit_tag "I'm done adding students",:onclick =>'return checkTextField()'
-<<<<<<< HEAD
-          = link_to 'Add more students', '#', :onclick =>'cloneElement()'
-=======
-          = link_to 'Add More student', '#', :onclick =>'addStudent()'
->>>>>>> cbf32ba88696c340f39f468710659616fb77a4f5
+          = link_to 'Add more students', '#', :onclick =>'addStudent()'
 - elsif (current_user.is_observer? and current_user.class_room_observers.blank?)
   
   #sitewrapper

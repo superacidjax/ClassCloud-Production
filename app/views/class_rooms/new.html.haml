@@ -27,12 +27,7 @@
         = f.submit "Save"
     %div{:style => "text-align:center"}
       = link_to "Back", root_path
-<<<<<<< HEAD
-      = link_to 'Add A Class', '#', :onclick =>'cloneElement()'
-    
-=======
-      = link_to 'Add More Class', '#', :onclick =>'cloneElement()'
->>>>>>> cbf32ba88696c340f39f468710659616fb77a4f5
+      = link_to 'Add another class', '#', :onclick =>'cloneElement()'
   %div{:style => "margin-left: 930px; margin-top: -151px; position:absolute"}
     %h3 My Students
     - @students.each do |student|
