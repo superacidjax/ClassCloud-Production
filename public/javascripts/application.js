@@ -1,6 +1,8 @@
 // // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
+window.classCounter = 0;
+
 function Check(){
     if($("#Check_ctr").is(':checked') == true)
         $('.check_msg').each(function(){
@@ -100,8 +102,21 @@ function checkField(){
 }
 
 function cloneElement(){
-    obj = $("#form1").clone()
-    obj.appendTo("#clone");
+    //    obj = $("#form1").clone()
+    //    obj.appendTo("#clone");
+    obj = $("#form1").clone();
+    var form = obj.appendTo("#clone").html('<div id="new_class_'+ window.classCounter +'"><label for="class_room_name">Class name</label><br><input id="class_room_name_'+ window.classCounter +'" type="text" name="class_room[name][]"> <a href="javascript:removeClass('+ window.classCounter +')">Remove</a></div>');
+    window.classCounter++;
+}
+
+function removeClass(i){
+    $("#new_class_"+i).remove();
+}
+
+function addStudent(){
+    obj = $("#form1").clone();
+    var form = obj.appendTo("#clone").html('<div id="new_class_'+ window.classCounter +'">Add Student<input class="first_name" id="user_first_name_'+ window.classCounter +'" name="user[first_name][]" placeholder="First Name" size="10" type="text" /><input class="last_name" id="user_last_name_'+ window.classCounter +'" name="user[last_name][]" placeholder="Last Name" size="10" type="text" /><input class="email" id="user_email_'+ window.classCounter +'" name="user[email][]" placeholder="Email" size="10" type="email" /><a href="javascript:removeClass('+ window.classCounter +')">Remove</a></div><br>');
+    window.classCounter++;
 }
 
 function checkTextField(){
@@ -120,4 +135,8 @@ function checkTextField(){
     else{
         return true;
     }
+}
+
+function removeElement(){
+    $("#clone").remove()
 }
