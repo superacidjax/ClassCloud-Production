@@ -106,15 +106,6 @@
                             %br
                             %div
                               %h2
-                                = "#{@teacher.full_name}'s activity feed"
-                              %table
-                                - @activity_streams.each do |activity_stream|
-                                  - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
-                                  - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
-                                  %tr
-                                    %td
-                                      = "#{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}"
-                    - elsif @student and @teacher and !@my_class_rooms.nil?
                       .clear
                       %br
                       %br
