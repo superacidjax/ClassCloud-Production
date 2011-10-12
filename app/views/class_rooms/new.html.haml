@@ -22,13 +22,12 @@
           = f.label :name, "Class name"
         %br
           = text_field_tag 'class_room[name][]'
-        %div#clone
+      %div#clone
       %div#submit{:style => "text-align:center"}
         = f.submit "Save"
     %div{:style => "text-align:center"}
       = link_to "Back", root_path
       = link_to 'Add More Class', '#', :onclick =>'cloneElement()'
-    
   %div{:style => "margin-left: 930px; margin-top: -151px; position:absolute"}
     %h3 My Students
     - @students.each do |student|

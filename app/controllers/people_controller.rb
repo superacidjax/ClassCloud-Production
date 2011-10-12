@@ -13,7 +13,7 @@ class PeopleController < ApplicationController
     @existing_observers = []
     @existing_students = []
     
-    current_user.class_rooms.where(["id <> ?", params[:class_room_id]]).each do |class_room|
+    ClassRoom.where(["id <> ?", params[:class_room_id]]).each do |class_room|
       class_room.observers.each do |observer|
         @existing_observers << observer if observer.class_room_observers.where(class_room_id: params[:class_room_id]).blank?
       end
@@ -68,7 +68,7 @@ class PeopleController < ApplicationController
     else
       @existing_observers = []
       @existing_students = []
-      current_user.class_rooms.where(["id <> ?", params[:class_room_id]]).each do |class_room|
+      ClassRoom.where(["id <> ?", params[:class_room_id]]).each do |class_room|
         class_room.observers.each do |observer|
           @existing_observers << observer
         end

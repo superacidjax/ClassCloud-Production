@@ -6,9 +6,6 @@
           - if current_user.is_observer?
             = link_to "Switch user", root_path
           = current_user.full_name
-          
-          =# link_to "Settings",class_room_edit_user_path(@my_class_rooms ,current_user.id)
-          
           = link_to "Sign Out", destroy_user_session_path, :method => :delete
           - unless current_user.is_observer?
             .clear
@@ -91,7 +88,7 @@
                   %br
                   %br
                   %div{:style => "text-align:left"}
-                    %h2 "#{@teacher.first_name}"'s Classes
+                    %h2= "#{@teacher.first_name}'s Classes"
                     %div{:style => "width: 800px"}
                       - @my_class_rooms.each_with_index do |class_room, index|
                         %div{:style => "float: left;width: 300px"}
@@ -204,10 +201,10 @@
               = email_field_tag "user[email][]", nil, {:placeholder=>'Email', :size => 10,:class =>'email'}
             %br
             %br
-            %div#clone
+          %div#clone
           %div{:style => "text-align:right"}
             = submit_tag "I'm done adding students",:onclick =>'return checkTextField()'
-          = link_to 'Add More student', '#', :onclick =>'cloneElement()'
+          = link_to 'Add More student', '#', :onclick =>'addStudent()'
 - elsif (current_user.is_observer? and current_user.class_room_observers.blank?)
   
   #sitewrapper
@@ -226,8 +223,5 @@
             %br
       .main
         %p
-          = "I'm so sorry, you can not get into classes before you are invited by teacher."
-          = "I'm so sorry, you can not get into classes until you are invited by teacher."
-          = "I'm so sorry, you can not get into classes before you are invited by teacher."
           %br
           = "after you are invited by teacher, you will receive confirmation from us.thank you"
