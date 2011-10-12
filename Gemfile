@@ -4,6 +4,7 @@ gem 'rails', '3.1.0'
 gem 'pg'
 gem 'devise'
 # gem "kgio", "~> 1.0.1"
+gem 'newrelic_rpm'
 gem 'dalli'
 gem 'RedCloth'
 gem 'omniauth'
