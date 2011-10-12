@@ -13,9 +13,10 @@
         = f.submit "Sign in",{:class=>'submit'}
   .notice_launch
     = alert
-  %div{:style=> "text-align: center"}
     = render :partial => "devise/shared/links"
   %div{:style=> "position: relative"}
+    %h1
+      = link_to "Watch the ClassCloud Video!", href="http://vimeo.com/29879423"
     = image_tag "cc_landing.png", alt: "Are you ready for the paperless classroom? Welcome to ClassCloud!"
 .main
   .myclasses
