@@ -7,7 +7,8 @@ class Assignment < ActiveRecord::Base
   validates :title, :description, :assignment_category_id, :user_id, :presence => true
   validates :title, :uniqueness => {:scope => :user_id}
   acts_as_voteable
-
+  acts_as_textiled :description
+  
   belongs_to :user
   belongs_to :assignment_category
   belongs_to :class_room
