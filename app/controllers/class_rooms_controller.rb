@@ -23,7 +23,6 @@ class ClassRoomsController < ApplicationController
         @class_room = ClassRoom.new(:name => name, :user_id => current_user.id)
         @class_room.save
       end
-      debugger
       if @class_room.save.eql?(true)
         redirect_to root_url
       else
