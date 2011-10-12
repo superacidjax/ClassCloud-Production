@@ -102,8 +102,6 @@ function checkField(){
 }
 
 function cloneElement(){
-    //    obj = $("#form1").clone()
-    //    obj.appendTo("#clone");
     obj = $("#form1").clone();
     var form = obj.appendTo("#clone").html('<div id="new_class_'+ window.classCounter +'"><label for="class_room_name">Class name</label><br><input id="class_room_name_'+ window.classCounter +'" type="text" name="class_room[name][]"> <a href="javascript:removeClass('+ window.classCounter +')">Remove</a></div>');
     window.classCounter++;
@@ -135,8 +133,4 @@ function checkTextField(){
     else{
         return true;
     }
-}
-
-function removeElement(){
-    $("#clone").remove()
 }

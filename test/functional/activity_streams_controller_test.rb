@@ -4,7 +4,7 @@
 # LICENSE included with this ActivityStreams plug-in.
 #++
 # Template to generate the ActivityStreamsControllerTest
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 class ActivityStreamsControllerTest < ActionController::TestCase
 
   def test_public_should_get_feed

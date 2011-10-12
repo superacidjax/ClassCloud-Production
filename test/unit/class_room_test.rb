@@ -4,7 +4,6 @@ class ClassRoomTest < ActiveSupport::TestCase
   test "class room must have user id" do
     class_room = ClassRoom.new
     class_room.name = 'sunda'
-    class_room.user_id = 357581546
     assert_equal false, class_room.save
   end
 
