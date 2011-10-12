@@ -116,7 +116,7 @@ function removeClass(i){
 function addStudent(){
     obj = $("#form1").clone();
     var form = obj.appendTo("#clone").html('<div id="new_class_'+ window.classCounter +'">Add Student<input class="first_name" id="user_first_name_'+ window.classCounter +'" name="user[first_name][]" placeholder="First Name" size="10" type="text" /><input class="last_name" id="user_last_name_'+ window.classCounter +'" name="user[last_name][]" placeholder="Last Name" size="10" type="text" /><input class="email" id="user_email_'+ window.classCounter +'" name="user[email][]" placeholder="Email" size="10" type="email" /><a href="javascript:removeClass('+ window.classCounter +')">Remove</a></div><br>');
-
+    window.classCounter++;
 }
 
 function checkTextField(){
@@ -138,5 +138,5 @@ function checkTextField(){
 }
 
 function removeElement(){
-$("#clone").remove()
+    $("#clone").remove()
 }
