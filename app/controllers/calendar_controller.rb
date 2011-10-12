@@ -116,7 +116,7 @@ class CalendarController < ApplicationController
   private
 
   def get_my_students_and_class
-        @class = if current_user.is_teacher?
+    @class = if current_user.is_teacher?
       current_user.class_rooms.find(params[:class_room_id])
     elsif current_user.is_student?
       my_class_room = current_user.class_room_students.where(class_room_id: params[:class_room_id]).first

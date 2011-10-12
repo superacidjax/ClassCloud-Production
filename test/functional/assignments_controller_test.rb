@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AssignmentsControllerTest < ActionController::TestCase
   setup do
-    @assignment = assignments(:one)
+    @assignment = assignments(:assignment1)
   end
 
   test "should get index" do
@@ -21,7 +21,7 @@ class AssignmentsControllerTest < ActionController::TestCase
       post :create, assignment: @assignment.attributes
     end
 
-    assert_redirected_to assignment_path(assigns(:assignment))
+    assert_redirected_to class_room_assignment_path(assigns(:assignment))
   end
 
   test "should show assignment" do

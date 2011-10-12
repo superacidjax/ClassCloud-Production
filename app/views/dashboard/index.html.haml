@@ -41,19 +41,27 @@
               - if current_user.is_teacher? and @student
                 - @activity_streams.each do |activity_stream|
                   - if activity_stream.actor_id.to_s.eql?(@student.id.to_s)
-                    - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
-                    - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
-                    %tr
-                      %td
-                        = "#{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}"
-                  - else
-                    - @activity_streams.each do |activity_stream|
-                      - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
-                      - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
+                    - begin
+                      - actor = activity_stream.actor_type.constantize.find_by_id(activity_stream.actor_id)
+                      - object = activity_stream.object_type.constantize.find_by_id(activity_stream.object_id)
                       %tr
                         %td
-                          ="#{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} "
-                          = link_to "#{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}", link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "))
+                          = "#{date_format(activity_stream.created_at)}"
+                          = link_to "#{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}",link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "))
+                    - rescue
+                      %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
+                  - else
+                    - @activity_streams.each do |activity_stream|
+                      -begin
+                        - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
+                        - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
+                        %tr
+                          %td
+                            ="#{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} "
+                            = link_to "#{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}", link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "))
+                        - rescue
+                          %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
+
               - else
                 - if !@student.blank? and @teacher.blank?
                   .clear
@@ -78,11 +86,16 @@
                       = "#{@student.full_name}'s activity feed"
                     %table
                       - @activity_streams.each do |activity_stream|
-                        - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
-                        - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
-                        %tr
-                          %td
-                            = "#{activity_stream.created_at.strftime("%Y-%m-%d %H:%M")} #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}"
+                        - begin
+                          - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
+                          - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
+                          %tr
+                            %td
+                              = "#{activity_stream.created_at.strftime("%Y-%m-%d %H:%M")}"
+                              = link_to " #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}",link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "))
+                        -rescue
+                          %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
+
                 - elsif @student.blank? and !@teacher.blank? and !@my_class_rooms.nil?
                   .clear
                   %br
@@ -106,11 +119,16 @@
                                 = "#{@teacher.full_name}'s activity feed"
                               %table
                                 - @activity_streams.each do |activity_stream|
-                                  - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
-                                  - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
-                                  %tr
-                                    %td
-                                      = "#{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}"
+                                  - begin
+                                    - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
+                                    - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
+                                    %tr
+                                      %td
+                                        = "#{date_format(activity_stream.created_at)}"
+                                        =link_to " #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}",link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "))
+                                  -rescue
+                                    %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
+
                     - elsif @student and @teacher and !@my_class_rooms.nil?
                       .clear
                       %br

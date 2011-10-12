@@ -54,6 +54,7 @@ class AssignmentsController < ApplicationController
   end
 
   def update
+    
     @assignment = Assignment.find(params[:id])
     @assignment.due_date = if params[:assignment]["due_date(1i)"].blank? and params[:assignment]["due_date(2i)"].blank? and params[:assignment]["due_date(3i)"].blank?
       nil
@@ -65,12 +66,11 @@ class AssignmentsController < ApplicationController
         :group_allowed => params[:assignment][:group_allowed],:file =>params[:assignment][:file]})
 
     if @assignment.valid?
-      if params[:assignment][:group_allowed].eql?("0") and params[:my_student].blank?
-        @assignment_errors = []
-        @assignment_errors << "Please select group or student that will assign this assignment!"
-        @categories = AssignmentCategory.all
-        render action: "edit"
+      if params[:assignment][:group_allowed].eql?("0") 
+        @assignment.is_public = false
+        @assignment.save
       else
+        @assignment.is_public = true
         @assignment.save
 
         unless params[:my_student].blank?
@@ -95,8 +95,9 @@ class AssignmentsController < ApplicationController
           end
         end
 
-        redirect_to comment_new_class_room_assignment_url(@class.id, @assignment), notice: 'Assignment was successfully updated.'
       end
+      redirect_to comment_new_class_room_assignment_url(@class.id, @assignment), notice: 'Assignment was successfully updated.'
+
     else
       @assignment_errors = @assignment.errors.full_messages
       @assignment_errors << "Please select group or student that will assign this assignment!" if params[:assignment][:group_allowed].eql?("0") and params[:my_student].blank?
@@ -189,11 +190,11 @@ class AssignmentsController < ApplicationController
   def update_assignment_category
     @assignment_category = AssignmentCategory.find(params[:id])
 
-      if @assignment_category.update_attributes(params[:assignment_category])
-        redirect_to assignment_category_class_room_assignments_url(@class.id), notice: 'Assignment Category was successfully updated.'
-      else
-        render action: "edit_assignment_category"
-      end
+    if @assignment_category.update_attributes(params[:assignment_category])
+      redirect_to assignment_category_class_room_assignments_url(@class.id), notice: 'Assignment Category was successfully updated.'
+    else
+      render action: "edit_assignment_category"
+    end
   end
 
   def edit_assignment_category

@@ -4,11 +4,12 @@
 # LICENSE included with this ActivityStreams plug-in.
 #++
 # Template to generate the ActivityStreamPreferencesControllerTest
-require File.dirname(__FILE__) + '/../test_helper'
+
+require 'test_helper'
 class ActivityStreamPreferencesControllerTest < ActionController::TestCase
 
   def test_should_get_index
-    login_as :aaron
+    login_as :david
     get :index
     assert_response :success
     assert_not_nil assigns(:activity_stream_preferences)
@@ -20,7 +21,7 @@ class ActivityStreamPreferencesControllerTest < ActionController::TestCase
   end
 
   def test_all_checked_should_save_no_data
-    login_as :aaron
+    login_as :david
 
     locations = []
     ACTIVITY_STREAM_ACTIVITIES.each_key do |key|
