@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class NotesControllerTest < ActionController::TestCase
+  tests NotesController
+  include Devise::TestHelpers
   setup do
-    @note = notes(:one)
+    @note = notes(:note1)
+    @controller = NotesController.new
   end
 
   test "should get index" do
