@@ -47,9 +47,9 @@
                       %tr
                         %td
                           = "#{date_format(activity_stream.created_at)}"
-                          = link_to "#{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}",link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "), activity_stream.actor_id)
+                          = link_feed_helper(activity_stream, actor, object)
                     - rescue
-                      %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
+                      %strike= deleted_feed(activity_stream, actor)
                   - else
                     - @activity_streams.each do |activity_stream|
                       -begin
@@ -57,11 +57,12 @@
                         - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
                         %tr
                           %td
-                            ="#{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} "
-                            = link_to "#{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}", link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "), activity_stream.actor_id)
+                            - if current_user.is_student? and activity_stream.actor_id.to_s.eql?(current_user.id.to_s)
+                              = date_feed_format(activity_stream, actor)
+                              = link_feed_helper(activity_stream, actor, object)
                         - rescue
-                          %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
-
+                          - if current_user.is_student? and activity_stream.actor_id.to_s.eql?(current_user.id)
+                            %strike= deleted_feed(activity_stream, actor)
               - else
                 - if !@student.blank? and @teacher.blank?
                   .clear
@@ -91,11 +92,13 @@
                           - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
                           %tr
                             %td
-                              = "#{activity_stream.created_at.strftime("%Y-%m-%d %H:%M")}"
-                              = link_to " #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}", link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "), activity_stream.actor_id)
+                              -if params[:id].eql?(activity_stream.actor_id.to_s)
+                                = "#{activity_stream.created_at.strftime("%Y-%m-%d %H:%M")}"
+                                = link_feed_helper(activity_stream, actor, object)
                         -rescue
-                          %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
-                          %br
+                          -if params[:id].eql?(activity_stream.actor_id.to_s)
+                            %strike= deleted_feed(activity_stream, actor)
+                            %br
                 - elsif @student.blank? and !@teacher.blank? and !@my_class_rooms.nil?
                   .clear
                   %br
@@ -109,27 +112,12 @@
                             %legend
                               - unless current_user.class_room_observers.find_all_by_class_room_id(class_room).blank?
                                 = link_to "Class #{class_room.name}", class_room_teacher_path(class_room.id, @teacher.id)
-                  %br
-                    %br
-                      %br
-                        %br
-                          %br
                             %br
-                            %div
-                              %h2
-                                = "#{@teacher.full_name}'s activity feed"
-                              %table
-                                - @activity_streams.each do |activity_stream|
-                                  - begin
-                                    - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
-                                    - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
-                                    %tr
-                                      %td
-                                        = "#{date_format(activity_stream.created_at)}"
-                                        = link_feed_helper(activity_stream,actor, object)
-                                  -rescue
-                                    %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
-                                    %br
+                            %br
+                            %br
+                            %br
+                            %br
+                            %br
                     - elsif @student and @teacher and !@my_class_rooms.nil?
                       .clear
                       %br
@@ -144,9 +132,6 @@
                                   = link_to "Class #{class_room.name}", class_room_teacher_path(class_room.id, @teacher.id)
                       %br
                       %br
-                      %br
-                      %br
-                      %br
                       %div{:style => "text-align:left"}
                         %h2
                           = "#{@student.full_name}'s activity feed"
@@ -157,7 +142,8 @@
                               - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
                               %tr
                                 %td
-                                  = "#{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}"
+                                  = "#{date_format(activity_stream.created_at)}"
+                                  = "#{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}"
                 %div{:style => "margin-right: 300px"}
                   - if current_user.is_teacher?
                     %h3 My Students
@@ -178,8 +164,9 @@
                   - elsif current_user.is_observer? and @student and @teacher
                     %h3 Students
                     - @students.each do |student|
-                      = link_to student.full_name, student_activity_feed_path(@teacher.id, student.id)
+                      = link_to student.full_name, student_dashboard_path(student.id)
                       %br
+
 - elsif current_user.is_teacher?
   %center
     %div{:style => "text-align:right; width:50%"}
