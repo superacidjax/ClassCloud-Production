@@ -44,35 +44,39 @@ module ApplicationHelper
     MessageFile.where("message_id=?",x).last
   end
 
-  def link_to_feed(class_id,object_type,object_id,verb)  
+  def link_to_feed(class_id, object_type, object_id, verb, student_id)
     if verb.eql?('commented')
       "/class_rooms/#{class_id}/#{object_type.downcase.pluralize}/#{object_id}/comment_new"
     elsif verb.eql?('completed')
       "/class_rooms/#{class_id}/assignments/#{object_id}/comment_new"
     else
-      "/class_rooms/#{class_id}/#{object_type.downcase.pluralize}/#{object_id}"
+      if current_user.is_obsevers?
+        "/class_rooms/#{class_id}/#{object_type.downcase.pluralize}/#{object_id}"
+      else
+        "/class_rooms/#{class_id}/#{object_type.downcase.pluralize}/#{object_id}/student/#{student_id}"
+
+      end
     end
   end
+  def vote_count(voteable_id)
+    Vote.where("voteable_id =?",voteable_id).count
+  end
 
-def vote_count(voteable_id)
-  Vote.where("voteable_id =?",voteable_id).count
-end
+  def vote_assignment(voteable_id)
+    Vote.where("voteable_id =? and voter_id=? and voteable_type=?",voteable_id, current_user.id,'Assignment').first
+  end
 
-def vote_assignment(voteable_id)
-  Vote.where("voteable_id =? and voter_id=? and voteable_type=?",voteable_id, current_user.id,'Assignment').first
-end
+  def vote_notes(voteable_id)
+    Vote.where("voteable_id =? and voter_id=? and voteable_type=?",voteable_id, current_user.id,'Note').first
+  end
 
-def vote_notes(voteable_id)
-  Vote.where("voteable_id =? and voter_id=? and voteable_type=?",voteable_id, current_user.id,'Note').first
-end
+  def vote_writeboard(voteable_id)
+    Vote.where("voteable_id =? and voter_id=? and voteable_type=?",voteable_id, current_user.id,'Writeboard').first
+  end
+  def vote_comment(voteable_id)
+    Vote.where("voteable_id =? and voter_id=? and voteable_type=?",voteable_id, current_user.id,'Comment').first
 
-def vote_writeboard(voteable_id)
-  Vote.where("voteable_id =? and voter_id=? and voteable_type=?",voteable_id, current_user.id,'Writeboard').first
-end
-def vote_comment(voteable_id)
-  Vote.where("voteable_id =? and voter_id=? and voteable_type=?",voteable_id, current_user.id,'Comment').first
-
-end
+  end
 
   def vote_count(voteable_id)
     Vote.where("voteable_id =?",voteable_id).count
@@ -92,7 +96,15 @@ end
 
   def vote_comment(voteable_id)
     Vote.where("voteable_id =? and voter_id=? and voteable_type=?",voteable_id, current_user.id,'Comment').first
-
+  end
+  
+  def find_actor(activity_stream)
+    object = activity_stream.object_type.constantize.find(activity_stream.object_id)
+    actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)     
+    return object,actor
   end
 
+  def link_feed_helper(activity_stream,actor, object)
+    link_to " #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}",link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "),acttivity_stream.actor_id)
+  end
 end

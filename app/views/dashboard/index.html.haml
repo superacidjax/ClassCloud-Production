@@ -47,7 +47,7 @@
                       %tr
                         %td
                           = "#{date_format(activity_stream.created_at)}"
-                          = link_to "#{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}",link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "))
+                          = link_to "#{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}",link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "), activity_stream.actor_id)
                     - rescue
                       %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
                   - else
@@ -58,7 +58,7 @@
                         %tr
                           %td
                             ="#{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} "
-                            = link_to "#{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}", link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "))
+                            = link_to "#{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}", link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "), activity_stream.actor_id)
                         - rescue
                           %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
 
@@ -92,10 +92,10 @@
                           %tr
                             %td
                               = "#{activity_stream.created_at.strftime("%Y-%m-%d %H:%M")}"
-                              = link_to " #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}",link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "))
+                              = link_to " #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}", link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "), activity_stream.actor_id)
                         -rescue
                           %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
-
+                          %br
                 - elsif @student.blank? and !@teacher.blank? and !@my_class_rooms.nil?
                   .clear
                   %br
@@ -107,7 +107,8 @@
                         %div{:style => "float: left;width: 300px"}
                           %fieldset{:style => "width:150px; height: 50px"}
                             %legend
-                              = link_to "Class #{class_room.name}", class_room_teacher_path(class_room.id, @teacher.id)
+                              - unless current_user.class_room_observers.find_all_by_class_room_id(class_room).blank?
+                                = link_to "Class #{class_room.name}", class_room_teacher_path(class_room.id, @teacher.id)
                   %br
                     %br
                       %br
@@ -125,10 +126,10 @@
                                     %tr
                                       %td
                                         = "#{date_format(activity_stream.created_at)}"
-                                        =link_to " #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}",link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "))
+                                        = link_feed_helper(activity_stream,actor, object)
                                   -rescue
                                     %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
-
+                                    %br
                     - elsif @student and @teacher and !@my_class_rooms.nil?
                       .clear
                       %br
