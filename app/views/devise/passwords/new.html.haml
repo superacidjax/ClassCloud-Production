@@ -1,0 +1,58 @@
+#sitewrapper
+  .header
+    %h1{:style=> "text-align:center"}
+      =link_to "Sign in", root_path
+    .nav
+    
+#main_content_area
+  .helppage  
+    %h1
+      Need help with your account? ClassCloud is here to help!
+      %h1
+        =link_to "Sign in", root_path
+.main
+  %h1 Forgot your password?
+  %br
+.password_reset
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+    = devise_error_messages!
+
+    %div
+      = f.text_field :login,{:placeholder=>'Your email'}
+    %br
+    %hr
+    = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+      = devise_error_messages!
+      %h1 "I forgot my password!"
+      %div
+        %br
+        = f.text_field :login,{:placeholder=>'Username or email'}
+      %br
+      %div
+        = f.submit "Send password reset instructions"
+       
+      %br
+      %hr
+        = form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
+          = devise_error_messages!
+          %h1 "I never received my account confirmation email! I checked my spam folder and it wasn't there!"
+          %div
+            %br
+            = f.email_field :email, {:placeholder=>'Username or email'}
+          %br
+          %div= f.submit "Resend confirmation instructions"
+      %br
+      %hr
+        %div
+          = form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f|
+            = devise_error_messages!
+            %h1 "For some reason my account is locked!"
+            %div
+              %br
+              = f.email_field :email, {:placeholder=> 'Username or email'}
+            %br
+            %div
+              = f.submit "Resend unlock instructions"
+      %br
+      %hr
+        = link_to "Go Back", root_path
