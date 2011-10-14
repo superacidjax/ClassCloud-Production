@@ -11,7 +11,7 @@
   %tr
     %td{:colspan => "2"}
       From: #{@note.user.full_name}
-      - unless vote_count(@note.id).eql?(0) or !current_user.is_teacher?
+      - unless vote_count(@note.id).eql?(0) or current_user.is_teacher?
         = '('
         = vote_count(@note.id)
         = ')'
