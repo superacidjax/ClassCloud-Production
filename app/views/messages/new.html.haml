@@ -18,7 +18,7 @@
         %tr
           %td{:align => "center"}
             ='Send to all'
-            %input#Check_ctr{:name => "Check_ctr", :onClick => "checkAll();", :type => "checkbox"}
+            %input#Check_ctr{:name => "Check_ctr", :onClick => "Check();", :type => "checkbox"}
         - counter = 0
         - @users.each do |user|
           - counter += 1
@@ -43,7 +43,7 @@
         = label_tag 'File :'
         = file_field_tag 'message[file]'
         %br
-        = submit_tag "Send"
+        = submit_tag "Send", :onclick =>'return checkFieldStudentAndObserver()'
     - elsif @teacher
       = form_tag teacher_observer_message_create_class_room_messages_path(@class.id, @teacher.id),:multipart =>true  do
 
@@ -56,7 +56,7 @@
         = label_tag 'File :'
         = file_field_tag 'message[file]'
         %br
-        = submit_tag "Save"
+        = submit_tag "Save", :onclick =>'return checkFieldStudentAndObserver()'
   - else
     = form_tag class_room_messages_path(@class.id),:multipart =>true  do
 
@@ -69,4 +69,4 @@
       = label_tag 'File :'
       = file_field_tag 'message[file]'
       %br
-      = submit_tag "Send"
+      = submit_tag "Send", :onclick =>'return checkFieldStudentAndObserver()'
