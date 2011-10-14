@@ -77,6 +77,9 @@ Tes::Application.routes.draw do
 
     resources :messages do
       member do
+        get "student/:student_id", :action => "inbox_detail", :as => :student_inbox_detail_observer
+        get "teacher/:teacher_id", :action => "inbox_detail", :as => :teacher_inbox_detail_observer
+
         get "download"
         get "edit_draft"
         post 'delete_draft'

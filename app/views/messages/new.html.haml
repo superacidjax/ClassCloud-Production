@@ -4,7 +4,7 @@
 %center
   - if current_user.is_teacher?
     = form_tag class_room_messages_path(@class.id),:name =>'form1',:multipart =>true do
-
+      = hidden_field_tag 'teacher_id',current_user.id
       = label_tag 'Title :'
       = text_field_tag 'message[topic]', nil, :placeholder => 'Enter the subject'
       %br

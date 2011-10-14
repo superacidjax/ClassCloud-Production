@@ -66,7 +66,6 @@ class WriteboardsController < ApplicationController
   end
 
   def update
-    
     if !params['version'].eql?('1') and !current_user.is_teacher?
       @writeboard = current_user.writeboards.new(params[:writeboard])
       @writeboard.assignment_id = params[:assignment_id]
@@ -91,8 +90,7 @@ class WriteboardsController < ApplicationController
     else
       @writeboard = Writeboard.find(params[:id])
       if current_user.is_teacher?
-        params[:writeboard][:body] = params[:body]
-        params[:writeboard][:edited_by_teacher] =true
+        params[:writeboard][:edited_by_teacher] = true
         if @writeboard.update_attributes(params[:writeboard])
           redirect_to (class_room_writeboards_url(@class.id)), notice: 'Writeboard was successfully updated.'
          

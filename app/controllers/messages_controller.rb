@@ -1,4 +1,7 @@
 class MessagesController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :get_my_students_and_class
+  
   def index
     @inboxes = current_user.received_messages
     @files = MessageFile.where("user_id =?",current_user.id)
@@ -75,29 +78,30 @@ class MessagesController < ApplicationController
     else
       @sender.send_message(@class.user, params[:message][:topic], params[:message][:body])
     end
-    
     if params[:student_id]
-      redirect_to(student_observer_message_inbox_class_room_messages_url(@class.id, params[:student_id]))
+      redirect_to(student_observer_message_inbox_class_room_messages_url(@class.id, params[:student_id]), notice: 'Message has been sent')
     elsif params[:teacher_id]
-      redirect_to(teacher_observer_message_inbox_class_room_messages_url(@class.id, params[:teacher_id]))
+      redirect_to(teacher_observer_message_inbox_class_room_messages_url(@class.id, params[:teacher_id]), notice: 'Message has been sent')
+    elsif current_user.is_teacher? or current_user.is_student?
+      redirect_to(class_room_messages_url(@class.id), notice: 'Message has been sent')
     else
       redirect_to :back
     end
   end
   
   def draft
-    @drafts=current_user.sent_messages
+    @drafts = current_user.sent_messages
   end
   
   def draft_detail
-    @draft_detail=current_user.sent_messages
-    @message_id=params[:id]
+    @draft_detail = current_user.sent_messages
+    @message_id = params[:id]
   end
   
   def inbox_detail
-    @message_id=params[:id]
-    @inbox_detail=current_user.messages.where('id=?',@message_id).first
-    @inbox_detail.opened=1
+    @message_id = params[:id]
+    @inbox_detail = current_user.messages.where('id=?',@message_id).first
+    @inbox_detail.opened = 1
     @inbox_detail.save
   end
 
