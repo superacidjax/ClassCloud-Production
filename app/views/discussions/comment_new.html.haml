@@ -36,7 +36,7 @@
               %td{:rowspan => "3"}= image_tag "bakso.jpg", :width => "48", :height => "48"
               %td{:colspan => "3"}
                 = "#{comment.user.full_name}"
-                - unless vote_count(comment.id).eql?(0) or !current_user.is_teacher?
+                - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
                   = '('
                   = vote_count(comment.id)
                   = ')'

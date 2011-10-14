@@ -10,7 +10,7 @@
   %tr
     %td{:colspan => "2"}
       From: #{@assignment.user.full_name}
-      - unless vote_count(@assignment.id).eql?(0) or !current_user.is_teacher?
+      - unless vote_count(@assignment.id).eql?(0) or current_user.is_teacher?
         = '('
         = vote_count(@assignment.id)
         = ')'
