@@ -34,17 +34,18 @@
             %li= msg
 
     .field
-      -title ="#{@writeboard.title}"
-      = f.hidden_field :title ,:value=>title
-    .field
-      = f.label :title
-      %br
-      = f.text_field :title
+      - if current_user.is_teacher?
+        -title ="#{@writeboard.title}"
+        = f.hidden_field :title ,:value=>title
+      - else
+        = f.label :title
+        %br
+        = f.text_field :title
       %br
       %br
       = label_tag 'Body'
       %br
-        = f.text_area :body
+      = f.text_area :body
       %br
       -if @writeboard.user_id.eql?(current_user.id)
         = check_box_tag "version",@writeboard.version

@@ -25,6 +25,9 @@ class AssignmentsController < ApplicationController
 
   def create
     @assignment = Assignment.new(params[:assignment])
+    if params[:assignment]["due_date(2i)"] or params[:assignment]["due_date(2i)"] or params[:assignment]["due_date(2i)"].nil?
+      @assignment.due_date = Time.now.to_date.strftime("%Y-%m-%d")
+    end
     @assignment.user_id = current_user.id
     @assignment.class_room_id = params[:class_room_id]
 
@@ -162,7 +165,7 @@ class AssignmentsController < ApplicationController
   end
 
   def assignment_category
-    @assignment_categories = AssignmentCategory.all
+    @assignment_categories = AssignmentCategory.where("class_room_id =?",@class.id)
   end
 
   def new_assignment_category
@@ -172,7 +175,7 @@ class AssignmentsController < ApplicationController
 
   def create_assignment_category
     @assignment_category = AssignmentCategory.new(params[:assignment_category])
-
+    @assignment_category.class_room_id = @class.id
     if @assignment_category.save
       redirect_to assignment_category_class_room_assignments_url(@class.id), notice: 'Note was successfully created.'
     else

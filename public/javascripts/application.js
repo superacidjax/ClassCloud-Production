@@ -3,18 +3,18 @@
 
 window.classCounter = 0;
 
-function Check(){
-    if($("#Check_ctr").is(':checked') == true)
-        $('.check_msg').each(function(){
-            this.checked = true;
-        });
- 
-    else
-        $('.check_msg').each(function(){
-            this.checked = false;
-        });
-
-}
+//function Check(){
+//    if($("#Check_ctr").is(':checked') == true)
+//        $('.check_msg').each(function(){
+//            this.checked = true;
+//        });
+//
+//    else
+//        $('.check_msg').each(function(){
+//            this.checked = false;
+//        });
+//
+//}
 function mouseIn(objek){
     var cbox = objek.cells[0].getElementsByTagName('input')[0];
     objek.style.background = "#E1E3DE";
@@ -84,22 +84,36 @@ function observerAndStudentListToggle() {
     }
 }
 
-
-function checkField(){
-    if($(".check_msg").is(':checked') == false){
-        alert ('Please select receiver.');
-        return false;
-    }
-    else if($("#message_body").val().length==0 || $("#message_topic").val().length==0) {
-        alert('message body or message topic is empty');
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-    
-}
+//function checkField(){
+//    if($(".check_msg").is(':checked') == false){
+//        alert ('Please select receiver.');
+//        return false;
+//    }
+//    else if($("#message_body").val().length==0 || $("#message_topic").val().length==0) {
+//        alert('message body or message topic is empty');
+//        return false;
+//    }
+//    else
+//    {
+//        return true;
+//    }
+//
+//}
+//
+//
+//function checkFieldStudentAndObserver(){
+//   if($("#message_body").val().length==0 || $("#message_topic").val().length==0) {
+//        alert('message body or message topic is empty');
+//        return false;
+//    }
+//    else
+//    {
+//        return true;
+//    }
+//
+//}
+//
+//
 
 function cloneElement(){
     obj = $("#form1").clone();

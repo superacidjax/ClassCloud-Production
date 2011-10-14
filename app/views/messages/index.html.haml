@@ -1,6 +1,8 @@
 /- content_for :middle_content do
 %br
 %br
+%div#notice= notice
+%div#notice= alert
 %h2 Private Message
 - unless current_user.is_observer?
   = link_to 'New message', new_class_room_message_path(@class.id)
@@ -62,11 +64,21 @@
                 =inbox.topic
           %td
             -if current_user.messages.find(inbox.id).opened
-              =link_to truncate(strip_tags(inbox.body), :length => 80), class_room_inbox_detail_path(@class.id, inbox.id)
+              - if params[:student_id]
+                =link_to truncate(strip_tags(inbox.body), :length => 80), student_inbox_detail_observer_class_room_message_path(@class.id, inbox.id, "#{params[:student_id]}")
+              - elsif params[:teacher_id]
+                =link_to truncate(strip_tags(inbox.body), :length => 80), teacher_inbox_detail_observer_class_room_message_path(@class.id, inbox.id, "#{params[:teacher_id]}")
+              - else
+                =link_to truncate(strip_tags(inbox.body), :length => 80), class_room_inbox_detail_path(@class.id, inbox.id)
 
             -else
               %b
-                =link_to truncate(strip_tags(inbox.body), :length => 80), class_room_inbox_detail_path(@class.id, inbox.id)
+                - if params[:student_id]
+                  =link_to truncate(strip_tags(inbox.body), :length => 80), student_inbox_detail_observer_class_room_message_path(@class.id, inbox.id, "#{params[:student_id]}")
+                - elsif params[:teacher_id]
+                  =link_to truncate(strip_tags(inbox.body), :length => 80), teacher_inbox_detail_observer_class_room_message_path(@class.id, inbox.id, "#{params[:teacher_id]}")
+                - else
+                  =link_to truncate(strip_tags(inbox.body), :length => 80), class_room_inbox_detail_path(@class.id, inbox.id)
 
           %td
             -if current_user.messages.find(inbox.id).opened

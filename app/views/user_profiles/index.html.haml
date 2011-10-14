@@ -39,5 +39,6 @@
             = "#{activity_stream.created_at.strftime("%Y-%m-%d %H:%M")} #{actor.instance_eval(activity_stream.actor_name_method)} "
             = link_to  "#{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}", link_to_feed(@class.id, activity_stream.object_type, activity_stream.object_id,activity_stream.verb.gsub("_", " "),activity_stream.actor_id)
     -rescue
-      %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
-      %br
+      - unless !activity_stream.actor_id.eql?(@user.id)
+        %strike= " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
+        %br
