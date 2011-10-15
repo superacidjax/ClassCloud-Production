@@ -13,15 +13,12 @@
       #{link_to "Edit", edit_class_room_assignment_path(@class.id, @assignment)} | #{link_to "Delete", class_room_assignment_path(@class.id, @assignment), :confirm => "Are you sure ?", :method => :delete}
   %tr
   %tr
-<<<<<<< HEAD
-=======
     %td{:colspan => "2"}
       From: #{@assignment.user.full_name}
       - unless vote_count(@assignment.id).eql?(0) or current_user.is_teacher?
         = '('
         = vote_count(@assignment.id)
         = ')'
->>>>>>> 6b96ff0b5cc4a801e16348a7167a032a2d93bd2b
   %tr
   %br
   %td
