@@ -5,6 +5,12 @@
 /- content_for :middle_content do
 .headings
   %h2 All Assignments
+  %br
+  %h4
+    = link_to 'Post New Assignment', new_class_room_assignment_path(@class.id) if current_user.is_teacher?
+  %br  
+    - unless current_user.is_observer? or  current_user.is_student?
+      = link_to "Edit Assignment Categories",assignment_category_class_room_assignments_path(@class.id)
 %table.assignments
   - @assignments.each do |assignment|
     %tr
@@ -42,5 +48,4 @@
               = link_to 'Weee!!',vote_up_class_room_assignment_path(@class.id ,assignment)
     %tr
       %td
-%br/
-= link_to 'New Assignment', new_class_room_assignment_path(@class.id) if current_user.is_teacher?
+%br

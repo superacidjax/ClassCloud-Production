@@ -61,10 +61,6 @@
               - elsif @teacher
                 = link_to "Assignments", teacher_assignments_index_class_room_assignments_path(@class.id, @teacher.id)
             = "|"
-            - unless current_user.is_observer? or  current_user.is_student?
-              = link_to "Assignment Categories",assignment_category_class_room_assignments_path(@class.id)
-              = "|"
-
             - unless current_user.is_observer?
               = link_to "Class Notes", class_room_notes_path(@class.id)
             - else
