@@ -115,4 +115,9 @@ module ApplicationHelper
   def date_feed_format(activity_stream,actor)
     "#{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)}"
   end
+
+  def class_rooms(class_room)
+    current_user.class_room_observers.find_all_by_class_room_id(class_room)
+
+  end
 end
