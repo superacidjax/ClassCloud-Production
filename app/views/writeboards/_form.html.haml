@@ -60,5 +60,7 @@
         = f.check_box :is_public
         - if current_user.is_student?
           = hidden_field_tag 'id',nil,@whiteboard.id
+    -else
+      %br
     .actions
       = f.submit "Save"
