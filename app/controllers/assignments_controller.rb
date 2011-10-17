@@ -14,12 +14,12 @@ class AssignmentsController < ApplicationController
   end
 
   def new
-    @categories = AssignmentCategory.all
+    @categories = AssignmentCategory.where("class_room_id =?",@class.id)
     @assignment = Assignment.new
   end
 
   def edit
-    @categories = AssignmentCategory.all
+    @categories = AssignmentCategory.where("class_room_id =?",@class.id)
     @assignment = Assignment.find(params[:id])
   end
 

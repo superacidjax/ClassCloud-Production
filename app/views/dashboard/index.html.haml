@@ -110,7 +110,7 @@
                         %div{:style => "float: left;width: 300px"}
                           %fieldset{:style => "width:150px; height: 50px"}
                             %legend
-                              - unless current_user.class_room_observers.find_all_by_class_room_id(class_room).blank?
+                              - unless class_rooms(class_room).blank?
                                 = link_to "Class #{class_room.name}", class_room_teacher_path(class_room.id, @teacher.id)
                             %br
                             %br
@@ -191,9 +191,9 @@
           %div
             = "Add a class"
             - unless params[:class_room].blank?
-              = text_field_tag "class_room[name]", params[:class_room][:name]
+              = text_field_tag "class_room[name]", params[:class_room][:name],:class =>'class_name'
             - else
-              = text_field_tag "class_room[name]", nil
+              = text_field_tag "class_room[name]", nil,:class =>'class_name'
           %h3 Now you'll add students, you can always edit or add students later..
           %div#form1
             = "Add Student"
