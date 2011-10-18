@@ -20,12 +20,24 @@ module CalendarHelper
     calendar event_calendar_opts do |args|
       event = args[:event]
       if user_id.blank?
-        %(<a href="/events/#{event.id}" title="#{h(event.name)}">#{h(event.name)}</a>)
+        if event.assignment_id.nil?
+          %(<a href="/events/#{event.id}" title="#{h(event.name)}">#{h(event.name)}</a>)
+        else
+          %(<a href="/class_rooms/#{@class.id}/assignments/" title="#{h(event.name)}">#{h(event.name)}</a>)
+        end
       else
         unless teacher
-          %(<a href="/events/#{event.id}/student/#{user_id}" title="#{h(event.name)}">#{h(event.name)}</a>)
+          if event.assignment_id.nil?
+            %(<a href="/events/#{event.id}/student/#{user_id}" title="#{h(event.name)}">#{h(event.name)}</a>)
+          else
+            %(<a href="/class_rooms/#{@class.id}/assignments/#{event.assignment_id}/student/#{user_id}" title="#{h(event.name)}">#{h(event.name)}</a>)
+          end
         else
+          if event.assignment_id.nil?
           %(<a href="/events/#{event.id}/teacher/#{user_id}" title="#{h(event.name)}">#{h(event.name)}</a>)
+          else
+            %(<a href="/class_rooms/#{@class.id}/assignments/#{event.assignment_id}/teacher/#{user_id}" title="#{h(event.name)}">#{h(event.name)}</a>)
+          end
         end
       end
     end

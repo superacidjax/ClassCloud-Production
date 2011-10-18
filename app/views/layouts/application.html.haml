@@ -115,6 +115,8 @@
             %h2
             - @students.each do |student|
               = link_to student.full_name, class_room_user_profile_path(@class.id, student.id)
+              - unless karma_number(student).eql?(0)
+                = "(#{karma_number(student)})"
               %br
       - else
         = yield
