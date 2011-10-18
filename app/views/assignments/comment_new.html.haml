@@ -45,13 +45,11 @@
             %tr
               %td{:colspan => "3"}
                 = "#{comment.user.full_name}"
-                = "said on "
-                = date_format(comment.created_at)
-              %br
                 - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
                   = '('
                   = vote_count(comment.id)
                   = ')'
+                  = "said on "
                   %br 
                 = "#{date_format(comment.created_at)}"
             %tr
@@ -60,7 +58,11 @@
                 - if current_user.id.eql?(comment.user_id) or current_user.is_teacher?
                   =link_to "Edit", class_room_comment_edit_assignment_path(@class.id, @assignment, comment.id)
                   =link_to "Delete", class_room_comment_destroy_assignment_path(@class.id, @assignment, comment.id), :method => :delete
-            %tr
+                - unless vote_comment(comment).nil?
+                  = 'Weee!!'
+                - else
+                  = link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@assignment.id,comment,:commentable_type =>"#{params[:controller]}")
+
               %td{:colspan => "3"}
                 %hr{:noshade => ""}
 

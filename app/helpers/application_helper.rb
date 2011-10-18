@@ -1,5 +1,9 @@
 module ApplicationHelper
   
+  def karma_number(student)
+    vote = Vote.where("voteable_user_id = ?", student).count
+  end
+  
   def my_date_time
     Time.now
   end
@@ -100,7 +104,7 @@ module ApplicationHelper
   
   def find_actor(activity_stream)
     object = activity_stream.object_type.constantize.find(activity_stream.object_id)
-    actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)     
+    actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
     return object,actor
   end
 

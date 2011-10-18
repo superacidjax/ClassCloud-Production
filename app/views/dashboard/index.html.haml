@@ -155,6 +155,7 @@
                     - @students.each do |student|
                       - unless params[:teacher_id]
                         = link_to student.full_name, student_dashboard_path(student.id)
+                        = "(#{karma_number(student)})"
                       - else
                         = link_to student.full_name, student_activity_feed_path(@teacher.id, student.id)
                       %br

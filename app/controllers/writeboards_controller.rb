@@ -30,11 +30,6 @@ class WriteboardsController < ApplicationController
 
   def show
     @writeboard = Writeboard.find(params[:id])
-    
-    respond_to do |format|
-      format.html #show.html.haml
-      format.json { render :json => @post }
-    end  
   end
 
   def new
@@ -153,21 +148,18 @@ class WriteboardsController < ApplicationController
   def vote_up
     post = Writeboard.find(params[:id])
     current_user.vote_for(post)
-    respond_to do |format|
-      format.html { redirect_to class_room_writeboards_url(@class.id) }
-      format.json { head :ok }
-    end
+    redirect_to class_room_writeboards_url(@class.id) 
   end
 
   private
 
   def get_my_students_and_class
-    @class = if current_user.is_teacher?
+    @class = if user_teacher?
       current_user.class_rooms.find(params[:class_room_id])
-    elsif current_user.is_student?
+    elsif user_student?
       my_class_room = current_user.class_room_students.where(class_room_id: params[:class_room_id]).first
       my_class_room.class_room if my_class_room
-    elsif current_user.is_observer?
+    elsif user_observer?
       if params[:student_id]
         @student = User.find params[:student_id]
         student_class_room = @student.class_room_students.where(class_room_id: params[:class_room_id]).first
