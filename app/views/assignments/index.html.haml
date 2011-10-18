@@ -8,7 +8,7 @@
   %br
   %h4
     = link_to 'Post New Assignment', new_class_room_assignment_path(@class.id) if current_user.is_teacher?
-  %br  
+  %br
     - unless current_user.is_observer? or  current_user.is_student?
       = link_to "Edit Assignment Categories",assignment_category_class_room_assignments_path(@class.id)
 %table.assignments
@@ -42,10 +42,11 @@
             - if current_user.is_student? and (assignment.group_allowed? or !AssignmentStudent.where(user_id: current_user.id).first.blank?)
               = "|"
               = link_to "Do assignment", new_class_room_assignment_writeboard_path(@class.id, assignment)
-            -unless vote_assignment(assignment).nil?
-              = 'Weee!!'
-            -else
-              = link_to 'Weee!!',vote_up_class_room_assignment_path(@class.id ,assignment)
+            - if !current_user.is_observer?
+              -unless vote_assignment(assignment).nil?
+                = 'Weee!!'
+              -else
+                = link_to 'Weee!!',vote_up_class_room_assignment_path(@class.id ,assignment)
     %tr
       %td
 %br

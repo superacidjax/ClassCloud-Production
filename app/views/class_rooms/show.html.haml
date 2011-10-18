@@ -26,7 +26,8 @@
         %tr
           %td
             - if current_user.id.eql?(activity_stream.actor_id) or current_user.is_observer? or current_user.is_teacher?
-              = date_feed_format(activity_stream, actor)
+              - unless karma_number(actor).eql?(0)
+                = "#{date_feed_format(activity_stream, actor)} (#{karma_number(actor)})"
               = link_to "#{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}", link_to_feed(@class.id,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "), activity_stream.actor_id)
       - rescue
         - if current_user.id.eql?(activity_stream.actor_id) or current_user.is_observer? or current_user.is_teacher?

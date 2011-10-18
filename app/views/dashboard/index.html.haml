@@ -149,14 +149,20 @@
                     %h3 My Students
                     - @students.each do |student|
                       = link_to student.full_name, student_dashboard_path(student.id)
+                      - unless karma_number(student).eql?(0)
+                        = "(#{karma_number(student)})"
                       %br
                   - elsif current_user.is_observer? and @student.blank?
                     %h3 Students
                     - @students.each do |student|
                       - unless params[:teacher_id]
                         = link_to student.full_name, student_dashboard_path(student.id)
+                        - unless karma_number(student).eql?(0)
+                          = "(#{karma_number(student)})"
                       - else
                         = link_to student.full_name, student_activity_feed_path(@teacher.id, student.id)
+                        - unless karma_number(student).eql?(0)
+                          = "(#{karma_number(student)})"
                       %br
                     - if params[:teacher_id].blank?
                       %h3 Teacher

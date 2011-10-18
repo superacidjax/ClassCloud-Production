@@ -6,7 +6,18 @@ class CommentsController < ApplicationController
     commentable_type = params[:commentable_type]
     post = Comment.find(params[:comment_id])
     current_user.vote_for(post)
-    redirect_to class_room_url(@class.id)
+    controller = params[:commentable_type]
+    if controller.eql?('assignments')
+       redirect_to comment_new_class_room_assignment_path(@class.id,params[:id])
+    elsif controller.eql?('notes')
+      redirect_to  comment_new_class_room_note_path(@class.id,params[:id])
+    elsif controller.eql?('discussions')
+      redirect_to  comment_new_class_room_discussion_path(@class.id,params[:id])
+    elsif controller.eql?('calendar')
+      redirect_to  class_room_event_path(@class.id,params[:id])
+    elsif controller.eql?('writeboards')
+      redirect_to  class_room_writeboard_path(@class.id,params[:id])
+    end
   end
 
   private

@@ -37,10 +37,8 @@
             %tr
               %td{:colspan => "3"}
                 = "#{comment.user.full_name}"
-                - unless vote_count(comment.id).eql?(0) or !current_user.is_teacher?
-                  = '('
-                  = vote_count(comment.id)
-                  = ')'
+                - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
+                  = "(#{vote_count(comment.id)})"
                   %br
                 = "#{date_format(comment.created_at)}"
             %tr
@@ -52,7 +50,8 @@
                 - unless vote_comment(comment).nil?
                   = 'Wee!!'
                 - else
-                  = link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@assignment.id,comment,:commentable_type =>"#{params[:controller]}")
+                  - unless current_user.is_observer?
+                    = link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@assignment.id,comment,:commentable_type =>"#{params[:controller]}")
 
             %tr
               %td{:colspan => "3"}

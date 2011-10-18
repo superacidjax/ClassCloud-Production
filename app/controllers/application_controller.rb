@@ -6,7 +6,19 @@ class ApplicationController < ActionController::Base
   before_filter :get_my_students_and_class
   before_filter :admin?
   before_filter :set_timezone
-  
+
+  def user_teacher?
+    current_user.nil? ? false : current_user.is_teacher?
+  end
+
+  def user_observer?
+    current_user.nil? ? false : current_user.is_observer?
+  end
+
+  def user_student?
+    current_user.nil? ? false : current_user.is_student?
+  end
+
   def teacher_required!
     unless current_user && current_user.is_teacher?
       flash[:error] = "Sorry, you don't have access to that."

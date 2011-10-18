@@ -16,9 +16,7 @@
     %td{:colspan => "2"}
       From: #{@assignment.user.full_name}
       - unless vote_count(@assignment.id).eql?(0) or current_user.is_teacher?
-        = '('
-        = vote_count(@assignment.id)
-        = ')'
+        = "(#{vote_count(@assignment.id)})"
   %tr
   %br
   %td
@@ -45,22 +43,24 @@
             %tr
               %td{:colspan => "3"}
                 = "#{comment.user.full_name}"
-                = "said on "
-                = date_format(comment.created_at)
-              %br
                 - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
-                  = '('
-                  = vote_count(comment.id)
-                  = ')'
-                  %br 
+                  = "(#{vote_count(comment.id)})"
+                = "said on "
+                %br 
                 = "#{date_format(comment.created_at)}"
             %tr
               %td= comment.comment
               %td{:align => "right"}
+                = link_to "Edit", class_room_comment_edit_assignment_path(@class.id, @assignment, comment.id)
                 - if current_user.id.eql?(comment.user_id) or current_user.is_teacher?
-                  =link_to "Edit", class_room_comment_edit_assignment_path(@class.id, @assignment, comment.id)
-                  =link_to "Delete", class_room_comment_destroy_assignment_path(@class.id, @assignment, comment.id), :method => :delete
-            %tr
+                  = link_to "Delete", class_room_comment_destroy_assignment_path(@class.id, @assignment, comment.id), :method => :delete
+                  = link_to 'reply','#'
+                - unless vote_comment(comment).nil?
+                  = 'Weee!!'
+                - else
+                  - unless current_user.is_observer?
+                    = link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@assignment.id,comment,:commentable_type =>"#{params[:controller]}")
+
               %td{:colspan => "3"}
                 %hr{:noshade => ""}
 

@@ -1,5 +1,9 @@
 module ApplicationHelper
   
+  def karma_number(student)
+    vote = Vote.where("voteable_user_id = ?", student).count
+  end
+
   def my_date_time
     Time.now
   end
@@ -100,12 +104,12 @@ module ApplicationHelper
   
   def find_actor(activity_stream)
     object = activity_stream.object_type.constantize.find(activity_stream.object_id)
-    actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)     
+    actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
     return object,actor
   end
 
   def link_feed_helper(activity_stream,actor, object)
-    link_to " #{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}",link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "),activity_stream.actor_id)
+    link_to " #{actor.instance_eval(activity_stream.actor_name_method)}(#{karma_number(@student)}) #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}",link_to_feed(@my_class_rooms.first.id ,activity_stream.object_type ,activity_stream.object_id , activity_stream.verb.gsub("_", " "),activity_stream.actor_id)
   end
 
   def deleted_feed(activity_stream,actor)
