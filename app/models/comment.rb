@@ -16,6 +16,8 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   validates :comment, :user_id, :presence => true
 
+  has_many :replies
+  
   has_attached_file :file,
     :content_type => ['image/png' ,'image/jpeg', 'image/gif', 'application/pdf' , 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' , 'text/plain'  ,'application/zip' , 'application/x-rar' ,'application/msword' , 'application/vnd.ms-excel' ],
     :url => ':basename.:extension',

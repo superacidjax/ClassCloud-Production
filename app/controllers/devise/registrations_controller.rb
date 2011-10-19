@@ -7,8 +7,10 @@ class Devise::RegistrationsController < ApplicationController
 
   end
   def new
+    @states = State.all
     resource = build_resource({})
     respond_with_navigational(resource){ render_with_scope :new }
+    
   end
 
   # POST /resource

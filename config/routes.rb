@@ -5,6 +5,8 @@ Tes::Application.routes.draw do
 
   get "pages/index"
 
+  match "pages/city/:city"=> "pages#city", :as => :state_city, :via => :get
+
   namespace :admin do
 
     resources :admins do
@@ -24,6 +26,9 @@ Tes::Application.routes.draw do
   resources :activity_stream_preferences
   resources :activity_streams
   resources :class_rooms do
+
+    match "reply/:comment_id"=> "comments#reply", :as => :reply_comment, :via => :post
+
     match "voteable_type/:id/comment_vote/:comment_id"=> "comments#index", :as => :comment_vote, :via => :get
     match "user_profiles/:student_id"=> "user_profiles#index", :as => :user_profile, :via => :get
     devise_for :users, :controllers => {:registrations => "devise/registrations" }, :only =>:edit do

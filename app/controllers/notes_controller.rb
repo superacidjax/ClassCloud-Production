@@ -51,6 +51,7 @@ class NotesController < ApplicationController
   
   def comment_new
     @note = Note.find(params[:id])
+    @replies = Reply.all
   end
 
   def comment_create

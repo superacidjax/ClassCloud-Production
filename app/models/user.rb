@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
     user.has_many :notes
     user.has_many :writeboards
     user.has_many :upload_files
+    user.has_many :schools
   end
 
   after_create :define_user_role, :if => Proc.new{|user| user.is_not_teacher.eql?(false) || user.is_not_teacher.blank?}
