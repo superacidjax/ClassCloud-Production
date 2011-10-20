@@ -4,8 +4,11 @@
 
 #background
   #main_content_area
+  
     %h3
-      = link_to "Development Log/Bug Reporting", development_path
+      = image_tag "cclogo.png"
+    %br
+
   .login_form
     %h4
       /= link_to "Account Help", account_help_path
@@ -20,7 +23,11 @@
   %div{:style=> "position: relative"}
     %h1
       = link_to "Watch the ClassCloud Video!", href="http://vimeo.com/29879423"
-    = image_tag "cc_landing.png", alt: "Are you ready for the paperless classroom? Welcome to ClassCloud!"
+    %br
+    %hr
+    %div
+      <iframe marginwidth="0"  marginheight="0" width="600" height="350" src="http://www.embeddedanalytics.com/reports/displayreport?reportcode=ydPo9ROLSP&chckcode=ga1SJXoCEq9viz9VvLcPAw" type="text/html" frameborder="0" scrolling="no" title="EmeddedAnalytics - Embed Realtime Google Analytics Charts into your Website!"></iframe>
+    /= image_tag "cc_landing.png", alt: "Are you ready for the paperless classroom? Welcome to ClassCloud!"
 .main
   .myclasses
     %br
@@ -87,6 +94,5 @@
     If you're a teacher or a school administrator and you want to join the private beta of ClassCloud, contact Brian Dear at #{mail_to 'brian@classcloud.me'}.
 %br
 %div{:style=> "margin-bottom: 18px"}
-= image_tag "cclogo.png"
 %div{:style=> "margin-bottom: 36px"}
 #info
