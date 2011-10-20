@@ -26,8 +26,6 @@ class User < ActiveRecord::Base
     user.has_many :class_room_observers
     user.has_many :notes
     user.has_many :writeboards
-    user.has_many :upload_files
-    user.has_many :activity_streams, :primary_key => "actor_id"
   end
 
   belongs_to :schools

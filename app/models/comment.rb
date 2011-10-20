@@ -14,6 +14,7 @@ class Comment < ActiveRecord::Base
   #acts_as_voteable
   # NOTE: Comments belong to a user
   belongs_to :user
+  
   validates :comment, :user_id, :presence => true
 
   has_many :replies

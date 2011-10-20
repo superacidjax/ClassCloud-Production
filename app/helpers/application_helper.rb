@@ -1,7 +1,7 @@
 module ApplicationHelper
   
   def karma_number(student)
-    vote = Vote.where("voteable_user_id = ?", student).count
+    Vote.where("voteable_user_id = ?", student).count
   end
 
   def my_date_time
@@ -110,11 +110,12 @@ module ApplicationHelper
   end
 
   def deleted_feed(activity_stream,actor)
-     if actor.nil?
-        activity_stream.destroy
-     else
-       " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
-     end    
+    if actor.nil?      
+      activity_stream.destroy
+      return ""
+    else
+     return " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
+    end
     
   end
 
