@@ -148,9 +148,10 @@
                   - if current_user.is_teacher?
                     %h3 My Students
                     - @students.each do |student|
-                      = link_to user_full_name(student), student_dashboard_path(student.id)
-                      - unless karma_number(student).eql?(0)
-                        = "(#{karma_number(student)})"
+                      - unless student.nil?
+                        = link_to user_full_name(student), student_dashboard_path(student.id)
+                        - unless karma_number(student).eql?(0)
+                          = "(#{karma_number(student)})"
                       %br
                   - elsif current_user.is_observer? and @student.blank?
                     %h3 Students

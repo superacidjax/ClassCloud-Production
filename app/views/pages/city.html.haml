@@ -1,2 +1,2 @@
 = "City :"
-= select("user","school_id",@cities.schools.collect {|p| [ p.name, p.id ] })
+= select("user","school_id",@cities.collect {|p| [ p.city, p.id ] })

@@ -6,7 +6,7 @@ Tes::Application.routes.draw do
   get "pages/index"
 
   match "pages/city/:city"=> "pages#city", :as => :state_city, :via => :get
-
+  match "pages/school/:school"=> "pages#school", :as => :school_city, :via => :get
   namespace :admin do
 
     resources :admins do

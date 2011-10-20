@@ -51,7 +51,8 @@
             %tr
               %td= comment.comment
               %td{:align => "right"}
-                = link_to "Edit", class_room_comment_edit_assignment_path(@class.id, @assignment, comment.id)
+                - if current_user.id.eql?(comment.user_id)
+                  = link_to "Edit", class_room_comment_edit_assignment_path(@class.id, @assignment, comment.id)
                 - if current_user.id.eql?(comment.user_id) or current_user.is_teacher?
                   = link_to "Delete", class_room_comment_destroy_assignment_path(@class.id, @assignment, comment.id), :method => :delete
                 - unless vote_comment(comment).nil?
