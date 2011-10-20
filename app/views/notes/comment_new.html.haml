@@ -24,7 +24,7 @@
           %table{:width => "100%"}
             %tr
               %h6{:colspan => "3"}
-                = "#{comment.user.full_name}"
+                = "#{user_full_name(comment.user)}"
                 - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
                   = "(#{vote_count(comment.id)})"
                 said this #{distance_of_time_in_words(comment.created_at, Time.now)} ago:

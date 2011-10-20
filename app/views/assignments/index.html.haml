@@ -16,7 +16,12 @@
     %tr
       %tr.white
         %td
-          = link_to assignment.title, comment_new_class_room_assignment_path(@class.id, assignment)
+          - if @student
+            = link_to assignment.title, go_to_student_assignment_class_room_assignment_path(@class.id, assignment, @student.id)
+          - elsif @teacher
+            = link_to assignment.title, go_to_teacher_assignment_class_room_assignment_path(@class.id, assignment, @teacher.id)
+          - else
+            = link_to assignment.title, comment_new_class_room_assignment_path(@class.id, assignment)
         %tr
           %td.due
             - unless Time.now > assignment.due_date

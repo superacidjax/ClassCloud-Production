@@ -9,7 +9,7 @@
  
   %tr
     %td{:colspan => "2"}
-      From: #{@upload_file.user.full_name}
+      From: #{user_full_name(@upload_file.user)}
   %tr
     %td{:colspan => "2"}
       = 'Date:'
@@ -30,7 +30,7 @@
             %tr
               %td{:rowspan => "3"}= image_tag "bakso.jpg", :width => "48", :height => "48"
               %td{:colspan => "3"}
-                = "#{comment.user.full_name}"
+                = "#{user_full_name(comment.user)}"
                 = date_format(comment.created_at)
                
             %tr

@@ -3,7 +3,7 @@
 %br
 %p
   = 'Name :'
-  = @user.full_name
+  = user_full_name(@user)
   %br
   = 'Class  :'
   = @class.name
@@ -26,7 +26,7 @@
         %td= writeboard.created_at
 
 %h1 My student activity feed
-%b= "#{@user.full_name}'s activity feed"
+%b= "#{user_full_name(@user)}'s activity feed"
 %br
 %table
   - @activity_streams.each do |activity_stream|

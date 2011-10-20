@@ -22,7 +22,7 @@
         = "(#{upload_file.file_file_size}kb)"
         %br
         = 'by'
-        = upload_file.user.full_name
+        = user_full_name(upload_file.user)
         = 'on'
         = date_format(upload_file.created_at)
       -if current_user.id.eql?(upload_file.user_id)

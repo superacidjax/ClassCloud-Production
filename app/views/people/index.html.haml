@@ -6,7 +6,7 @@
 %div{:style => "width: 800px"}
   - @people.each_with_index do |person, index|
     %div{:style => "float: left;width: 300px"}
-      %b= person.full_name
+      %b= user_full_name(person)
       %br
       = mail_to person.email
       %br

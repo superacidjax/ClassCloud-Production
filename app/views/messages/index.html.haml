@@ -50,15 +50,15 @@
           %td
             -if current_user.messages.find(inbox.id).opened
               -user_sender(inbox.sent_messageable_id).each do |sender|
-                =sender.full_name
+                = user_full_name(sender)
             -else
               %b
                 -user_sender(inbox.sent_messageable_id).each do |sender|
-                  =sender.full_name
+                  = user_full_name(sender)
 
           %td
             -if current_user.messages.find(inbox.id).opened
-              =inbox.topic
+              = inbox.topic
             -else
               %b
                 =inbox.topic

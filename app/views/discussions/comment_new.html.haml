@@ -1,5 +1,5 @@
 #main_content_area
-  %h3 Discussion started #{distance_of_time_in_words(@discussion.created_at, Time.now)} ago by #{@discussion.user.full_name}.
+  %h3 Discussion started #{distance_of_time_in_words(@discussion.created_at, Time.now)} ago by #{user_full_name(@discussion.user)}.
   %hr
   - if current_user.id.eql?(@discussion.user_id) or current_user.is_teacher?
     = link_to "Edit", edit_class_room_discussion_path(@class.id, @discussion)
@@ -28,11 +28,9 @@
           %table{:width => "100%"}
             %tr
               %h6{:colspan => "3"}
-                = "#{comment.user.full_name}"
+                = "#{user_full_name(comment.user)}"
                 - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
-                  = '('
-                  = vote_count(comment.id)
-                  = ')'
+                  = "(#{vote_count(comment.id)})"
                 said this #{distance_of_time_in_words(comment.created_at, Time.now)} ago:
             %tr
             %br

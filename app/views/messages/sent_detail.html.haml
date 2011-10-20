@@ -7,8 +7,8 @@
     = 'me'
     %br
     %b 'To'
-    -user_sender(detail.received_messageable_id).each do |b|
-      =b.full_name
+    -user_sender(detail.received_messageable_id).each do |sender|
+      = user_full_name(sender)
     %br
     %br
       =detail.topic
@@ -16,7 +16,5 @@
     %br
       =detail.body
     
-  -else
-    -true
 
   

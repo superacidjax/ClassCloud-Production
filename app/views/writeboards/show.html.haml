@@ -1,5 +1,5 @@
 #main_content_area
-  %h3 CloudPad posted by #{@writeboard.user.full_name} for #{@writeboard.assignment.title}
+  %h3 CloudPad posted by #{user_full_name(@writeboard.user)} for #{@writeboard.assignment.title}
   %hr
   %br
   %h2 
@@ -26,7 +26,7 @@
       %br
       %b Student
       %br
-      = @writeboard.user.full_name
+      = user_full_name(@writeboard.user)
       %br
       %hr
   - if current_user.is_teacher? or current_user.is_student? or current_user.is_observer
@@ -35,7 +35,7 @@
         %table
           %tr
             %td{:colspan => "3"}
-              = "#{comment.user.full_name}"
+              = "#{user_full_name(comment.user)}"
               - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
                 = "(#{vote_count(comment.id)})"
                 = "said on "

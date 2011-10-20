@@ -10,7 +10,7 @@
     -true
   %tr
     %td{:colspan => "2"}
-      From: #{@note.user.full_name}
+      From: #{user_full_name(@note.user)}
       - unless vote_count(@note.id).eql?(0) or current_user.is_teacher?
         = '('
         = vote_count(@note.id)
@@ -36,11 +36,9 @@
             %tr
               %td{:rowspan => "3"}= image_tag "bakso.jpg", :width => "48", :height => "48"
               %td{:colspan => "3"}
-                = "#{comment.user.full_name}"
+                = "#{user_full_name(comment.user)}"
                 - unless vote_count(comment.id).eql?(0) or !current_user.is_teacher?
-                  = '('
-                  = vote_count(comment.id)
-                  = ')'
+                  = "(#{vote_count(comment.id)})"
                 = "#{date_format(comment.created_at)}"
             %tr
               %td

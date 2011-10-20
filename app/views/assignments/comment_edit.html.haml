@@ -9,11 +9,9 @@
         | #{link_to "Edit", edit_class_room_assignment_path(@class.id, @assignment)} | #{link_to "Delete", class_room_assignment_path(@class.id, @assignment)}
   %tr
     %td{:colspan => "2"}
-      From: #{@assignment.user.full_name}
+      From: #{user_full_name(@assignment.user)}
       - unless vote_count(@assignment.id).eql?(0) or current_user.is_teacher?
-        = '('
-        = vote_count(@assignment.id)
-        = ')'
+        = "(#{vote_count(@assignment.id)})"
   %tr
     %td{:colspan => "2"}
       Date: #{@assignment.created_at}
@@ -36,7 +34,7 @@
           %table{:width => "100%"}
             %tr
               %td{:colspan => "3"}
-                = "#{comment.user.full_name}"
+                = "#{user_full_name(comment.user)}"
                 - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
                   = "(#{vote_count(comment.id)})"
                   %br

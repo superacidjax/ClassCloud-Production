@@ -14,7 +14,7 @@
   %tr
   %tr
     %td{:colspan => "2"}
-      From: #{@assignment.user.full_name}
+      From: #{user_full_name(@assignment.user)}
       - unless vote_count(@assignment.id).eql?(0) or current_user.is_teacher?
         = "(#{vote_count(@assignment.id)})"
   %tr

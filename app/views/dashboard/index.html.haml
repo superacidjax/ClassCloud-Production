@@ -5,7 +5,7 @@
         %h1
           - if current_user.is_observer?
             = link_to "Switch user", root_path
-          = current_user.full_name
+          = user_full_name(current_user)
           = link_to "Sign Out", destroy_user_session_path, :method => :delete
           - unless current_user.is_observer?
             .clear
@@ -34,7 +34,7 @@
           .feed 
             - if current_user.is_teacher? and @student
               %h1
-                = "#{@student.full_name}'s activity feed"
+                = "#{user_full_name(@student)}'s activity feed"
             - else
               %h1 My class activity feed
             %table
@@ -84,7 +84,7 @@
                   %br
                   %div{:style => "text-align:left"}
                     %h2
-                      = "#{@student.full_name}'s activity feed"
+                      = "#{user_full_name(@student)}'s activity feed"
                     %table
                       - @activity_streams.each do |activity_stream|
                         - begin
@@ -134,7 +134,7 @@
                       %br
                       %div{:style => "text-align:left"}
                         %h2
-                          = "#{@student.full_name}'s activity feed"
+                          = "#{user_full_name(@student)}'s activity feed"
                         %table
                           - @activity_streams.each do |activity_stream|
                             - if activity_stream.actor_id.to_s.eql?(@student.id.to_s)
@@ -148,7 +148,7 @@
                   - if current_user.is_teacher?
                     %h3 My Students
                     - @students.each do |student|
-                      = link_to student.full_name, student_dashboard_path(student.id)
+                      = link_to user_full_name(student), student_dashboard_path(student.id)
                       - unless karma_number(student).eql?(0)
                         = "(#{karma_number(student)})"
                       %br
@@ -156,27 +156,27 @@
                     %h3 Students
                     - @students.each do |student|
                       - unless params[:teacher_id]
-                        = link_to student.full_name, student_dashboard_path(student.id)
+                        = link_to user_full_name(student), student_dashboard_path(student.id)
                         - unless karma_number(student).eql?(0)
                           = "(#{karma_number(student)})"
                       - else
-                        = link_to student.full_name, student_activity_feed_path(@teacher.id, student.id)
+                        = link_to user_full_name(student), student_activity_feed_path(@teacher.id, student.id)
                         - unless karma_number(student).eql?(0)
                           = "(#{karma_number(student)})"
                       %br
                     - if params[:teacher_id].blank?
                       %h3 Teacher
-                      = link_to @teacher.full_name, teacher_dashboard_path(@teacher.id)
+                      = link_to user_full_name(@teacher), teacher_dashboard_path(@teacher.id) if @teacher
                   - elsif current_user.is_observer? and @student and @teacher
                     %h3 Students
                     - @students.each do |student|
-                      = link_to student.full_name, student_dashboard_path(student.id)
+                      = link_to user_full_name(student), student_dashboard_path(student.id)
                       %br
 
 - elsif current_user.is_teacher?
   %center
     %div{:style => "text-align:right; width:50%"}
-      = current_user.full_name
+      = user_full_name(current_user)
       = link_to_function "Settings", edit_user_registration_path
       = link_to "Sign Out", destroy_user_session_path, :method => :delete
       %div{:class => "clear"}
@@ -225,7 +225,7 @@
         %h1
           - if current_user.is_observer?
             = link_to "Switch user", root_path
-          = current_user.full_name
+          = user_full_name(current_user)
 
           |
           = link_to "Sign Out", destroy_user_session_path, :method => :delete

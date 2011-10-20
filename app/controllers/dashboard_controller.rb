@@ -36,6 +36,7 @@ class DashboardController < ApplicationController
           @students << class_room_student.student if class_room_student and !@students.include?(class_room_student.student)
         end
 
+
         @teacher = current_user.class_room_observers.first.class_room.user unless current_user.class_room_observers.blank?
       elsif params[:id]
         @student = User.find params[:id]

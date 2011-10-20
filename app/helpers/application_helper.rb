@@ -125,6 +125,9 @@ module ApplicationHelper
 
   def class_rooms(class_room)
     current_user.class_room_observers.find_all_by_class_room_id(class_room)
+  end
 
+  def user_full_name(user)
+    user.nil? ? "" : user.full_name
   end
 end
