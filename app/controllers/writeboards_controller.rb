@@ -105,6 +105,7 @@ class WriteboardsController < ApplicationController
       end
     end
   end
+  
   def destroy
     @writeboard = Writeboard.find(params[:id])
     @writeboard.destroy

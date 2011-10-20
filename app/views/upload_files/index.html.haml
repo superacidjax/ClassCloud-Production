@@ -19,9 +19,7 @@
               = link_to upload_file.title ,show_student_upload_file_class_room_upload_file_path(@class.id ,upload_file, @student.id)
             - elsif @teacher
               = link_to upload_file.title ,show_teacher_upload_file_class_room_upload_file_path(@class.id ,upload_file, @teacher.id)
-        = '('
-        = upload_file.file_file_size
-        = 'kb)'
+        = "(#{upload_file.file_file_size}kb)"
         %br
         = 'by'
         = upload_file.user.full_name

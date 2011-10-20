@@ -110,7 +110,12 @@ module ApplicationHelper
   end
 
   def deleted_feed(activity_stream,actor)
-    " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
+     if actor.nil?
+        activity_stream.destroy
+     else
+       " #{date_format(activity_stream.created_at)} #{actor.instance_eval(activity_stream.actor_name_method)} deleted #{activity_stream.activity}"
+     end    
+    
   end
 
   def date_feed_format(activity_stream,actor)

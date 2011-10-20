@@ -25,7 +25,7 @@
       = @writeboard.grade
       %br
       %b Student
-      %br/
+      %br
       = @writeboard.user.full_name
       %br
       %hr
@@ -37,9 +37,7 @@
             %td{:colspan => "3"}
               = "#{comment.user.full_name}"
               - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
-                = '('
-                = vote_count(comment.id)
-                = ')'
+                = "(#{vote_count(comment.id)})"
                 = "said on "
                 %br
               = "#{date_format(comment.created_at)}"
