@@ -1,6 +1,5 @@
 class AddUniversityAndStateToUser < ActiveRecord::Migration
   def change
-    remove_column :schools, :school_id
     remove_column :schools, :country
     remove_column :schools, :city
     add_column :states, :city, :string
