@@ -35,10 +35,6 @@ module ApplicationHelper
       image_tag('unknown.jpeg', :height => '50px;', :width => '50px;')
     end
   end
-  
-  def created_at(date)
-    date.strftime('%b %d %Y, %H:%M')
-  end
 
   def date_format(date)
     date.strftime('%b %d %Y, %H:%M')
@@ -62,6 +58,7 @@ module ApplicationHelper
       end
     end
   end
+  
   def vote_count(voteable_id)
     Vote.where("voteable_id =?",voteable_id).count
   end

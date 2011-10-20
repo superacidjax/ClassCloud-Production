@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable,
     :token_authenticatable, :confirmable, :lockable, :timeoutable,:omniauthable
-#:confirmable : removed to disable confirmation email
+  #:confirmable : removed to disable confirmation email
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :user_type, :username, :login, :time_zone
   attr_accessor :is_not_teacher, :user_type, :login, :user_pick_username_and_password
@@ -27,10 +27,14 @@ class User < ActiveRecord::Base
     user.has_many :notes
     user.has_many :writeboards
     user.has_many :upload_files
-    user.has_many :schools
+    user.has_many :activity_streams, :primary_key => "actor_id"
   end
 
+  belongs_to :schools
+  
   after_create :define_user_role, :if => Proc.new{|user| user.is_not_teacher.eql?(false) || user.is_not_teacher.blank?}
+
+  before_destroy :remove_activity_stream
 
   acts_as_messageable  :table_name => "messages", # default 'messages'
   :required   => [:topic, :body]    ,              # default [:topic, :body]
@@ -99,5 +103,9 @@ class User < ActiveRecord::Base
   def self.generate_random_string(size = 8)
     charset = %w{ 2 3 4 6 7 9 A C D E F G H J K M N P Q R T V W X Y Z}
     (0...size).map{ charset.to_a[rand(charset.size)] }.join
+  end
+
+  def remove_activity_stream
+    ActivityStream.delete_all(["actor_id = ? and actor_type = 'User'", self.id])
   end
 end
