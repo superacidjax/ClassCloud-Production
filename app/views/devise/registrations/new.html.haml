@@ -43,18 +43,18 @@
               = time_zone_select("user", "time_zone", nil, :default => "Pacific Time (US & Canada)" )
             %br
             %h3
-              = "School:"
+              /= "School:"
             %br
             %h3
               %div{:style=>"float:left"}
-                = "State :"
-                = select_tag "city", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "$('#city_name').load('/pages/city/'+this.value)"
-              %div#city_name{:style=>"float:left"}
-                = "City :"
-                = select("user","school_id",@states.collect {|p| [ p.city, p.id ] })
-              %div#school_name{:style=>"float:center"}
-                = "Name :"
-                = select("user","school_id",@states.collect {|p| [ p.schools.first.name, p.id ] })
+                /= "State :"
+                /= select_tag "city", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "$('#city_name').load('/pages/city/'+this.value)"
+              /%div#city_name{:style=>"float:left"}
+              /  = "City :"
+              /  = select("user","school_id",@states.collect {|p| [ p.city, p.id ] })
+              /%div#school_name{:style=>"float:center"}
+              /  = "Name :"
+              /  = select("user","school_id",@states.collect {|p| [ p.schools.first.name, p.id ] })
             %br
             %h3
               = f.submit "Sign up", :class=>'submit'
