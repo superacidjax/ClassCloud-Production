@@ -148,8 +148,8 @@
 //        return true;
 //    }
 //}
-function showCity(id){
-    $('#city_name').load('/pages/city/' + id);
+function showCity(id,controller){
+    $('#city_name').load('/pages/city/' + id + '?user_controller='+controller);
     $('#loader').ajaxStart(function() {
         $(this).show();
     }).ajaxComplete(function() {
@@ -159,6 +159,15 @@ function showCity(id){
 
 function showSchool(state_id){
     $('#school_name').load('/pages/school/' + state_id);
+    $('#loader').ajaxStart(function() {
+        $(this).show();
+    }).ajaxComplete(function() {
+        $(this).hide();
+    });
+}
+
+function editSchool(id,school_id){
+    $('#school_list').load('/admin/admins/'+ id +'/edit_school'+'?school_id='+school_id);
     $('#loader').ajaxStart(function() {
         $(this).show();
     }).ajaxComplete(function() {

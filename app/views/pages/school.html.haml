@@ -1,2 +1,4 @@
 = "Shcool :"
 = select_tag "school[name]", options_from_collection_for_select(@schools,'id','name',params[:client]), :include_blank => true
+- if current_user and current_user.admin?
+  = link_to 'edit', '#', :onclick =>"editSchool($('#state_name').val(),($('#school_name :selected').val()));"

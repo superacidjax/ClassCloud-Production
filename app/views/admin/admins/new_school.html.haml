@@ -1,0 +1,15 @@
+%div
+=form_tag create_school_admin_admins_path do
+  %h3 Country
+  = text_field_tag 'country',nil,:placeholder=>"enter country name"
+  %br
+  %h3 State
+  = text_field_tag 'state',nil,:placeholder=>"enter state name"
+  %br
+  %h3 City
+  = text_field_tag 'city',nil,:placeholder=>"enter city name"
+  %br
+  %h3 School
+  = text_field_tag 'school',nil,:placeholder=>"enter school name"
+  %br
+  =submit_tag 'save'

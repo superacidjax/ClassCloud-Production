@@ -1,5 +1,4 @@
 Tes::Application.routes.draw do
-
   resources :states do
     get :autocomplete_state_name, :on => :collection
   end
@@ -16,7 +15,15 @@ Tes::Application.routes.draw do
     resources :admins do
       member do
         put "update"
+        get "edit_school"
+        put "update_school"
       end
+      collection do
+        get "school"
+        get "new_school"
+        post "create_school"
+      end
+
     end
 
   end

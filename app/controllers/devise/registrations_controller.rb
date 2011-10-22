@@ -20,8 +20,7 @@ class Devise::RegistrationsController < ApplicationController
     if resource.save
       resource.time_zone = params['user']['time_zone']
       if params['state']['name'].nil? and params['state']['city'].nil?
-        asd
-        state = State.find_or_create_by_name_and_city(:name => params['state']['name2'], :city => params['state']['city2'])
+        state = State.find_or_create_by_country_and_city(:country => params['state']['name2'], :city => params['state']['city2'])
         school = School.find_or_create_by_name_and_state_id(:name =>params[:school][:name2],:state_id => state.id)
         resource.state_id = state.id
         resource.school_id = school.id

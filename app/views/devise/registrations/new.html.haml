@@ -49,7 +49,7 @@
             %div#school_list
               %div{:style=>"float:left"}
                 = "State :"
-                = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value)"
+                = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value,'#{params[:controller]}');"
               %div#city_name{:style=>"float:left;"}
               %div#school_name{:style=>"float:center;"}
               %div#loader{:style=>"display:none;float:left;"}
@@ -60,16 +60,12 @@
                 = link_to 'Click here', '#', :onclick => "$('#school_list').hide();$('#user_school_name').show();"
             %div#user_school_name{:style => "display:none"}
               %h3
-                = "State"
-                = autocomplete_field_tag "state[name2]", '',autocomplete_state_name_states_path
+                = "Country"
+                = text_field_tag "state[name2]", nil, :placeholder =>"enter your country"
                 = "City"
-                = text_field_tag "state[city2]", nil, :placeholder =>"enter your city",:name=>"blah"
+                = text_field_tag "state[city2]", nil, :placeholder =>"enter your city"
                 = "School"
                 = text_field_tag "school[name2]", nil, :placeholder =>"enter your school"
-                :javascript
-                  $(document).ready(function() {
-                    $("#state_city2").tokenInput("http://shell.loopj.com/tokeninput/tvshows.php");
-                    });
                 %br
             %h3
               = f.submit "Sign up", :class=>'submit'
