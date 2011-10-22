@@ -1,0 +1,2 @@
+= "Shcool :"
+= select_tag "school[name]", options_from_collection_for_select(@schools,'id','name',params[:client]), :include_blank => true

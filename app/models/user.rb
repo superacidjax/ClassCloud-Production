@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
     :token_authenticatable, :confirmable, :lockable, :timeoutable,:omniauthable
   #:confirmable : removed to disable confirmation email
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :user_type, :username, :login, :time_zone
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :user_type, :username, :login, :time_zone, :state_id, :school_id
   attr_accessor :is_not_teacher, :user_type, :login, :user_pick_username_and_password
   validates :first_name, :presence => true
   validates :user_type, :presence => true, :if => Proc.new{|user| user.is_not_teacher.eql?(true)}
@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   end
 
   belongs_to :schools
+  belongs_to :states
   
   after_create :define_user_role, :if => Proc.new{|user| user.is_not_teacher.eql?(false) || user.is_not_teacher.blank?}
 
@@ -43,6 +44,7 @@ class User < ActiveRecord::Base
     ["Student", "student"],
     ["Observer", "observer"]
   ]
+
 
   def full_name
     "#{first_name} #{last_name}"

@@ -1,2 +1,3 @@
 = "City :"
-= select("user","school_id",@cities.collect {|p| [ p.city, p.id ] })
+= select_tag "state[city]", options_from_collection_for_select(@cities,'id','city',params[:client]), :include_blank => true,:onchange=> "showSchool(this.value)"
+= params[:state_name]

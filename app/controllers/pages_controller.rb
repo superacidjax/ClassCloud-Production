@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     @cities = State.where("id = ?", params[:city])
 
     respond_to do |format|
-      format.html{render :layout => false}
+      format.html{render :layout => false,:state_name =>params[:city]}
 
     end
   end
@@ -18,5 +18,9 @@ class PagesController < ApplicationController
       format.html{render :layout => false}
 
     end
+  end
+
+  def search_state
+
   end
 end

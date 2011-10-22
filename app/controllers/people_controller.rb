@@ -18,7 +18,7 @@ class PeopleController < ApplicationController
         @existing_observers << observer if observer.class_room_observers.where(class_room_id: params[:class_room_id]).blank?
       end
       class_room.students.each do |student|
-        @existing_students << student if student.class_room_students.where(class_room_id: params[:class_room_id]).blank?
+        @existing_students << student if student.class_room_students.where(class_room_id: params[:class_room_id]).blank? and student.school_id.eql?(current_user.school_id)
       end
     end
   end
@@ -61,6 +61,7 @@ class PeopleController < ApplicationController
 
     if @person.save
       @person.add_role params[:user][:user_type]
+      @person.school_id = current_user.school_id
       @person.save
       ClassRoomStudent.create(:user_id => @person.id, :class_room_id => @class.id) if params[:user][:user_type].eql?("student")
       ClassRoomObserver.create(:user_id => @person.id, :class_room_id => @class.id) if params[:user][:user_type].eql?("observer")
@@ -91,11 +92,9 @@ class PeopleController < ApplicationController
     if user.is_student?
       class_room_student = user.class_room_students.where(class_room_id: params[:class_room_id]).first
       class_room_student.destroy if class_room_student
-      user.destroy if user.class_room_students.blank?
     elsif user.is_observer?
       class_room_observer = user.class_room_observers.where(class_room_id: params[:class_room_id]).first
       class_room_observer.destroy if class_room_observer
-      user.destroy if user.class_room_observers.blank?
     end
     redirect_to class_room_people_path(params[:class_room_id])
   end

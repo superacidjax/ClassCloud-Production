@@ -148,3 +148,24 @@
 //        return true;
 //    }
 //}
+function showCity(id){
+    $('#city_name').load('/pages/city/' + id);
+    $('#loader').ajaxStart(function() {
+        $(this).show();
+    }).ajaxComplete(function() {
+        $(this).hide();
+    });
+}
+
+function showSchool(state_id){
+    $('#school_name').load('/pages/school/' + state_id);
+    $('#loader').ajaxStart(function() {
+        $(this).show();
+    }).ajaxComplete(function() {
+        $(this).hide();
+    });
+}
+//= require jquery
+//= require jquery_ujs
+//= require jquery_ui
+//= require autocomplete-rails
