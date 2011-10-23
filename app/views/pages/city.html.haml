@@ -1,2 +1,6 @@
-= "City :"
-= select("user","school_id",@cities.collect {|p| [ p.city, p.id ] })
+- if controller.eql?('people')
+  ="City :"
+  = select_tag "user[city]", options_from_collection_for_select(@cities,'id','name',params[:client]), :include_blank => true
+- else
+  = "City :"
+  = select_tag "state[city]", options_from_collection_for_select(@cities,'id','name',params[:client]), :include_blank => true,:onchange=> "showSchool(this.value)"

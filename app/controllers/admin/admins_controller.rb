@@ -57,5 +57,56 @@ class Admin::AdminsController < ApplicationController
     redirect_to (admin_admins_url), notice: 'User was succesfully deleted'
   end
 
+  def school
+    @states = State.where("name IS NOT NULL")
+    @countries = State.where("country<>?",'USA')
+  end
+
+  def edit_school
+    @school = School.where("id = ?", params[:school_id]).first
+    @state = State.find(params[:id])
+    @states = State.all
+    @cities = City.all
+    @city = City.where("state_id =?",params[:id]).first
+    @country = State.find(params[:id])
+    @schools = School.all
+    respond_to do |format|
+      format.html{render :layout => false,:state_name =>params[:city],:locals =>{:controller =>@controller,:country=>@countries}}
+
+    end
+  end
+
+  def update_school
+    city_name = City.find(params[:city][:name])
+    state_name  = State.find(params[:state][:name])
+    city = City.find(params[:city2])
+    state = State.find(params[:id])
+    school = School.find(params[:school])
+
+    if params[:state][:name2].nil? and params[:state][:country2].nil? and params[:school][:name2].nil?
+      city.update_attributes(:name =>city_name.name, :state_id =>state_name.id)
+      city.save
+      school.update_attributes(:state_id =>state_name.id, :city_id=>city_name.id)
+      school.save
+    else
+      state = State.find_or_create_by_name_and_country(:name => params['state']['name2'], :country=> params['state']['country2'])
+      city = City.find_or_create_by_name_and_state_id(:name =>params['city']['name2'],:state_id =>state.id)
+      school.update_attributes(:name=>params['school']['name2'],:state_id =>state.id, :city_id =>city.id)
+      school.save
+    end
+    redirect_to school_admin_admins_path
+  end
+
+  def new_school
+  end
+
+  def create_school
+    state = State.find_or_create_by_name_and_country(:name =>params[:state], :country =>params[:country])
+    city = City.find_or_create_by_name(:name =>params[:city])
+    school = School.new(:name=>params[:school],:state_id=>state.id, :city_id=>city.id)
+    school.save
+    redirect_to school_admin_admins_path
+  end
+
 end
 

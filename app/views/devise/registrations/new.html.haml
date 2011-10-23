@@ -11,7 +11,7 @@
         %h2
           You're only three clicks away from the paperless classroom!
         .form 
-          = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+          = form_for(resource, :as => resource_name, :url => registration_path(resource_name),:multipart=>true) do |f|
             = devise_error_messages!
             %br
             %h3
@@ -46,15 +46,28 @@
               /= "School:"
             %br
             %h3
+            %div#school_list
               %div{:style=>"float:left"}
-                /= "State :"
-                /= select_tag "city", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "$('#city_name').load('/pages/city/'+this.value)"
-              /%div#city_name{:style=>"float:left"}
-              /  = "City :"
-              /  = select("user","school_id",@states.collect {|p| [ p.city, p.id ] })
-              /%div#school_name{:style=>"float:center"}
-              /  = "Name :"
-              /  = select("user","school_id",@states.collect {|p| [ p.schools.first.name, p.id ] })
             %br
+                = "State :"
+                = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value,'#{params[:controller]}');"
+              %div#city_name{:style=>"float:left;"}
+              %div#school_name{:style=>"float:center;"}
+              %div#loader{:style=>"display:none;float:left;"}
+                = image_tag('ajax-loading.gif')
+              %br
+              %h3
+                = 'If your school isn\'t listed'
+                = link_to 'Click here', '#', :onclick => "$('#school_list').hide();$('#user_school_name').show();"
+            %div#user_school_name{:style => "display:none"}
+              %h3
+                = "Country"
+                = text_field_tag "state[name2]", nil, :placeholder =>"enter your country"
+                = "City"
+                = text_field_tag "state[city2]", nil, :placeholder =>"enter your city"
+                = "School"
+                = text_field_tag "school[name2]", nil, :placeholder =>"enter your school"
+                %br
             %h3
               = f.submit "Sign up", :class=>'submit'
+            

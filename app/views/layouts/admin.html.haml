@@ -9,5 +9,7 @@
   %body
     = link_to "My Settings", edit_admin_admin_path(current_user.id)
     = "|"
+    = link_to "Schools", school_admin_admins_path
+    = "|"
     = link_to "Sign Out", destroy_user_session_path, :method => :delete
     = yield

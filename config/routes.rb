@@ -1,18 +1,29 @@
 Tes::Application.routes.draw do
-
-
+  resources :states do
+    get :autocomplete_state_name, :on => :collection
+  end
   get "admins/index"
 
   get "pages/index"
 
   match "pages/city/:city"=> "pages#city", :as => :state_city, :via => :get
   match "pages/school/:school"=> "pages#school", :as => :school_city, :via => :get
+  match "pages/search_state/"=> "pages#search_state", :as => :search_state, :via => :get
+
   namespace :admin do
 
     resources :admins do
       member do
         put "update"
+        get "edit_school"
+        put "update_school"
       end
+      collection do
+        get "school"
+        get "new_school"
+        post "create_school"
+      end
+
     end
 
   end

@@ -3,10 +3,10 @@ class PagesController < ApplicationController
   end
 
   def city
-    @cities = State.where("id = ?", params[:city])
-
+    @cities = City.where("state_id = ?", params[:city])
+    @controller = params[:user_controller]
     respond_to do |format|
-      format.html{render :layout => false}
+      format.html{render :layout => false,:state_name =>params[:city],:locals =>{:controller =>@controller}}
 
     end
   end
@@ -18,5 +18,9 @@ class PagesController < ApplicationController
       format.html{render :layout => false}
 
     end
+  end
+
+  def search_state
+
   end
 end

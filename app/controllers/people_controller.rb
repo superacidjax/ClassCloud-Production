@@ -18,7 +18,7 @@ class PeopleController < ApplicationController
         @existing_observers << observer if observer.class_room_observers.where(class_room_id: params[:class_room_id]).blank?
       end
       class_room.students.each do |student|
-        @existing_students << student if student.class_room_students.where(class_room_id: params[:class_room_id]).blank?
+        @existing_students << student if student.class_room_students.where(class_room_id: params[:class_room_id]).blank? and student.school_id.eql?(current_user.school_id)
       end
     end
   end
@@ -54,29 +54,38 @@ class PeopleController < ApplicationController
   end
 
   def create
-    @person = User.new(params[:user])
-    @person.is_not_teacher = true
-    @person.password = "123456"
-    @person.password_confirmation = "123456"
-
-    if @person.save
-      @person.add_role params[:user][:user_type]
-      @person.save
-      ClassRoomStudent.create(:user_id => @person.id, :class_room_id => @class.id) if params[:user][:user_type].eql?("student")
-      ClassRoomObserver.create(:user_id => @person.id, :class_room_id => @class.id) if params[:user][:user_type].eql?("observer")
-      redirect_to class_room_people_url(@class.id), notice: 'User was successfully created.'
+    already_user = User.where("email = ?", params[:user][:email]).first
+    if already_user
+      ClassRoomStudent.create(:user_id => already_user.id, :class_room_id => @class.id) if params[:user][:user_type].eql?("student")
+      ClassRoomObserver.create(:user_id => already_user.id, :class_room_id => @class.id) if params[:user][:user_type].eql?("observer")
+    redirect_to class_room_people_url(@class.id), notice: 'User was successfully created.'
     else
-      @existing_observers = []
-      @existing_students = []
-      ClassRoom.where(["id <> ?", params[:class_room_id]]).each do |class_room|
-        class_room.observers.each do |observer|
-          @existing_observers << observer
+
+      @person = User.new(params[:user])
+      @person.is_not_teacher = true
+      @person.password = "123456"
+      @person.password_confirmation = "123456"
+
+      if @person.save
+        @person.add_role params[:user][:user_type]
+        @person.school_id = current_user.school_id
+        @person.save
+        ClassRoomStudent.create(:user_id => @person.id, :class_room_id => @class.id) if params[:user][:user_type].eql?("student")
+        ClassRoomObserver.create(:user_id => @person.id, :class_room_id => @class.id) if params[:user][:user_type].eql?("observer")
+        redirect_to class_room_people_url(@class.id), notice: 'User was successfully created.'
+      else
+        @existing_observers = []
+        @existing_students = []
+        ClassRoom.where(["id <> ?", params[:class_room_id]]).each do |class_room|
+          class_room.observers.each do |observer|
+            @existing_observers << observer
+          end
+          class_room.students.each do |student|
+            @existing_students << student
+          end
         end
-        class_room.students.each do |student|
-          @existing_students << student
-        end
+        render action: "new"
       end
-      render action: "new"
     end
   end
 
@@ -91,16 +100,15 @@ class PeopleController < ApplicationController
     if user.is_student?
       class_room_student = user.class_room_students.where(class_room_id: params[:class_room_id]).first
       class_room_student.destroy if class_room_student
-      user.destroy if user.class_room_students.blank?
     elsif user.is_observer?
       class_room_observer = user.class_room_observers.where(class_room_id: params[:class_room_id]).first
       class_room_observer.destroy if class_room_observer
-      user.destroy if user.class_room_observers.blank?
     end
     redirect_to class_room_people_path(params[:class_room_id])
   end
 
   def pick_username_and_password
+    @states = State.all
     @person = User.find_by_confirmation_token(params[:confirmation_token])
     render :layout => false
   end
@@ -108,8 +116,15 @@ class PeopleController < ApplicationController
   def save_username_and_password
     @person = User.find_by_confirmation_token(params[:confirmation_token])
     @person.user_pick_username_and_password = true
-
+    
     if @person.update_attributes(params[:user])
+      if params['state']['name'].nil?
+        state = State.find_or_create_by_name_and_city(:name => params['state']['name2'], :city => params['state']['city2'])
+        @person.state_id = state.id
+      else
+        @person.state_id = params['state']['name']
+      end
+      @person.save
       redirect_to user_confirmation_url(:confirmation_token => params[:confirmation_token], :user_save_username_and_password => true)
     else
       render action: "pick_username_and_password"

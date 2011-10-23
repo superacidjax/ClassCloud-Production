@@ -1,0 +1,29 @@
+%h3 Edit School
+%br
+=form_tag update_school_admin_admin_path(@state.id,:city2=>@city,:school=>@school.id),:method=>:put do
+  %div#edit_school
+    %h3 School Name:#{@school.name}
+    %br
+    %h3 State/Country
+    = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',@state.id), :include_blank => true
+    %br
+    %h3 City
+    = select_tag "city[name]", options_from_collection_for_select(@cities,'id','name',@city.id), :include_blank => true
+    %br
+    = link_to 'edit school name','#',:onclick=>"$('#edit_school_name').show();$('#edit_school').hide();"
+  %div#edit_school_name{:style=>"display:none;"}
+    %h3 State
+    = text_field_tag 'state[name2]',@state.name,:placeholder=>"enter state"
+    %br
+    %h3 Country
+    = text_field_tag 'state[country2]',@state.country,:placeholder=>"enter country"
+    %br
+    %h3 School
+    = text_field_tag 'school[name2]',@school.name,:placeholder=>"enter school name"
+    %br
+    %h3 City
+    = text_field_tag 'city[name2]',@city.name,:placeholder=>"enter school city"
+
+  %br
+  %h3
+  = submit_tag 'Save'
