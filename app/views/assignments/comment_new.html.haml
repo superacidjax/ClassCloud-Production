@@ -1,12 +1,14 @@
-#main_content_area
-  %h6
+.assignments
+  %h3
     Posted #{distance_of_time_in_words(@assignment.created_at, Time.now)} ago
   %br
   %h3
     Due on
     = @assignment.due_date().strftime("%A, %B %d.")
+  %br
   %h2
-    != @assignment.title
+    %strong
+      != @assignment.title
   %br
   %td
     - if current_user.is_teacher?

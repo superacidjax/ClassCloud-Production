@@ -3,14 +3,14 @@
   = javascript_include_tag "event_calendar"
 
 /- content_for :middle_content do
-.headings
-  %h2 All Assignments
+.assignments
+  %h1 All Assignments
   %br
-  %h4
+  %h2
     = link_to 'Post New Assignment', new_class_room_assignment_path(@class.id) if current_user.is_teacher?
-  %br
     - unless current_user.is_observer? or  current_user.is_student?
-      = link_to "Edit Assignment Categories",assignment_category_class_room_assignments_path(@class.id)
+      |
+      = link_to "Edit Categories",assignment_category_class_room_assignments_path(@class.id)
 %table.assignments
   - @assignments.each do |assignment|
     %tr
@@ -24,11 +24,8 @@
             = link_to assignment.title, comment_new_class_room_assignment_path(@class.id, assignment)
         %tr
           %td.due
-            - unless Time.now > assignment.due_date
-              = "This assignment is due on"
-              = assignment.due_date().strftime("%A, %B %d.")
-            -else
-              ="This assignment was due on"
+            = "Due: "
+            = assignment.due_date().strftime("%A, %B %d.")
         %tr
           %td.assignments
             Posted #{distance_of_time_in_words(assignment.created_at, Time.now)} ago

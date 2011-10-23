@@ -1,101 +1,84 @@
 - content_for :head do
   %meta{:name => "description", :content => "ClassCloud gets the class into the Cloud. It's a cloud platform for managing classrooms and schools. It's like Facebook for schools. ..only better!"}
   %meta{:name => "keywords", :content => "education, cloud, schools, technology, classroom, teachers, internet, collaboration, Basecamp, Facebook, education management, free" }
-
-#background
-  #main_content_area
-    %h3
-      = link_to "Development Log/Bug Reporting", development_path
-    %br
-    %br
-    %h3
-      = image_tag "cclogo.png"
-    %br
-
-  .login_form
-    %h4
-      /= link_to "Account Help", account_help_path
-    = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-      %div
-        = f.text_field :login,{:placeholder=>'  Class Cloud ID',:class=>'email_field'}
-        = f.password_field :password,{:placeholder=>'  Password',:class=>'password_field'}
-        = f.submit "Sign in",{:class=>'submit'}
-  .notice_launch
-    = alert
-    = render :partial => "devise/shared/links"
-  %div{:style=> "position: relative"}
-    %h1
-      = link_to "Watch the ClassCloud Video!", href="http://vimeo.com/29879423"
-    %br
-    %hr
-    %div
-      <iframe marginwidth="0"  marginheight="0" width="600" height="350" src="http://www.embeddedanalytics.com/reports/displayreport?reportcode=ydPo9ROLSP&chckcode=ga1SJXoCEq9viz9VvLcPAw" type="text/html" frameborder="0" scrolling="no" title="EmeddedAnalytics - Embed Realtime Google Analytics Charts into your Website!"></iframe>
-    /= image_tag "cc_landing.png", alt: "Are you ready for the paperless classroom? Welcome to ClassCloud!"
-.main
-  .myclasses
-    %br
-    %br
-    %h1
-      ClassCloud is like Facebook for schools.
-    %h1{:style=> "margin-left: 425px"}
-      \..only better.
-    %br
-    %h2
-      %strong
-        Teachers can:
-    %h1{:style=> "margin-left: 128px"}
-      Create assignments.
-    %h1{:style=> "margin-left: 128px"}
-      Post class notes and slides.
-    %h1{:style=> "margin-left: 128px"}
-      Manage the class calendar.
-    %h1{:style=> "margin-left: 128px"}  
-      Start discussions.
-    %h1{:style=> "margin-left: 128px"}  
-      Collaborate with students.
-    %h1{:style=> "margin-left: 128px"}  
-      Grade essays and homework.
-    %h1{:style=> "margin-left: 128px"}
-      Contact parents.
-    %h1{:style=> "margin-left: 128px"}
-      Conference with students.
-    %h1{:style=> "margin-left: 128px"}
-      Manage attendance.
-    %h1{:style=> "margin-left: 128px"}
-      Make announcements.
-    %h1{:style=> "margin-left: 128px"}
-      Post rich media.
-    %br
-    %h2
-      %strong
-        Students can:
-      %h1{:style=> "margin-left: 128px"}
-        Complete assignments
-      %h1{:style=> "margin-left: 128px"}
-        Start discussions
-      %h1{:style=> "margin-left: 128px"}
-        Manage homework and due dates
-      %h1{:style=> "margin-left: 128px"}  
-        Collaborate with classmates
-      %h1{:style=> "margin-left: 128px"}  
-        Talk to the teacher
-      %h1{:style=> "margin-left: 128px"}  
-        Review class notes
-      %h1{:style=> "margin-left: 128px"}
-        Write essays
-      %h1{:style=> "margin-left: 128px"}
-        Share rich media
-      %h1{:style=> "margin-left: 128px"}
-        View grades and teacher comments
+  <script type="text/javascript" src="http://use.typekit.com/zsr1ror.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+%body
+#sitewrapper
+  #container
+    .wrapper
+      .header
+        .right
+          %h3
+            #{mail_to 'invites@classcloud.me', 'Request an Invitation'}
+            |
+            = link_to "Development Log", development_path
+        .logo
+          = image_tag "cclogo_small.png"
+        .login
+          = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+            = f.text_field :login,{:placeholder=>'  ClassCloud ID',:class=>'email_field'}
+            = f.password_field :password,{:placeholder=>'  Password',:class=>'password_field'}
+            = f.submit "Sign in",{:class=>'submit'}
+  
+            .notice_launch
+              = alert
+              = render :partial => "devise/shared/links"
+#main_content
+  .headline
+    .headline_text
+      %h1 Make learning fun again.
+    .subhead_text
+      %h2
+        ClassCloud is an incredible new way for teachers, students, parents and administrators
+        to keep organized.
+      %br
+      = image_tag "bigredplane.png"
+    .invite_request
+      %h2
+        ClassCloud is currently free and by invitation only. If you want to spend less time with
+        paperwork and more time teaching..
+      %br
+      %h1
+        =link_to image_tag('invite.png'), "mailto:invite@classcloud.me?Subject=Invite%20me!"
+    .headline_text
+      %h2
+        ClassCloud is the best choice for K-12 teachers who want to increase student interaction,
+        raise performance and help students stay organized.
+      .testimonials
+        %h1
+          What our users are saying:
+        %br
+        %h2
+          "I've never seen my child so excited about doing homework! ClassCloud is like Facebook,
+          but actually useful."
+        %h3
+          %strong
+            Parent of a 9th grade user
+        %br
+        %h2
+          "It's much faster than Yahoo Groups. It's also so much easier to use. Students love it!"
+        %h3
+          %strong
+            12th grade AP Literature teacher
+        %br
+        %h2
+          "It's much better than having to write down and remember all of my assignments and exams.
+          My teacher posts everything and I can check what I need to do from anywhere -- even from my
+          phone. It's awesome."
+        %h3
+          %strong
+            10 grade user
+    .analytics
+      %h1
+        Do you like graphs? Here are the ClassCloud statistics from the past 7 days..
       %br
       %br
-    %h1
-      ClassCloud is currently available by invitation only.
-%br
-%h2{:style=> "margin-right: 300px"}
-  %h2{:style=> "margin-left: 72px"}
-    If you're a teacher or a school administrator and you want to join the private beta of ClassCloud, contact Brian Dear at #{mail_to 'brian@classcloud.me'}.
-%br
-%div{:style=> "margin-bottom: 18px"}
-%div{:style=> "margin-bottom: 36px"}
-#info
+      <iframe marginwidth="0"  marginheight="0" width="640" height="350" src="http://www.embeddedanalytics.com/reports/displayreport?reportcode=ydPo9ROLSP&chckcode=ga1SJXoCEq9viz9VvLcPAw" type="text/html" frameborder="0" scrolling="no" ></iframe>
+
+  #footer_container
+    .footer
+      = image_tag "cclogo_small.png"
+      .contact
+        %h2
+          For more information, contact #{mail_to 'brian@classcloud.me', 'Brian Dear'}
