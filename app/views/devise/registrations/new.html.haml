@@ -48,16 +48,25 @@
             %h3
             %div#school_list
               %div{:style=>"float:left"}
+                /= "State :"
+                /= select_tag "city", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "$('#city_name').load('/pages/city/'+this.value)"
+              /%div#city_name{:style=>"float:left"}
+              /  = "City :"
+              /  = select("user","school_id",@states.collect {|p| [ p.city, p.id ] })
+              /%div#school_name{:style=>"float:center"}
+              /  = "Name :"
+              /  = select("user","school_id",@states.collect {|p| [ p.schools.first.name, p.id ] })
             %br
-                = "State :"
-                = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value,'#{params[:controller]}');"
+
+              = "State :"
+              = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value,'#{params[:controller]}');"
               %div#city_name{:style=>"float:left;"}
               %div#school_name{:style=>"float:center;"}
               %div#loader{:style=>"display:none;float:left;"}
                 = image_tag('ajax-loading.gif')
               %br
               %h3
-                = 'If your school isn\'t listed'
+                = 'If you not found your school'
                 = link_to 'Click here', '#', :onclick => "$('#school_list').hide();$('#user_school_name').show();"
             %div#user_school_name{:style => "display:none"}
               %h3

@@ -60,3 +60,48 @@
 [10/23/11 17:09:14 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/layouts/application.html.haml:145: syntax error, unexpected keyword_ensure, expecting $end
 [10/23/11 17:10:25 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/layouts/application.html.haml:140: syntax error, unexpected keyword_else, expecting keyword_end
 [10/23/11 17:34:31 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: Illegal nesting: nesting within plain text is illegal.
+[10/23/11 18:20:20 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: The line was indented 2 levels deeper than the previous line.
+[10/23/11 18:20:44 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: PGError: ERROR:  relation "cities" does not exist
+LINE 4:              WHERE a.attrelid = '"cities"'::regclass
+                                        ^
+:             SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+              FROM pg_attribute a LEFT JOIN pg_attrdef d
+                ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+             WHERE a.attrelid = '"cities"'::regclass
+               AND a.attnum > 0 AND NOT a.attisdropped
+             ORDER BY a.attnum
+
+[10/23/11 18:21:05 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.map
+[10/23/11 18:35:28 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/devise/registrations/new.html.haml:75: syntax error, unexpected keyword_ensure, expecting $end
+[10/23/11 18:35:49 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: The line was indented 2 levels deeper than the previous line.
+[10/23/11 18:36:01 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: Illegal nesting: nesting within plain text is illegal.
+[10/23/11 18:36:17 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: Illegal nesting: nesting within plain text is illegal.
+[10/23/11 18:36:52 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: Illegal nesting: nesting within plain text is illegal.
+[10/23/11 18:37:01 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/devise/registrations/new.html.haml:68: syntax error, unexpected tIDENTIFIER, expecting ')'
+...e_false(( 'If your school isn't listed'
+...                               ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/devise/registrations/new.html.haml:69: syntax error, unexpected tCONSTANT, expecting ')'
+...lse_true_false(( link_to 'Click here', '#', :onclick => "$('...
+...                               ^
+[10/23/11 18:38:40 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/devise/registrations/new.html.haml:68: syntax error, unexpected tIDENTIFIER, expecting ')'
+...e_false(( 'If your school isn't listed'
+...                               ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/devise/registrations/new.html.haml:69: syntax error, unexpected tCONSTANT, expecting ')'
+...lse_true_false(( link_to 'Click here', '#', :onclick => "$('...
+...                               ^
+[10/23/11 18:39:16 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: Inconsistent indentation: 15 spaces were used for indentation, but the rest of the document was indented using 2 spaces.
+[10/23/11 18:39:25 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: Illegal nesting: nesting within plain text is illegal.
+[10/23/11 18:40:02 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.map
+[10/23/11 18:40:40 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: Illegal nesting: nesting within plain text is illegal.
+[10/23/11 18:40:50 +0800 Brians-iMac.local (63678)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.map
+[10/23/11 18:41:27 +0800 Brians-iMac.local (67562)] INFO : Dispatcher: thin
+[10/23/11 18:41:27 +0800 Brians-iMac.local (67562)] INFO : Application: ClassCloud
+[10/23/11 18:41:27 +0800 Brians-iMac.local (67562)] WARN : Agent configured not to send data in this environment - edit newrelic.yml to change this
+[10/23/11 18:41:27 +0800 Brians-iMac.local (67562)] INFO : New Relic Ruby Agent 3.1.2 Initialized: pid = 67562
+[10/23/11 18:41:27 +0800 Brians-iMac.local (67562)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log
