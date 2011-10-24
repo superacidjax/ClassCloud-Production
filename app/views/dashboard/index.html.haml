@@ -173,6 +173,12 @@
                               %td
                                 = "#{date_format(activity_stream.created_at)}"
                                 = "#{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}"
+    #footer_container
+      .footer
+        = image_tag "cclogo_small.png"
+        .contact
+          %h2
+            For more information, contact #{mail_to 'brian@classcloud.me', 'Brian Dear'}
 - elsif current_user.is_teacher?
   %center
     %div{:style => "text-align:right; width:50%"}
@@ -217,6 +223,8 @@
           %div{:style => "text-align:right"}
             = submit_tag "I'm done adding students",:onclick =>'return checkTextField()'
           = link_to 'Add more students', '#', :onclick =>'addStudent()'
+  
+
 - elsif (current_user.is_observer? and current_user.class_room_observers.blank?)
 
   #sitewrapper
@@ -237,9 +245,10 @@
         %p
           %br
           = "after you are invited by teacher, you will receive confirmation from us.thank you"
-#footer_container
-  .footer
-    = image_tag "cclogo_small.png"
-    .contact
-      %h2
-        For more information, contact #{mail_to 'brian@classcloud.me', 'Brian Dear'}
+  #footer_container
+    .footer
+      = image_tag "cclogo_small.png"
+      .contact
+        %h2
+          For more information, contact #{mail_to 'brian@classcloud.me', 'Brian Dear'}
+  
