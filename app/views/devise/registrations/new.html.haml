@@ -1,3 +1,6 @@
+=stylesheet_link_tag 'token-input.css'
+=javascript_include_tag 'jquery.tokeninput.js'
+
 #sitewrapper
   .header
     .nav
@@ -56,10 +59,10 @@
               /%div#school_name{:style=>"float:center"}
               /  = "Name :"
               /  = select("user","school_id",@states.collect {|p| [ p.schools.first.name, p.id ] })
-            %br
+              %br
 
-              = "State :"
-              = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value,'#{params[:controller]}');"
+                = "State :"
+                = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value);"
               %div#city_name{:style=>"float:left;"}
               %div#school_name{:style=>"float:center;"}
               %div#loader{:style=>"display:none;float:left;"}
@@ -71,12 +74,24 @@
             %div#user_school_name{:style => "display:none"}
               %h3
                 = "Country"
-                = text_field_tag "state[name2]", nil, :placeholder =>"enter your country"
+                = text_field_tag "country[name]", nil,:placeholder =>"enter your country"
+                = "State"
+                = text_field_tag "state[name2]", nil, :placeholder =>"enter your state"
                 = "City"
                 = text_field_tag "state[city2]", nil, :placeholder =>"enter your city"
                 = "School"
                 = text_field_tag "school[name2]", nil, :placeholder =>"enter your school"
+                = hidden_field_tag 'country_name1'
                 %br
             %h3
-              = f.submit "Sign up", :class=>'submit'
-            
+              = f.submit "Sign up", :class=>'submit'              
+
+
+:javascript
+  $(document).ready(function () {
+      $("#country_name2").tokenInput("/pages/country/", {tokenLimit:1,
+         onAdd: function(item) {
+           $('#country_name1').val(item.name);
+         }
+       })
+  });

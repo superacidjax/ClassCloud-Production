@@ -7,7 +7,7 @@ class Devise::RegistrationsController < ApplicationController
 
   end
   def new
-    @states = State.all
+    @states = State.where("name !=''")
     resource = build_resource({})
     respond_with_navigational(resource){ render_with_scope :new }
     
@@ -16,12 +16,13 @@ class Devise::RegistrationsController < ApplicationController
   # POST /resource
   def create
     build_resource
-
     if resource.save
       resource.time_zone = params['user']['time_zone']
-      if params['state']['name'].nil? and params['state']['city'].nil?
-        state = State.find_or_create_by_country_and_city(:country => params['state']['name2'], :city => params['state']['city2'])
-        school = School.find_or_create_by_name_and_state_id(:name =>params[:school][:name2],:state_id => state.id)
+      if !params[:country][:name].nil? 
+        country = Country.find_or_create_by_name(:name => params[:country][:name])
+        state = State.find_or_create_by_name_and_country_id(:name =>params[:state][:name2], :country_id =>country.id)
+        city = City.find_or_create_by_name_and_state_id(:name =>params[:state][:city2],:state_id=>state.id)
+        school = School.find_or_create_by_name_and_state_id_and_city_id(:name =>params[:school][:name2],:state_id => state.id,:city_id=>city.id)
         resource.state_id = state.id
         resource.school_id = school.id
       else

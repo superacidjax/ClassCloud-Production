@@ -58,18 +58,18 @@ class Admin::AdminsController < ApplicationController
   end
 
   def school
-    @states = State.where("name IS NOT NULL")
-    @countries = State.where("country<>?",'USA')
+    @states = State.where("name !=''")
+    @countries = Country.where("name <>?",'USA')
   end
 
   def edit_school
-    @school = School.where("id = ?", params[:school_id]).first
-    @state = State.find(params[:id])
-    @states = State.all
+    @school = School.find(params[:id])
+    @city = City.find(@school.city_id)
+    @state = State.find(@school.state_id)
+    @states = State.where("name !=''")
     @cities = City.all
-    @city = City.where("state_id =?",params[:id]).first
-    @country = State.find(params[:id])
-    @schools = School.all
+    @country = Country.find(@state.country_id)
+    @countries = Country.all
     respond_to do |format|
       format.html{render :layout => false,:state_name =>params[:city],:locals =>{:controller =>@controller,:country=>@countries}}
 
@@ -101,7 +101,8 @@ class Admin::AdminsController < ApplicationController
   end
 
   def create_school
-    state = State.find_or_create_by_name_and_country(:name =>params[:state], :country =>params[:country])
+    state = State.find_or_create_by_name(:name =>params[:state])
+    country = Country.find_or_create_by_name(:name =>params[:country])
     city = City.find_or_create_by_name(:name =>params[:city])
     school = School.new(:name=>params[:school],:state_id=>state.id, :city_id=>city.id)
     school.save

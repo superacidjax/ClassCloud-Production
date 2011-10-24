@@ -9,7 +9,7 @@ Tes::Application.routes.draw do
   match "pages/city/:city"=> "pages#city", :as => :state_city, :via => :get
   match "pages/school/:school"=> "pages#school", :as => :school_city, :via => :get
   match "pages/search_state/"=> "pages#search_state", :as => :search_state, :via => :get
-
+  match "pages/country/"=> "pages#country", :as => :country, :via => :get
   namespace :admin do
 
     resources :admins do

@@ -9,7 +9,6 @@ class CalendarController < ApplicationController
   def index
     @month = (params[:month] || (Time.zone || Time).now.month).to_i
     @year = (params[:year] || (Time.zone || Time).now.year).to_i
-
     @shown_month = Date.civil(@year, @month)
     @event_strips = Event.event_strips_for_month(@shown_month)
   end
@@ -51,6 +50,7 @@ class CalendarController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
+    
     redirect_to class_room_url(params[:class_room_id])
   end
 
@@ -106,6 +106,7 @@ class CalendarController < ApplicationController
 
   def remove_file
     file = Event.find(params[:id])
+    
     if file.update_attributes(:file_updated_at =>'')
       redirect_to class_room_url(@class.id)
     else

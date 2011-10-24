@@ -23,6 +23,7 @@ class MessagesController < ApplicationController
   
   def update
     @sender = current_user
+    
     if params[:chk_ids].nil?
       @sender.send_message(current_user ,params[:acts_as_messageable_message][:topic],params[:acts_as_messageable_message][:body])
     else
@@ -32,12 +33,14 @@ class MessagesController < ApplicationController
         @sender.send_message(@receiver ,params[:acts_as_messageable_message][:topic],params[:acts_as_messageable_message][:body])
       end
     end
+    
     redirect_to(class_room_messages_url)
   end
 
   def destroy
     @message = current_user.messages.with_id(params[:id]).first
     @message.destroy
+    
     if params[:student_id]
       redirect_to student_observer_message_inbox_class_room_messages_url(@class, params[:student_id])
     elsif params[:teacher_id]

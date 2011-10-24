@@ -62,9 +62,10 @@ class PeopleController < ApplicationController
     else
 
       @person = User.new(params[:user])
+      tmp = User.generate_random_string
       @person.is_not_teacher = true
-      @person.password = "123456"
-      @person.password_confirmation = "123456"
+      @person.password = tmp
+      @person.password_confirmation = tmp
 
       if @person.save
         @person.add_role params[:user][:user_type]

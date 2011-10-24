@@ -4,16 +4,18 @@
 = link_to 'New School',new_school_admin_admins_path
 %div#school_list
   %div#state{:style=>"float:left;"}
-    = 'If the school not in USA'
+    = 'The school not in USA?'
     = link_to 'Click Here','#',:onclick => "$('#state').hide();$('#country').show();"
+    %br
     = "State :"
-    = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value);$('#loader').show()"
+    = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value);$('#loader').show();"
     
   %div#country{:style=>"display:none;float:left"}
-    = 'If the school in USA'
+    = 'The school in USA?'
     = link_to 'Click Here','#',:onclick => "$('#state').show();$('#country').hide();"
+    %br
     = "Country :"
-    = select_tag "state[name]", options_from_collection_for_select(@countries,'id','country',params[:client]), :include_blank => true,:onchange=> "showCity(this.value);$('#loader').show()"
+    = select_tag "state[name]", options_from_collection_for_select(@countries,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value,'country');$('#loader').show();"
     
   %div#city_name{:style=>"float:left;"}
   %div#school_name{:style=>"float:center;"}

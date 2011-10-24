@@ -35,11 +35,11 @@ class AssignmentsController < ApplicationController
       if params[:assignment][:group_allowed].eql?("0")
         @assignment.is_public = false
         @assignment.save
-
       else
         @assignment.is_public = true
         @assignment.save
       end
+      
       students = ClassRoomStudent.where(["class_room_id =?",@class.id])
       students.each do |student|
         AssignmentStudent.create(:assignment_id => @assignment.id, :user_id => student.user_id)
@@ -57,7 +57,6 @@ class AssignmentsController < ApplicationController
   end
 
   def update
-    
     @assignment = Assignment.find(params[:id])
     @assignment.due_date = if params[:assignment]["due_date(1i)"].blank? and params[:assignment]["due_date(2i)"].blank? and params[:assignment]["due_date(3i)"].blank?
       nil
@@ -100,7 +99,6 @@ class AssignmentsController < ApplicationController
 
       end
       redirect_to comment_new_class_room_assignment_url(@class.id, @assignment), notice: 'Assignment was successfully updated.'
-
     else
       @assignment_errors = @assignment.errors.full_messages
       @assignment_errors << "Please select group or student that will assign this assignment!" if params[:assignment][:group_allowed].eql?("0") and params[:my_student].blank?
@@ -124,6 +122,7 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
     @assignment.comments.create(:comment => params[:comment], :user_id => current_user.id)
     @assignment.reload
+    
     redirect_to comment_new_class_room_assignment_path(params[:class_room_id],params[:id])
   end
 
@@ -131,6 +130,7 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
     comment = @assignment.comments.find(params[:comment_id])
     comment.destroy if comment
+    
     redirect_to comment_new_class_room_assignment_path(params[:class_room_id],params[:id])
   end
 
@@ -207,6 +207,7 @@ class AssignmentsController < ApplicationController
   def vote_up
     post = Assignment.find(params[:id])
     current_user.vote_for(post)
+    
     redirect_to class_room_assignments_url(@class.id)
   end
 
