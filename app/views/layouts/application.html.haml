@@ -27,7 +27,7 @@
           .header
             = link_to image_tag('cclogo_xsmall.png'), root_path
             .right
-              %h3  
+              %h3
                 = "#{@class.name}"
                 - if current_user.is_observer?
                   - if @student
@@ -66,6 +66,7 @@
                 = link_to student.full_name, class_room_user_profile_path(@class.id, student.id)
                 - unless karma_number(student).eql?(0)
                   = "(#{karma_number(student)})"
+                %br
               %br
           .nav_bar
             %h3

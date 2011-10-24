@@ -149,6 +149,7 @@ class WriteboardsController < ApplicationController
   def vote_up
     post = Writeboard.find(params[:id])
     current_user.vote_for(post)
+    
     redirect_to class_room_writeboards_url(@class.id) 
   end
 

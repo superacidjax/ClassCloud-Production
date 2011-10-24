@@ -5,8 +5,6 @@ class UploadFilesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_my_students_and_class
 
-  # GET /upload_files
-  # GET /upload_files.json
   def index
     @notes = Comment.updated_not_null.commentable_type_note.user_id(current_user.id)
     @discussions = Comment.updated_not_null.commentable_type_discussion.user_id(current_user.id)

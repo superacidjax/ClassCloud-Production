@@ -157,8 +157,8 @@ function showCity(id,controller){
     });
 }
 
-function showSchool(state_id){
-    $('#school_name').load('/pages/school/' + state_id);
+function showSchool(state_id,controller){
+    $('#school_name').load('/pages/school/' + state_id +'?user_controller='+controller);
     $('#loader').ajaxStart(function() {
         $(this).show();
     }).ajaxComplete(function() {

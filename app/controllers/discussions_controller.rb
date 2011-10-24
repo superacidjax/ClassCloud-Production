@@ -59,6 +59,7 @@ class DiscussionsController < ApplicationController
   def comment_create
     @discussion = Discussion.find(params[:id])
     @discussion.comments.create(params[:comment])
+    
     redirect_to :back
   end
 
@@ -67,6 +68,7 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.find(params[:id])
     comment = @discussion.comments.find(params[:comment_id])
     comment.destroy if comment
+    
     render :action => "comment_new"
   end
 

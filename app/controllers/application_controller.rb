@@ -60,7 +60,6 @@ class ApplicationController < ActionController::Base
   def admin?
     if params[:controller].eql?("dashboard")and current_user.admin?
       redirect_to admin_admins_path
-
     end
   end
 

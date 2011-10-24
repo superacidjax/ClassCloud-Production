@@ -57,6 +57,7 @@ class NotesController < ApplicationController
   def comment_create
     @note = Note.find(params[:id])
     @note.comments.create(params[:comment])
+    
     redirect_to comment_new_class_room_note_path(@class, params[:id])
   end
     
@@ -65,6 +66,7 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
     comment = @note.comments.find(params[:comment_id])
     comment.destroy if comment
+    
     redirect_to comment_new_class_room_note_path(@class, params[:id])
   end
 
@@ -81,6 +83,7 @@ class NotesController < ApplicationController
     else
       params[:comment][:file]
     end
+    
     if @comment.update_attributes(params[:comment])
       redirect_to comment_new_class_room_note_path(@class, params[:id])
     else
@@ -91,11 +94,11 @@ class NotesController < ApplicationController
   def download
     file = Comment.find(params[:id])
     send_file file.file.path, :type => file.file_content_type
-
   end
 
   def remove_file
     file = Comment.find(params[:id])
+    
     if file.update_attributes(:file_updated_at =>'')
       redirect_to class_room_notes_url(@class.id)
     else
@@ -106,10 +109,8 @@ class NotesController < ApplicationController
   def vote_up
     post = Note.find(params[:id])
     current_user.vote_for(post)
-    respond_to do |format|
-      format.html { redirect_to class_room_notes_url(@class.id) }
-      format.json { head :ok }
-    end
+
+    redirect_to class_room_notes_url(@class.id) 
   end
 
   private
