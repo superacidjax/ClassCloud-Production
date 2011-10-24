@@ -149,6 +149,18 @@ body a {
     #main_content .students h3 {
       font: normal 12px myriad-pro, sans-serif;
       color: #3f3d32; }
+  #main_content .classes {
+    padding: 9px;
+    float: left;
+    text-align: left; }
+    #main_content .classes h1 {
+      font: normal 18px myriad-pro, sans-serif; }
+    #main_content .classes h2 {
+      font: normal 14px myriad-pro, sans-serif;
+      color: #3f3d32; }
+    #main_content .classes h3 {
+      font: normal 12px myriad-pro, sans-serif;
+      color: #3f3d32; }
 
 .analytics {
   text-align: center;
