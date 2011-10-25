@@ -58,6 +58,7 @@
                 = link_to "Sign Out", destroy_user_session_path, :method => :delete
         #main_content
           .students
+          - unless current_user.is_student?  
             %h2
               %strong
                 My Students
