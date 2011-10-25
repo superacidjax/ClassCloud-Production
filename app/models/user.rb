@@ -28,8 +28,8 @@ class User < ActiveRecord::Base
     user.has_many :writeboards
   end
 
-  belongs_to :schools
-  belongs_to :states
+  belongs_to :school
+  belongs_to :state
   
   after_create :define_user_role, :if => Proc.new{|user| user.is_not_teacher.eql?(false) || user.is_not_teacher.blank?}
 

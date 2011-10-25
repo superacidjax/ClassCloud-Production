@@ -174,7 +174,14 @@ function editSchool(id,school_id){
         $(this).hide();
     });
 }
-//= require jquery
-//= require jquery_ujs
-//= require jquery_ui
-//= require autocomplete-rails
+function checkFieldEditSchool(){
+   if($("#country_name").val().length==0 || $("#city_name").val().length==0 || $("#school_name").val().length==0) {
+        alert('country,city or school name must not empty');
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+
+}
