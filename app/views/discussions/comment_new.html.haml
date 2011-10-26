@@ -1,80 +1,81 @@
-#main_content_area
-  %h3 Discussion started #{distance_of_time_in_words(@discussion.created_at, Time.now)} ago by #{user_full_name(@discussion.user)}.
-  %hr
-  - if current_user.id.eql?(@discussion.user_id) or current_user.is_teacher?
-    = link_to "Edit", edit_class_room_discussion_path(@class.id, @discussion)
-    = "|"
-    = link_to "Delete", class_room_discussion_path(@class.id, @discussion), :confirm => "Are you sure ?", :method => :delete
-  %td
-    %br
-      %h2
-        = @discussion.title
-    %td{:align => "right"}
+#main_content
+  .standard_text
+    %h3 Discussion started #{distance_of_time_in_words(@discussion.created_at, Time.now)} ago by #{user_full_name(@discussion.user)}.
+    %hr
+    - if current_user.id.eql?(@discussion.user_id) or current_user.is_teacher?
+      = link_to "Edit", edit_class_room_discussion_path(@class.id, @discussion)
+      = "|"
+      = link_to "Delete", class_room_discussion_path(@class.id, @discussion), :confirm => "Are you sure ?", :method => :delete
+    %td
+      %br
+        %h2
+          = @discussion.title
+      %td{:align => "right"}
       
  
-  %tr
-    %h4
-      != @discussion.description
-    %br
-  %tr
-    %hr
-    %hr
-  %tr
-    %td{:colspan => "3"}
-      #comments_container
-        %h4 Comments
-        %br
-        - @discussion.comments.each do |comment|
-          %table{:width => "100%"}
-            %tr
-              %h6{:colspan => "3"}
-                = "#{user_full_name(comment.user)}"
-                - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
-                  = "(#{vote_count(comment.id)})"
-                said this #{distance_of_time_in_words(comment.created_at, Time.now)} ago:
-            %tr
-            %br
-            %h4
-              = comment.comment
-              %td{:align => "right"}
-                - if current_user.id.eql?(comment.user_id) 
-                  = link_to "Edit", class_room_comment_edit_discussions_path(@class.id, @discussion, comment.id)
-                  | #{link_to "Delete", class_room_comment_destroy_discussions_path(@class.id, @discussion, comment.id), :method => :delete}
-                - elsif current_user.id.eql?(comment.user_id) or current_user.is_teacher?
-                  = link_to "Delete", class_room_comment_destroy_discussions_path(@class.id, @discussion, comment.id), :method => :delete
-                - unless vote_comment(comment).nil?
-                  = 'Wee!!'
-                - else
-                  = link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@discussion.id,comment,:commentable_type =>"#{params[:controller]}")
-                - if current_user.id.eql?(@discussion.user_id) and !current_user.id.eql?(comment.user_id) and comment.replies.count.eql?(0)
-                  = link_to 'Reply', '#',:onclick => "$('.reply_#{comment.id}').show()"
-                  %div{:class =>"reply_#{comment.id}", :style=> "display: none;"}
-                    %h1=link_to 'x','#',:onclick => "$('.reply_#{comment.id}').hide()"
-                    = form_tag(class_room_reply_comment_path(@class.id, comment.id), :multipart => true)   do |f|
-                      .field
-                        = text_area_tag "reply[body]", nil, :rows => 4, :cols => 40
-                        = hidden_field_tag 'reply[user_id]',comment.user_id
-                        = hidden_field_tag 'reply[replier_id]',current_user.id
-                        = hidden_field_tag 'reply[comment_id]',comment.id
-                        = hidden_field_tag 'comment_controller',"#{params[:controller]}"
-                        = hidden_field_tag 'id',"#{params[:id]}"
-                      .actions
-                        = submit_tag "Add this Comment"
-            - comment.replies.each do |reply|
-              %tr
-                %td{:style =>"text-align:center;",:bgcolor=>'red'}
-                  %h1="This is a reply: #{reply.body}"
-            %tr
-              %td{:colspan => "3"}
-                %hr{:noshade => ""}
-- unless current_user.is_observer?
-  %h1 Leave a comment
-  = form_tag(comment_create_class_room_discussion_path(@class.id, @discussion),:multipart =>true) do |f|
-    .field
-      = text_area_tag "comment[comment]", nil, :rows => 4, :cols => 40
+    %tr
+      %h4
+        != @discussion.description
       %br
-      = hidden_field_tag 'comment[user_id]',current_user.id
-      = hidden_field_tag 'comment[class_room_id]',@class.id
-    .actions
-      = submit_tag "Add this Comment"
-      %span#assignment_comment_ajax_loader{:style => "display: none"}= image_tag "LoaderIcon.gif"
+    %tr
+      %hr
+      %hr
+    %tr
+      %td{:colspan => "3"}
+        #comments_container
+          %h4 Comments
+          %br
+          - @discussion.comments.each do |comment|
+            %table{:width => "100%"}
+              %tr
+                %h6{:colspan => "3"}
+                  = "#{user_full_name(comment.user)}"
+                  - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
+                    = "(#{vote_count(comment.id)})"
+                  said this #{distance_of_time_in_words(comment.created_at, Time.now)} ago:
+              %tr
+              %br
+              %h4
+                = comment.comment
+                %td{:align => "right"}
+                  - if current_user.id.eql?(comment.user_id) 
+                    = link_to "Edit", class_room_comment_edit_discussions_path(@class.id, @discussion, comment.id)
+                    | #{link_to "Delete", class_room_comment_destroy_discussions_path(@class.id, @discussion, comment.id), :method => :delete}
+                  - elsif current_user.id.eql?(comment.user_id) or current_user.is_teacher?
+                    = link_to "Delete", class_room_comment_destroy_discussions_path(@class.id, @discussion, comment.id), :method => :delete
+                  - unless vote_comment(comment).nil?
+                    = 'Wee!!'
+                  - else
+                    = link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@discussion.id,comment,:commentable_type =>"#{params[:controller]}")
+                  - if current_user.id.eql?(@discussion.user_id) and !current_user.id.eql?(comment.user_id) and comment.replies.count.eql?(0)
+                    = link_to 'Reply', '#',:onclick => "$('.reply_#{comment.id}').show()"
+                    %div{:class =>"reply_#{comment.id}", :style=> "display: none;"}
+                      %h1=link_to 'x','#',:onclick => "$('.reply_#{comment.id}').hide()"
+                      = form_tag(class_room_reply_comment_path(@class.id, comment.id), :multipart => true)   do |f|
+                        .field
+                          = text_area_tag "reply[body]", nil, :rows => 4, :cols => 40
+                          = hidden_field_tag 'reply[user_id]',comment.user_id
+                          = hidden_field_tag 'reply[replier_id]',current_user.id
+                          = hidden_field_tag 'reply[comment_id]',comment.id
+                          = hidden_field_tag 'comment_controller',"#{params[:controller]}"
+                          = hidden_field_tag 'id',"#{params[:id]}"
+                        .actions
+                          = submit_tag "Add this Comment"
+              - comment.replies.each do |reply|
+                %tr
+                  %td{:style =>"text-align:center;",:bgcolor=>'red'}
+                    %h1="This is a reply: #{reply.body}"
+              %tr
+                %td{:colspan => "3"}
+                  %hr{:noshade => ""}
+  - unless current_user.is_observer?
+    %h1 Leave a comment
+    = form_tag(comment_create_class_room_discussion_path(@class.id, @discussion),:multipart =>true) do |f|
+      .field
+        = text_area_tag "comment[comment]", nil, :rows => 4, :cols => 40
+        %br
+        = hidden_field_tag 'comment[user_id]',current_user.id
+        = hidden_field_tag 'comment[class_room_id]',@class.id
+      .actions
+        = submit_tag "Add this Comment"
+        %span#assignment_comment_ajax_loader{:style => "display: none"}= image_tag "LoaderIcon.gif"

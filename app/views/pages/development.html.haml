@@ -1,14 +1,22 @@
-.header
-  .nav
-    =link_to "Sign in", root_path
-#background
-  %h1 The ClassCloud Weather Center
-  #main_content_area
+#container
+  .header
+    = link_to image_tag('cclogo_xsmall.png'), root_path
+    
+    .right
+      =link_to "Sign in", root_path
+#main_content
+  .headline
+    .headline_text    
+      %h2
+        The ClassCloud Weather Center
+  .standard_text
     %br
     %h2
       To report any bugs, issues or other problems, please email us at #{mail_to 'support@classcloud.me'}.
     %br
     %hr
+    %h3 October 26, 2011 11:21 EST -- more inside styling. Added buttons.
+    %br
     %h3
       October 23, 2011: 05:50 EST -- complete home page redesign. Rewash of all SASS styles.
       In progress: complete site styling for inside pages.

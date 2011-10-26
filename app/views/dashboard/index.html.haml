@@ -1,6 +1,5 @@
 - if (current_user.is_teacher? and !current_user.class_rooms.blank?) or (current_user.is_student? and !current_user.class_room_students.blank?) or (current_user.is_observer? and !current_user.class_room_observers.blank?)
   %body
-  #sitewrapper
     #container
       .header
         = link_to image_tag('cclogo_xsmall.png'), root_path
@@ -33,12 +32,17 @@
           %br
         .students     
           - if current_user.is_teacher?
-            %h3 My Students
-            - @students.each do |student|
-              - unless student.nil?
-                = link_to user_full_name(student), student_dashboard_path(student.id)
-                - unless karma_number(student).eql?(0)
-                  = "(#{karma_number(student)})"
+            %h2
+              %strong
+                My Students
+            %hr
+              %ul
+                - @students.each do |student|
+                  %li
+                    - unless student.nil?
+                      = link_to user_full_name(student), student_dashboard_path(student.id)
+                      - unless karma_number(student).eql?(0)
+                        = "(#{karma_number(student)})"
               %br
           - elsif current_user.is_observer? and @student.blank?
             %h3 Students
@@ -173,12 +177,7 @@
                               %td
                                 = "#{date_format(activity_stream.created_at)}"
                                 = "#{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}"
-    #footer_container
-      .footer
-        = image_tag "cclogo_small.png"
-        .contact
-          %h2
-            For more information, contact #{mail_to 'brian@classcloud.me', 'Brian Dear'}
+    
 - elsif current_user.is_teacher?
   %center
     %div{:style => "text-align:right; width:50%"}
@@ -244,11 +243,6 @@
       .main
         %p
           %br
-          = "after you are invited by teacher, you will receive confirmation from us.thank you"
-  #footer_container
-    .footer
-      = image_tag "cclogo_small.png"
-      .contact
-        %h2
-          For more information, contact #{mail_to 'brian@classcloud.me', 'Brian Dear'}
+          = "after you are invited by your teacher, you will receive confirmation from us.thank you"
+  
   

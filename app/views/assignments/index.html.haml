@@ -35,15 +35,15 @@
         %tr
           %td
             - unless current_user.is_observer?
-              = link_to "Add a comment", comment_new_class_room_assignment_path(@class.id, assignment)
+              = link_to image_tag('add_comment_button.png'), comment_new_class_room_assignment_path(@class.id, assignment)
             - else
               - if @student
                 = link_to "Go to assignment", go_to_student_assignment_class_room_assignment_path(@class.id, assignment, @student.id)
               - elsif @teacher
                 = link_to "Go to assignment", go_to_teacher_assignment_class_room_assignment_path(@class.id, assignment, @teacher.id)
             - if current_user.is_student? and (assignment.group_allowed? or !AssignmentStudent.where(user_id: current_user.id).first.blank?)
-              = "|"
-              = link_to "Do assignment", new_class_room_assignment_writeboard_path(@class.id, assignment)
+              
+              = link_to image_tag('do_assignment_button.png'), new_class_room_assignment_writeboard_path(@class.id, assignment)
             - if !current_user.is_observer?
               -unless vote_assignment(assignment).nil?
                 = 'Weee!!'

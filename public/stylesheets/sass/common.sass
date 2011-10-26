@@ -1,16 +1,20 @@
 @import "mixins"
 
-body
-  
-  
+html
+  height: 100%
+body  
+  height: 100%
   h1
     font: normal 18px myriad-pro, sans-serif
+    -webkit-font-smoothing: anti-aliased
     color: #3f3d32
   h2
     font: normal 14px myriad-pro, sans-serif
+    -webkit-font-smoothing: anti-aliased
     color: #3f3d32
   h3
     font: normal 12px myriad-pro, sans-serif
+    -webkit-font-smoothing: anti-aliased
     color: #3f3d32
   a
     text-decoration: none
@@ -22,6 +26,8 @@ body
 
 #container
   +gradient-bg(#F5F5F5,  #8A8A8A)
+  height: auto
+  margin 0 auto 100px
   .wrapper
     margin: 0 auto
     width: 960px
@@ -34,6 +40,14 @@ body
     .right
       float: right
       text-align: right
+    .classname
+      float: right
+      text-align: center
+      margin-top: 24px
+      h1
+        font: normal 16px myriad-pro, sans-serif
+        -webkit-font-smoothing: anti-aliased
+        color: #236B8E
     .login
       text-align: right
       margin-top: 36px
@@ -48,15 +62,22 @@ body
     
     .notice_launch
       font: normal 14px myriad-pro, sans-serif
+      -webkit-font-smoothing: anti-aliased
       color: #B22222
       margin-top: 9px
       margin-right: 75px
 
 #main_content
   +gradient-bg(#F5F5F5,  #FFEFDB)
-  min-height: 640px
+  min-height: 100%
+  padding-bottom: 100px
   
   
+  
+  .above_calendar
+    margin-top: 9px
+    margin-bottom: 18px
+    text-align: left
   .headline
     margin: auto
     width: 960px
@@ -65,36 +86,58 @@ body
       padding: 72px 18px 18px
       h1
         font: normal 48px chaloops, sans-serif
+        -webkit-font-smoothing: anti-aliased
         color: #3f3d32
       h2
         font: normal 36px chaloops, sans-serif
+        -webkit-font-smoothing: anti-aliased
         color: #3f3d32
     .subhead_text
       h2
         font: normal 18px myriad-pro, sans-serif
+        -webkit-font-smoothing: anti-aliased
         color: #3f3d32
       h3
         font: normal 12px myriad-pro, sans-serif
+        -webkit-font-smoothing: anti-aliased
+        color: #3f3d32
+  .standard_text
+    margin: auto
+    width: 960px
+    text-align: left
+    padding: 9px
+    h2
+      font: normal 18px myriad-pro, sans-serif
+      -webkit-font-smoothing: anti-aliased
+      color: #3f3d32
+    h3
+      font: normal 12px myriad-pro, sans-serif
+      -webkit-font-smoothing: anti-aliased
         color: #3f3d32
     .invite_request
       h1
         font: normal 36px myriad-pro, sans-serif
+        -webkit-font-smoothing: anti-aliased
         color: #B22222
       h2
         font: normal 18px myriad-pro, sans-serif
+        -webkit-font-smoothing: anti-aliased
         color: #3f3d32
     .testimonials
       margin-top: 36px
       text-align: left
       h1
         font: normal 24px myriad-pro, sans-serif
+        -webkit-font-smoothing: anti-aliased
         color: #B22222
       h2
         font: normal 18px daniel, cursive
+        -webkit-font-smoothing: anti-aliased
         color: #3f3d32
       h3
         text-align: right
         font: normal 18px daniel, cursive
+        -webkit-font-smoothing: anti-aliased
         color: #3f3d32
   .nav_bar
     margin: auto
@@ -103,12 +146,15 @@ body
     padding: 9px
     h1
       font: normal 18px myriad-pro, sans-serif
+      -webkit-font-smoothing: anti-aliased
       color: #3f3d32
     h2
       font: normal 14px myriad-pro, sans-serif
+      -webkit-font-smoothing: anti-aliased
       color: #3f3d32
     h3
       font: normal 12px myriad-pro, sans-serif
+      -webkit-font-smoothing: anti-aliased
       color: #3f3d32
     a
       text-decoration: underline
@@ -123,33 +169,43 @@ body
     &:visited
     color: #3f3d32
   .students
+    margin-top: 9px
     padding: 9px
     float: right
-    text-align: right
+    text-align: left
+    max-width: 150px
     h2
       font: normal 14px myriad-pro, sans-serif
+      -webkit-font-smoothing: anti-aliased
       color: #3f3d32
     h3
       font: normal 12px myriad-pro, sans-serif
+      -webkit-font-smoothing: anti-aliased
       color: #3f3d32
+    ul
+      line-height: 2em
   .classes
     padding: 9px
     float: left
     text-align: left
     h1
       font: normal 18px myriad-pro, sans-serif
+      -webkit-font-smoothing: anti-aliased
       color #3f3d32
     h2
       font: normal 14px myriad-pro, sans-serif
+      -webkit-font-smoothing: anti-aliased
       color: #3f3d32
     h3
       font: normal 12px myriad-pro, sans-serif
+      -webkit-font-smoothing: anti-aliased
       color: #3f3d32 
 .analytics
   text-align: center
   margin-top: 72px
   h1
     font: normal 24px myriad-pro, sans-serif
+    -webkit-font-smoothing: anti-aliased
     color: #B22222
     
 .assignments
@@ -157,12 +213,15 @@ body
   text-align: left
   h1
     font: normal 18px myriad-pro, sans-serif
+    -webkit-font-smoothing: anti-aliased
     color: #3f3d32
   h2
     font: normal 14px myriad-pro, sans-serif
+    -webkit-font-smoothing: anti-aliased
     color: #3f3d32
   h3
     font: normal 12px myriad-pro, sans-serif
+    -webkit-font-smoothing: anti-aliased
     color: #3f3d32
   a
     text-decoration: underline
@@ -222,12 +281,14 @@ table.assignments
   
 #footer_container
   +gradient-bg(#8A8A8A, #F5F5F5)
+  bottom: 0
   .footer
     text-align: center
     padding: 9px
     margin: 0 auto
     width: 960px
     padding: 9px
+    height: 100px
     .contact
       text-align: left
       float: left

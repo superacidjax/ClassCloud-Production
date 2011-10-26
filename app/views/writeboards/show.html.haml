@@ -1,71 +1,72 @@
-#main_content_area
-  %h3 CloudPad posted by #{user_full_name(@writeboard.user)} for #{@writeboard.assignment.title}
-  %hr
-  %br
-  %h2 
-    != @writeboard.title
-  %br
-  %br
-  %h4
-    != @writeboard.body
-  %br
-  %br
-  %hr
+#main_content
+  .standard_text
+    %h3 CloudPad posted by #{user_full_name(@writeboard.user)} for #{@writeboard.assignment.title}
+    %hr
+    %br
+    %h2 
+      != @writeboard.title
+    %br
+    %br
+    %h4
+      != @writeboard.body
+    %br
+    %br
+    %hr
 
-    .field
-      %h3
-        This CloudPad is
-        = @writeboard.body.scan(/\S+/).size
-        words!
-      %br
-      %br
-    - if current_user.is_teacher? or (current_user.id.eql?(@writeboard.user_id))
-      %b Grade
-      %br/
-      = @writeboard.grade
-      %br
-      %b Student
-      %br
-      = user_full_name(@writeboard.user)
-      %br
-      %hr
-  - if current_user.is_teacher? or current_user.is_student? or current_user.is_observer
-    #comments_container
-      - @writeboard.comments.each do |comment|
-        %table
-          %tr
-            %td{:colspan => "3"}
-              = "#{user_full_name(comment.user)}"
-              - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
-                = "(#{vote_count(comment.id)})"
-                = "said on "
-                %br
-              = "#{date_format(comment.created_at)}"
-            %br
-          %tr
-            %td= comment.comment
-            %td{:align => "right"}
-              - if current_user.id.eql?(comment.user_id) or current_user.is_teacher?
-                =link_to "Edit", edit_writeboard_assignment_class_room_writeboard_path(@class.id, @writeboard, comment.id)
-                =link_to "Delete", destroy_writeboard_comment_class_room_writeboard_path(@class.id, @writeboard, comment.id), :method => :delete
-              - unless vote_comment(comment).nil?
-                = 'Wee!!'
-              - else
-                = link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@writeboard.id,comment,:commentable_type =>"#{params[:controller]}")
-
-          %tr
-            %td{:colspan => "3"}
-              %hr{:noshade => ""}
-
-  - if (!current_user.is_observer? and current_user.id.eql?(@writeboard.user_id)) or current_user.is_teacher? or current_user.id.eql?(@writeboard.user_id) or current_user.is_student?
-    %h1 Leave a comment
-    = form_tag(comment_create_class_room_writeboard_path(@class.id, @writeboard)) do |f|
       .field
-        = text_area_tag "comment", nil, :rows => 4, :cols => 40
-      .actions
-        = submit_tag "Add this Comment"
-        %span#assignment_comment_ajax_loader{:style => "display: none"}= image_tag "LoaderIcon.gif"
+        %h3
+          This CloudPad is
+          = @writeboard.body.scan(/\S+/).size
+          words!
+        %br
+        %br
+      - if current_user.is_teacher? or (current_user.id.eql?(@writeboard.user_id))
+        %b Grade
+        %br/
+        = @writeboard.grade
+        %br
+        %b Student
+        %br
+        = user_full_name(@writeboard.user)
+        %br
+        %hr
+    - if current_user.is_teacher? or current_user.is_student? or current_user.is_observer
+      #comments_container
+        - @writeboard.comments.each do |comment|
+          %table
+            %tr
+              %td{:colspan => "3"}
+                = "#{user_full_name(comment.user)}"
+                - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
+                  = "(#{vote_count(comment.id)})"
+                  = "said on "
+                  %br
+                = "#{date_format(comment.created_at)}"
+              %br
+            %tr
+              %td= comment.comment
+              %td{:align => "right"}
+                - if current_user.id.eql?(comment.user_id) or current_user.is_teacher?
+                  =link_to "Edit", edit_writeboard_assignment_class_room_writeboard_path(@class.id, @writeboard, comment.id)
+                  =link_to "Delete", destroy_writeboard_comment_class_room_writeboard_path(@class.id, @writeboard, comment.id), :method => :delete
+                - unless vote_comment(comment).nil?
+                  = 'Wee!!'
+                - else
+                  = link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@writeboard.id,comment,:commentable_type =>"#{params[:controller]}")
+
+            %tr
+              %td{:colspan => "3"}
+                %hr{:noshade => ""}
+
+    - if (!current_user.is_observer? and current_user.id.eql?(@writeboard.user_id)) or current_user.is_teacher? or current_user.id.eql?(@writeboard.user_id) or current_user.is_student?
+      %h1 Leave a comment
+      = form_tag(comment_create_class_room_writeboard_path(@class.id, @writeboard)) do |f|
+        .field
+          = text_area_tag "comment", nil, :rows => 4, :cols => 40
+        .actions
+          = submit_tag "Add this Comment"
+          %span#assignment_comment_ajax_loader{:style => "display: none"}= image_tag "LoaderIcon.gif"
 
 
-  = link_to 'Back', class_room_writeboards_path(@class.id)
-  = link_to 'Edit', edit_class_room_writeboard_path
+    = link_to 'Back', class_room_writeboards_path(@class.id)
+    = link_to 'Edit', edit_class_room_writeboard_path
