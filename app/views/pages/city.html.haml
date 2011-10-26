@@ -5,15 +5,28 @@
   %br
   %table
     %tr
+      - unless @states.nil?
+        %td 
+          %b="State"
       %td
         %b="City"
       %td
         %b="School"
       %td
         %b="Edit?"
-      - @cities.each do|city|
-        %tr
-          %td=city.name
-          -city.schools.each do |school|
-            %td= school.name
-            %td= link_to 'edit','#',:onclick=>"editSchool('#{school.id}')"
+      - unless @states.nil?
+        - @states.each do |state|
+          - state.cities.each do |city|
+            %tr
+              %td= state.name
+              %td= city.name
+              -city.schools.each do |school|
+                %td= school.name
+                %td= link_to 'edit2','#',:onclick=>"editSchool('#{school.id}')"
+      - else
+        - @cities.each do|city|
+          %tr
+            %td= city.name
+            -city.schools.each do |school|
+              %td= school.name
+              %td= link_to 'edit','#',:onclick=>"editSchool('#{school.id}')"

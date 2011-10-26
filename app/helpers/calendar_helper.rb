@@ -34,7 +34,7 @@ module CalendarHelper
           end
         else
           if event.assignment_id.nil?
-          %(<a href="/events/#{event.id}/teacher/#{user_id}" title="#{h(event.name)}">#{h(event.name)}</a>)
+            %(<a href="/events/#{event.id}/teacher/#{user_id}" title="#{h(event.name)}">#{h(event.name)}</a>)
           else
             %(<a href="/class_rooms/#{@class.id}/assignments/#{event.assignment_id}/teacher/#{user_id}" title="#{h(event.name)}">#{h(event.name)}</a>)
           end

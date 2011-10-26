@@ -5,8 +5,7 @@ class PagesController < ApplicationController
   def city
     if params[:user_controller].eql?('country')
       country =Country.find(params[:city])
-      state = State.where("country_id = ?",country.id).first
-      @cities = City.where("state_id = ?", state.id)
+      @states = country.states
     else
       @cities = City.where("state_id = ?", params[:city])
     end
@@ -23,7 +22,7 @@ class PagesController < ApplicationController
       city = City.find(params[:school])
       @schools = School.where("city_id = ?", city.id)
     else
-    @schools = School.where("city_id = ?", params[:school])
+      @schools = School.where("city_id = ?", params[:school])
     end
     respond_to do |format|
       format.html{render :layout => false}

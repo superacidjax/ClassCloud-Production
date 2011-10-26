@@ -4,6 +4,16 @@ class DashboardController < ApplicationController
   before_filter :admin?
 
   def index
+    @month = (params[:month] || (Time.zone || Time).now.month).to_i
+    @year = (params[:year] || (Time.zone || Time).now.year).to_i
+
+    @shown_month = Date.civil(@year, @month)
+    @class = current_user.class_rooms
+    @event_strips = if current_user
+      Event.event_strips_for_month(@shown_month)
+    else
+      Event.event_strips_for_month(@shown_month)
+    end
     @class_rooms = ClassRoom.all
     unless current_user.is_observer?
       if current_user.class_rooms.blank?
