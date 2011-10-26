@@ -4,33 +4,25 @@
   - country = @country
 - else
   - country = @state
-=form_tag update_school_admin_admin_path(country.id,:city2=>@city,:school=>@school.id),:method=>:put do
+=form_tag update_school_admin_admin_path(country.id,:old_city=>@city,:school=>@school.id,:country_id=>@country.id),:method=>:put do
   %div#edit_school
-    %h3 School Name:#{@school.name}
-    %br
-    %h3 Country
-    = select_tag "state[name]", options_from_collection_for_select(@countries,'id','name',@country.id), :include_blank => true
+    - if @country.name.eql?('USA')
+      %h3 Country : #{@country.name}
+      = hidden_field_tag 'country[name2]',@country.name
+    - else
+      %h3 Country
+      = text_field_tag 'country[name]',@country.name,:placeholder=>"enter country name"
     %br
     %h3 State
-    = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',@state.id), :include_blank => true
+    - if @country.name.eql?('USA')
+      = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',@state.id), :include_blank => true
+    - else
+      = text_field_tag 'state[name2]',@state.name,:placeholder=>"enter state name"
     %br
     %h3 City
-    = select_tag "city[name]", options_from_collection_for_select(@cities,'id','name',@city.id), :include_blank => true
-    %br
-    = link_to 'edit school name','#',:onclick=>"$('#edit_school_name').show();$('#edit_school').hide();"
-  %div#edit_school_name{:style=>"display:none;"}
-    %h3 Country
-    = text_field_tag 'state[country2]',@country.name,:placeholder=>"enter country"
-    %br
-    %h3 State
-    = text_field_tag 'state[name2]',@state.name,:placeholder=>"enter state"
+    = text_field_tag 'city[name]',@city.name,:placeholder=>"enter city name"
     %br
     %h3 School
-    = text_field_tag 'school[name2]',@school.name,:placeholder=>"enter school name"
+    = text_field_tag 'new_school[name]',@school.name,:placeholder=>"enter school name"
     %br
-    %h3 City
-    = text_field_tag 'city[name2]',@city.name,:placeholder=>"enter school city"
-
-  %br
-  %h3
-  = submit_tag 'Save'
+    = submit_tag 'Save',:onclick=>'checkFieldEditSchool();'
