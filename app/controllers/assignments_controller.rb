@@ -25,8 +25,10 @@ class AssignmentsController < ApplicationController
 
   def create
     @assignment = Assignment.new(params[:assignment])
-    if params[:assignment]["due_date(2i)"] or params[:assignment]["due_date(2i)"] or params[:assignment]["due_date(2i)"].nil?
+    if params[:assignment]["due_date(1i)"].nil? or params[:assignment]["due_date(2i)"].nil? or params[:assignment]["due_date(3i)"].nil?
       @assignment.due_date = Time.now.to_date.strftime("%Y-%m-%d")
+    else
+      @assignment.due_date = "#{params[:assignment]["due_date(1i)"]}-#{params[:assignment]["due_date(2i)"]}-#{params[:assignment]["due_date(2i)"]}"
     end
     @assignment.user_id = current_user.id
     @assignment.class_room_id = params[:class_room_id]

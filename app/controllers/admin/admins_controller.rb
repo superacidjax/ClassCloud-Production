@@ -107,7 +107,7 @@ class Admin::AdminsController < ApplicationController
       new_city = City.find_or_create_by_name_and_state_id(:name =>params[:city][:name],:state_id =>state_name.id)
       school.update_attributes(:name => params[:new_school][:name], :state_id =>state_name.id, :city_id =>new_city.id)
     end
-    school.save
+    school.save!
      
     redirect_to school_admin_admins_path
   end

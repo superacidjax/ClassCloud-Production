@@ -100,7 +100,6 @@ class ClassRoomsController < ApplicationController
     else
       Event.event_strips_for_month(@shown_month)
     end
-    
     @activity_streams = @class.activity_streams.order("created_at ASC")
   end
 

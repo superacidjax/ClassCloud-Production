@@ -1,6 +1,9 @@
 class Event < ActiveRecord::Base
   acts_as_commentable
-
+  
+#  def self.controller(controller)
+#    if controller.eql?('dashboard')
+#  end
   has_event_calendar
   belongs_to :user
   belongs_to :class_room
