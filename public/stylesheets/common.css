@@ -245,6 +245,22 @@ body {
     margin-top: 5px;
     margin-left: 9px; }
 
+.textile_explanation {
+  text-align: left;
+  margin-top: 18px;
+  margin-left: 200px; }
+  .textile_explanation h3 {
+    font: normal 14px Andale Mono, monospace;
+    -webkit-font-smoothing: anti-aliased;
+    color: #e47833; }
+  .textile_explanation h4 {
+    font: normal 14px myriad-pro, sans-serif;
+    -webkit-font-smoothing: anti-aliased;
+    color: #6b4226; }
+  .textile_explanation ul {
+    line-height: 2em;
+    font-size: 14px; }
+
 .assignments {
   margin-top: 18px;
   text-align: left; }
@@ -322,6 +338,11 @@ table.assignments {
     font: normal 12px Helvetica, Arial, sans-serif;
     color: #e3170d;
     -webkit-font-smoothing: anti-aliased; }
+
+#error_explanation h2 {
+  font: normal 18px myriad-pro, sans-serif;
+  -webkit-font-smoothing: anti-aliased;
+  color: #ff3030; }
 
 #footer_container {
   background-color: #8a8a8a;

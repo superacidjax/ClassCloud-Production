@@ -348,3 +348,75 @@ _hamlout.push_text("        </h2>\n", -1, false);end
 [10/27/11 22:53:52 +0800 Brians-iMac.local (8362)] WARN : Agent configured not to send data in this environment - edit newrelic.yml to change this
 [10/27/11 22:53:52 +0800 Brians-iMac.local (8362)] INFO : New Relic Ruby Agent 3.1.2 Initialized: pid = 8362
 [10/27/11 22:53:52 +0800 Brians-iMac.local (8362)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log
+[10/28/11 00:06:20 +0800 Brians-iMac.local (7519)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:39: syntax error, unexpected ')'
+));}\n    <span>%</span>\n    ...
+ ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:39: syntax error, unexpected $undefined, expecting ')'
+));}\n    <span>%</span>\n    @code@\n  </h4>\n</div>\...
+                         ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:39: unknown regexp options - dv
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:39: syntax error, unexpected $undefined
+...>\n    @code@\n  </h4>\n</div>\n", -2, false);end
+...                               ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:40: syntax error, unexpected $undefined, expecting ')'
+...aml_temp);_hamlout.push_text("\n", 0, false);
+...                               ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:45: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+_hamlout.push_text("<div id='error_explanation'>\n  <h2>...
+                           ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:45: syntax error, unexpected $undefined
+...("<div id='error_explanation'>\n  <h2>\n    #{_hamlout.adjus...
+...                               ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:45: syntax error, unexpected $undefined
+...d='error_explanation'>\n  <h2>\n    #{_hamlout.adjust_tabs(2...
+...                               ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:48: syntax error, unexpected '}', expecting ')'
+));}\n    prohibited this create ...
+    ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:48: syntax error, unexpected ':', expecting ')'
+...te writeboard from being saved:\n  </h2>\n  <ul>\n", 0, fals...
+...                               ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:52: unknown regexp option - l
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:52: syntax error, unexpected $undefined
+));}</li>\n", 0, false);end
+          ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:53: unknown regexp options - dv
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:53: syntax error, unexpected $undefined
+_hamlout.push_text("  </ul>\n</div>\n", -2, false);end
+                                    ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:54: syntax error, unexpected keyword_class, expecting keyword_do or '{' or '('
+_hamlout.push_text("<div class='field'>\n", 1, false); if c...
+                              ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:54: syntax error, unexpected $undefined
+...push_text("<div class='field'>\n", 1, false); if current_use...
+...                               ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:57: syntax error, unexpected keyword_else, expecting ')'
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:61: syntax error, unexpected keyword_end, expecting ')'
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:84: syntax error, unexpected keyword_end, expecting ')'
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:85: syntax error, unexpected keyword_end, expecting ')'
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:86: syntax error, unexpected keyword_
+[10/28/11 00:07:26 +0800 Brians-iMac.local (7519)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:31: syntax error, unexpected '*', expecting '='
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:33: syntax error, unexpected tPOW
+...alse_false_false_true_false((**bold**
+...                               ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:35: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+...false_true_false((-deleted text-
+...                               ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:37: syntax error, unexpected '^'
+...false_false_false_true_false((^superscript^
+...                               ^
+[10/28/11 00:08:44 +0800 Brians-iMac.local (7519)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:31: syntax error, unexpected '*', expecting '='
+...alse_false_true_false((*strong*"
+...                               ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:39: syntax error, unexpected ',', expecting ')'
+));}\n  </h4>\n</div>\n", -2, false);end
+                         ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:40: syntax error, unexpected keyword_else, expecting '}'
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:84: syntax error, unexpected keyword_end, expecting '}'
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:85: syntax error, unexpected keyword_ensure, expecting '}'
+...:Util.html_safe(_erbout);ensure;@haml_buffer = @haml_buffer....
+...                               ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:85: syntax error, unexpected keyword_end, expecting '}'
+...buffer = @haml_buffer.upper;end;
+...                               ^
+/Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:88: syntax error, unexpected keyword_end, expecting '}'
