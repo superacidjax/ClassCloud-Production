@@ -287,7 +287,7 @@ body {
   white-space: normal; }
 
 .textile {
-  white-space: pre; }
+  white-space: pre-wrap; }
 
 table.assignments {
   width: 640px;
@@ -339,7 +339,7 @@ table.assignments {
     color: #e3170d;
     -webkit-font-smoothing: anti-aliased; }
 
-#error_explanation h2 {
+#error_explanation h3 {
   font: normal 18px myriad-pro, sans-serif;
   -webkit-font-smoothing: anti-aliased;
   color: #ff3030; }
