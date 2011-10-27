@@ -228,6 +228,15 @@ body {
     -webkit-font-smoothing: anti-aliased;
     color: #b22222; }
 
+.field {
+  padding: 9px; }
+  .field p {
+    font: normal 12px myriad-pro, sans-serif;
+    -webkit-font-smoothing: anti-aliased;
+    color: #236b8e;
+    margin-top: 5px;
+    margin-left: 9px; }
+
 .assignments {
   margin-top: 18px;
   text-align: left; }

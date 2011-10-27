@@ -1,4 +1,6 @@
 /- content_for :middle_content do
-%h1 New assignment
-= render 'form'
-= link_to 'Back', class_room_assignments_path(@class.id)
+.standard_text
+  %h1 New assignment
+  = render 'form'
+  %br
+  = link_to 'Back', class_room_assignments_path(@class.id)
