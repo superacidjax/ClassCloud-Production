@@ -1,4 +1,10 @@
 Tes::Application.routes.draw do
+  resources :user_meeting_rooms
+
+  resources :meeting_rooms do
+    get "user",:on =>:collection
+  end
+
   resources :states do
     get :autocomplete_state_name, :on => :collection
   end

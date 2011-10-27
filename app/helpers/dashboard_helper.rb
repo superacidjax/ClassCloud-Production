@@ -23,7 +23,7 @@ module DashboardHelper
         %(<a href="/events/#{event.id}" title="#{h(event.name)}">#{h(event.name)}</a>)
       else
         if current_user.is_teacher?
-            %(<a href="/class_rooms/#{event.class_room_id}/assignments/" title="#{h(event.name)}">#{h(event.name)}</a>)
+            %(<a href="/class_rooms/#{event.class_room_id}/assignments/#{event.assignment_id}/comment_new/" title="#{h(event.name)}">#{h(event.name)}</a>)
 
 
         elsif current_user.is_student? && !event.assignment.assignment_students.where("user_id =?",current_user.id).first.nil?

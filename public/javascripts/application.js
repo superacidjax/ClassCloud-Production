@@ -185,3 +185,12 @@ function checkFieldEditSchool(){
     }
 
 }
+
+
+function addUser(){
+    obj = $("#new_meeting_room").clone();
+        obj.appendTo("#clone").html('<div id="new_class_'+ window.classCounter +'">Add User<input class="email" id="user_email_'+ window.classCounter +'" name="user[email][]" placeholder="Enter Email" size="10" type="email" /><br><input type="checkbox" name="user[role][]" id="user_student_role_'+ window.classCounter +'" value="student">Student<input type="checkbox" name="user[role][]" id="user_teacher_role_'+ window.classCounter +'" value="teacher">Teacher<input type="checkbox" name="user[role][]" id="user_other_role_'+ window.classCounter +'" value="observer">Other      <a href="javascript:removeClass('+ window.classCounter +')">Remove</a></div><br>');
+    window.classCounter++;
+
+
+}

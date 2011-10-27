@@ -10,76 +10,71 @@ class DashboardController < ApplicationController
     @shown_month = Date.civil(@year, @month)
     @class = current_user.class_rooms
     @event_strips = current_user.events.where("date(start_at) BETWEEN date(now()) and date(start_at) +14").event_strips_for_month(@shown_month)
-#select * from events where date(start_at) between date(now())  and date(start_at) + 14
+
     if current_user.is_student?
       current_user.class_room_students.each do|class_room_student|
         @event_strips += Event.where("user_id =? and date(start_at) BETWEEN date(now()) and date(start_at) +14",class_room_student.class_room.user_id).event_strips_for_month(@shown_month)
       end
-      #      current_user.assignment_students.each do |user_assignment|
-      #        unless user_assignment.nil?
-      #          @event_strips += Event.where("assignment_id =?",user_assignment.assignment.id).event_strips_for_month(@shown_month)
-      #        end
-      #      end
     end
     
-    @class_rooms = ClassRoom.all
-    unless current_user.is_observer?
-      if current_user.class_rooms.blank?
-        @my_class_rooms = if current_user.is_student?
-          my_class_rooms = []
-          current_user.class_room_students.each do |class_room_student|
-            my_class_rooms << class_room_student.class_room
+      @class_rooms = ClassRoom.all
+      unless current_user.is_observer?
+        if current_user.class_rooms.blank?
+          @my_class_rooms = if current_user.is_student?
+            my_class_rooms = []
+            current_user.class_room_students.each do |class_room_student|
+              my_class_rooms << class_room_student.class_room
+            end
+            my_class_rooms
           end
-          my_class_rooms
+          @error_messages = []
+        else
+          @my_class_rooms = current_user.class_rooms
+          @students = []
+          @my_class_rooms.each do |cr|
+            cr.class_room_students.each do |cr_student|
+              @students << cr_student.student unless @students.include?(cr_student.student)
+            end
+          end
         end
-        @error_messages = []
+        @student = User.find(params[:id]) if current_user.is_teacher? and params[:id]
       else
-        @my_class_rooms = current_user.class_rooms
-        @students = []
-        @my_class_rooms.each do |cr|
-          cr.class_room_students.each do |cr_student|
-            @students << cr_student.student unless @students.include?(cr_student.student)
+        if params[:id].blank? and params[:teacher_id].blank?
+          @students = []
+          @my_class_rooms = []
+
+          current_user.class_room_observers.each do |class_room_observer|
+            class_room_student = ClassRoomStudent.where(class_room_id: class_room_observer.class_room_id).first
+            @my_class_rooms << class_room_observer.class_room
+            @students << class_room_student.student if class_room_student and !@students.include?(class_room_student.student)
           end
-        end
-      end
-      @student = User.find(params[:id]) if current_user.is_teacher? and params[:id]
-    else
-      if params[:id].blank? and params[:teacher_id].blank?
-        @students = []
-        @my_class_rooms = []
-
-        current_user.class_room_observers.each do |class_room_observer|
-          class_room_student = ClassRoomStudent.where(class_room_id: class_room_observer.class_room_id).first
-          @my_class_rooms << class_room_observer.class_room
-          @students << class_room_student.student if class_room_student and !@students.include?(class_room_student.student)
-        end
 
 
-        @teacher = current_user.class_room_observers.first.class_room.user unless current_user.class_room_observers.blank?
-      elsif params[:id]
-        @student = User.find params[:id]
-        @my_class_rooms = []
+          @teacher = current_user.class_room_observers.first.class_room.user unless current_user.class_room_observers.blank?
+        elsif params[:id]
+          @student = User.find params[:id]
+          @my_class_rooms = []
 
-        @student.class_room_students.each do |class_room_student|
-          @my_class_rooms << class_room_student.class_room
-        end
-
-        @error_messages = []
-      elsif params[:teacher_id]
-        @teacher = User.find params[:teacher_id]
-        @my_class_rooms = @teacher.class_rooms
-        @students = []
-
-        @my_class_rooms.each do |cr|
-          cr.class_room_students.each do |cr_student|
-            @students << cr_student.student unless @students.include?(cr_student.student)
+          @student.class_room_students.each do |class_room_student|
+            @my_class_rooms << class_room_student.class_room
           end
-        end
+
+          @error_messages = []
+        elsif params[:teacher_id]
+          @teacher = User.find params[:teacher_id]
+          @my_class_rooms = @teacher.class_rooms
+          @students = []
+
+          @my_class_rooms.each do |cr|
+            cr.class_room_students.each do |cr_student|
+              @students << cr_student.student unless @students.include?(cr_student.student)
+            end
+          end
         
-        @student = User.find(params[:student_id]) if params[:student_id]
-        @error_messages = []
+          @student = User.find(params[:student_id]) if params[:student_id]
+          @error_messages = []
+        end
       end
+      @activity_streams = ActivityStream.where(["class_room_id IN (?)", @my_class_rooms.map(&:id)]).order("created_at ASC") if @my_class_rooms
     end
-    @activity_streams = ActivityStream.where(["class_room_id IN (?)", @my_class_rooms.map(&:id)]).order("created_at ASC") if @my_class_rooms
   end
-end

@@ -1,0 +1,39 @@
+=stylesheet_link_tag 'token-input.css'
+=javascript_include_tag 'jquery.tokeninput.js'
+= form_for @meeting_room do |f|
+  -if @meeting_room.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@meeting_room.errors.count, "error")} prohibited this meeting_room from being saved:"
+      %ul
+        - @meeting_room.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :title
+    = f.text_field :title,:placeholder=>'Enter title'
+  .field
+    = f.label :meeting_type
+    = f.select :meeting_type, MeetingRoom::MEETING_TYPE, :unclude_blank =>:true
+  .field
+    = label_tag 'User meeting'
+    = f.hidden_field :user_id ,current_user.id
+    = text_field_tag 'user_meeting',nil,:id =>'user_meeting'
+  .actions
+    = hidden_field_tag 'user_meeting',nil,:id =>'meeting_room_user'
+    -if @meeting_room.new_record?
+      %div#clone
+    = f.submit 'Save'
+    
+:javascript
+  $(document).ready(function () {
+      $("#user_meeting").tokenInput("/meeting_rooms/user/", {tokenLimit:30,
+         onAdd: function(item) {
+           var meeting_room;
+           meeting_room = $('#meeting_room_user').val();
+           if (meeting_room.length >= 1){
+             $('#meeting_room_user').val(meeting_room+','+item.name);
+           }else{
+             $('#meeting_room_user').val(item.name);
+           }
+       }
+     })
+  });

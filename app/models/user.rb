@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
 
   belongs_to :school
   belongs_to :state
+  belongs_to :meeting_room
   
   after_create :define_user_role, :if => Proc.new{|user| user.is_not_teacher.eql?(false) || user.is_not_teacher.blank?}
 
@@ -107,5 +108,17 @@ class User < ActiveRecord::Base
 
   def remove_activity_stream
     ActivityStream.delete_all(["actor_id = ? and actor_type = 'User'", self.id])
+  end
+
+  scope :search_by_name, lambda {|name| {:conditions => ["lower(username) LIKE ?","%"+name.downcase+"%"]} }
+
+  def self.json_form
+    results = []
+
+    self.all.each do |list|
+      results << {:name => list.username}
+    end
+
+    return results
   end
 end
