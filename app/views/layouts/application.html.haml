@@ -21,6 +21,23 @@
       })();
       <script type="text/javascript" src="https://use.typekit.com/zsr1ror.js"></script>
       <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+      
+    %script
+      <script type="text/javascript">
+      function woopraReady(tracker) {
+      tracker.setDomain('classcloud.me');
+      tracker.setIdleTimeout(1800000);
+      tracker.trackPageview({type:'pageview',url:window.location.pathname+window.location.search,title:document.title});
+      return false;
+      }
+      (function() {
+      var wsc = document.createElement('script');
+      wsc.src = document.location.protocol+'//static.woopra.com/js/woopra.js';
+      wsc.type = 'text/javascript';
+      wsc.async = true;
+      var ssc = document.getElementsByTagName('script')[0];
+      ssc.parentNode.insertBefore(wsc, ssc);
+      })();
   %body
     - if current_user and (((current_user and current_user.is_teacher?) or (!current_user.is_teacher? and current_user.username)))
       - if not ((params[:controller].eql?('dashboard') and params[:action].eql?('index')) or (params[:controller].eql?('class_rooms') and params[:action].eql?('new')))
