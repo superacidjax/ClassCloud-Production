@@ -22,7 +22,7 @@
       %hr
     %tr
       %td
-        %p
+        .textile
           != @assignment.description
         - if @assignment.user_id.eql?(current_user.id) or current_user.is_teacher? and !@assignment.file_updated_at.nil?
           = link_to @assignment.file_file_name,download_class_room_assignment_path(@class.id, @assignment.id)
