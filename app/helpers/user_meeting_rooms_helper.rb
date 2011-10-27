@@ -1,0 +1,2 @@
+module UserMeetingRoomsHelper
+end

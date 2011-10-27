@@ -120,7 +120,8 @@ class PeopleController < ApplicationController
     
     if @person.update_attributes(params[:user])
       if params['state']['name'].nil?
-        state = State.find_or_create_by_name_and_city(:name => params['state']['name2'], :city => params['state']['city2'])
+        state = State.find_or_create_by_name(:name => params['state']['name2'])
+        city = City.find_or_create_by_name_and_state_id(:name => params['state']['city2'], :state_id =>state.id)
         @person.state_id = state.id
       else
         @person.state_id = params['state']['name']
