@@ -9,11 +9,19 @@ class DashboardController < ApplicationController
 
     @shown_month = Date.civil(@year, @month)
     @class = current_user.class_rooms
-    @event_strips = if current_user
-      Event.event_strips_for_month(@shown_month)
-    else
-      Event.event_strips_for_month(@shown_month)
+    @event_strips = current_user.events.where("date(start_at) BETWEEN date(now()) and date(start_at) +14").event_strips_for_month(@shown_month)
+#select * from events where date(start_at) between date(now())  and date(start_at) + 14
+    if current_user.is_student?
+      current_user.class_room_students.each do|class_room_student|
+        @event_strips += Event.where("user_id =? and date(start_at) BETWEEN date(now()) and date(start_at) +14",class_room_student.class_room.user_id).event_strips_for_month(@shown_month)
+      end
+      #      current_user.assignment_students.each do |user_assignment|
+      #        unless user_assignment.nil?
+      #          @event_strips += Event.where("assignment_id =?",user_assignment.assignment.id).event_strips_for_month(@shown_month)
+      #        end
+      #      end
     end
+    
     @class_rooms = ClassRoom.all
     unless current_user.is_observer?
       if current_user.class_rooms.blank?
