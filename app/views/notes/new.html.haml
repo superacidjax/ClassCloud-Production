@@ -3,5 +3,22 @@
   %br
   %hr
 = render 'form'
-
+%br
 = link_to 'Back', class_room_notes_path(@class.id)
+
+.textile_explanation
+  %h2 Basic Textile Formatting Guide
+  %hr
+  %ul
+    %li _italics_
+    %li *bold*
+    %li ??citation??
+    %li -deleted text-
+    %li +inserted text+
+    %li ^superscript^
+    %li ~subscript~
+    %li "linktext":http://…
+  %br
+  %h3
+    For a more complete guide to everything you can do with Textile, visit #{link_to 'http://textile.thresholdstate.com/'}. ClassCloud supports all Textile features. It's an easy way to make your
+    writing look great!

@@ -420,3 +420,4 @@ _hamlout.push_text("<div class='field'>\n", 1, false); if c...
 ...buffer = @haml_buffer.upper;end;
 ...                               ^
 /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/writeboards/_form.html.haml:88: syntax error, unexpected keyword_end, expecting '}'
+[10/28/11 00:55:39 +0800 Brians-iMac.local (7519)] WARN : The error reporting queue has reached 20. The error detail for this and subsequent errors will not be transmitted to New Relic until the queued errors have been sent: /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/app/views/assignments/new.html.haml:24: syntax error, unexpected keyword_ensure, expecting $end
