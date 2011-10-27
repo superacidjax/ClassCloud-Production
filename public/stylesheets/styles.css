@@ -219,7 +219,8 @@ body {
     padding: 9px;
     float: right;
     text-align: left;
-    max-width: 150px; }
+    max-width: 150px;
+    min-height: 100%; }
     #main_content .students h2 {
       font: normal 14px myriad-pro, sans-serif;
       -webkit-font-smoothing: anti-aliased;
