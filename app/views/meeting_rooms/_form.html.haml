@@ -15,11 +15,12 @@
     = f.select :meeting_type, MeetingRoom::MEETING_TYPE, :unclude_blank =>:true
   .field
     = label_tag 'User meeting'
-    = f.hidden_field :user_id ,current_user.id
+    = hidden_field_tag 'meeting_room[user_id]',current_user.id
     = text_field_tag 'user_meeting',nil,:id =>'user_meeting'
   .actions
     = hidden_field_tag 'user_meeting',nil,:id =>'meeting_room_user'
     -if @meeting_room.new_record?
+      %div#user_meeting_room
       %div#clone
     = f.submit 'Save'
     

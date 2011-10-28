@@ -1,17 +1,1 @@
-%h1 Listing meeting_rooms
-
-%table
-  %tr
-    %th
-    %th
-    %th
-
-  - @meeting_rooms.each do |meeting_room|
-    %tr
-      %td= link_to 'Show', meeting_room
-      %td= link_to 'Edit', edit_meeting_room_path(meeting_room)
-      %td= link_to 'Destroy', meeting_room, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Meeting room', new_meeting_room_path
+= raw(user_event)

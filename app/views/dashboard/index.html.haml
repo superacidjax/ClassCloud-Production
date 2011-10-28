@@ -33,6 +33,9 @@
           %br
           %br
           = raw(user_event)
+          %br
+          -if current_user.is_teacher?
+            = link_to 'New Meeting',new_meeting_room_path
         .students
           - if current_user.is_teacher?
             %h2

@@ -62,7 +62,7 @@
               %br
 
                 = "State :"
-                = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value);"
+                = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value,'#{params[:controller]}');"
               %div#city_name{:style=>"float:left;"}
               %div#school_name{:style=>"float:center;"}
               %div#loader{:style=>"display:none;float:left;"}

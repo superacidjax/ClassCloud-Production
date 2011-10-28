@@ -25,8 +25,8 @@ class AssignmentsController < ApplicationController
 
   def create
     @assignment = Assignment.new(params[:assignment])
-    if params[:assignment]["due_date(1i)"].nil? or params[:assignment]["due_date(2i)"].nil? or params[:assignment]["due_date(3i)"].nil?
-      @assignment.due_date = Time.now.to_date.strftime("%Y-%m-%d")
+    if params[:assignment]["due_date(1i)"].empty? or params[:assignment]["due_date(2i)"].empty? or params[:assignment]["due_date(3i)"].empty?
+      @assignment.due_date = Date.today
     else
       @assignment.due_date = "#{params[:assignment]["due_date(1i)"]}-#{params[:assignment]["due_date(2i)"]}-#{params[:assignment]["due_date(2i)"]}"
     end
@@ -36,12 +36,10 @@ class AssignmentsController < ApplicationController
     if @assignment.valid?
       if params[:assignment][:group_allowed].eql?("0")
         @assignment.is_public = false
-        @assignment.save
       else
         @assignment.is_public = true
-        @assignment.save
       end
-      
+      @assignment.save
       students = ClassRoomStudent.where(["class_room_id =?",@class.id])
       students.each do |student|
         AssignmentStudent.create(:assignment_id => @assignment.id, :user_id => student.user_id)

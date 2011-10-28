@@ -26,11 +26,12 @@ class User < ActiveRecord::Base
     user.has_many :class_room_observers
     user.has_many :notes
     user.has_many :writeboards
+    user.has_many :meeting_rooms
+    user.has_many :user_meeting_rooms
   end
 
   belongs_to :school
   belongs_to :state
-  belongs_to :meeting_room
   
   after_create :define_user_role, :if => Proc.new{|user| user.is_not_teacher.eql?(false) || user.is_not_teacher.blank?}
 
