@@ -1,19 +1,22 @@
 class MeetingRoom < ActiveRecord::Base
-  has_one :user
+  belongs_to :user
 
-  after_create :create_meeting_room_user
-
-
-
-  def self.create_meeting_room_user(user_meeting,role)
-    users = []
-    users << params[:user_meeting]
+  has_many :user_meeting_rooms
+  
+  def create_meeting_room_user(user_meeting)
+    Event.create(:name => self.title, :start_at => Date.today, :end_at =>Date.today, :user_id =>self.user_id,:meeting_room_id =>self.id)
+    users = user_meeting.split(',')
+    
     users.each do |username|
-    user = User.where("username = ?", username).first
-    meeting_room_user = MeetingRoomUser.create(user_id: user.id,meeting_room_id: self.id, meeting_type: self.meeting_type )
+      user = User.where("username = ?", username).first
+      unless user.nil?
+        MeetingRoomMailer.welcome_email(user,self.id).deliver
+      end
+      UserMeetingRoom.create(:user_id=> user.id,:meeting_room_id=> self.id)
+      Event.create(:name => self.title, :start_at => Date.today, :end_at =>Date.today, :user_id =>user.id,:meeting_room_id =>self.id)
     end
-
   end
+  
   MEETING_TYPE = [
     "Files",
     "Meeting Notes",

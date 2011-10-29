@@ -188,8 +188,8 @@ function checkFieldEditSchool(){
 
 
 function addUser(){
-    obj = $("#new_meeting_room").clone();
-        obj.appendTo("#clone").html('<div id="new_class_'+ window.classCounter +'">Add User<input class="email" id="user_email_'+ window.classCounter +'" name="user[email][]" placeholder="Enter Email" size="10" type="email" /><br><input type="checkbox" name="user[role][]" id="user_student_role_'+ window.classCounter +'" value="student">Student<input type="checkbox" name="user[role][]" id="user_teacher_role_'+ window.classCounter +'" value="teacher">Teacher<input type="checkbox" name="user[role][]" id="user_other_role_'+ window.classCounter +'" value="observer">Other      <a href="javascript:removeClass('+ window.classCounter +')">Remove</a></div><br>');
+    obj = $("#user_meeting_room").clone();
+        obj.appendTo("#clone").html('<div id="new_class_'+ window.classCounter +'">Add User<input class="email" id="user_email_'+ window.classCounter +'" name="user[email][]" placeholder="Enter Email" size="10" type="email" /><input class="first_name" id="first_name_'+ window.classCounter +'" name="user[first_name][]" placeholder="Enter first name" size="10" type="first_name" /><input class="last_name" id="last_name_'+ window.classCounter +'" name="user[last_name][]" placeholder="Enter last name" size="10" type="last_name" /><br><input type="checkbox" name="user[role][]" id="user_student_role_'+ window.classCounter +'" value="student">Student<input type="checkbox" name="user[role][]" id="user_teacher_role_'+ window.classCounter +'" value="teacher">Teacher<input type="checkbox" name="user[role][]" id="user_other_role_'+ window.classCounter +'" value="observer">Other      <a href="javascript:removeClass('+ window.classCounter +')">Remove</a></div><br>');
     window.classCounter++;
 
 

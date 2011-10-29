@@ -1,0 +1,80 @@
+!!!
+%html
+  %head
+    %title ClassCloud
+    = stylesheet_link_tag :all
+    = javascript_include_tag :defaults
+    = javascript_include_tag 'coffeescripts'
+    = yield :calendar_js_and_css
+    = csrf_meta_tag
+    %meta{:name => "google-site-verification", :content =>"okQIcxqP1cCBYhBhs2NtJXc4PO9ReSekIQtF0VlaYSE"}
+    %script
+      \type="text/javascript"
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-21822274-7']);
+      _gaq.push(['_setDomainName', '.classcloud.me']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+      <script type="text/javascript" src="https://use.typekit.com/zsr1ror.js"></script>
+      <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    %script
+      <script type="text/javascript">
+      function woopraReady(tracker) {
+      tracker.setDomain('classcloud.me');
+      tracker.setIdleTimeout(1800000);
+      tracker.trackPageview({type:'pageview',url:window.location.pathname+window.location.search,title:document.title});
+      return false;
+      }
+      (function() {
+      var wsc = document.createElement('script');
+      wsc.src = document.location.protocol+'//static.woopra.com/js/woopra.js';
+      wsc.type = 'text/javascript';
+      wsc.async = true;
+      var ssc = document.getElementsByTagName('script')[0];
+      ssc.parentNode.insertBefore(wsc, ssc);
+      })();
+  %body
+    - if current_user and (((current_user and current_user.is_teacher?) or (!current_user.is_teacher? and current_user.username)))
+      - if not ((params[:controller].eql?('dashboard') and params[:action].eql?('index')) or (params[:controller].eql?('class_rooms') and params[:action].eql?('new')))
+        #container
+          .header
+            = link_to image_tag('cclogo_xsmall.png'), root_path
+
+            .right
+              %h3
+                = current_user.full_name
+                = '|'
+                = link_to "Sign Out", destroy_user_session_path, :method => :delete
+            .classname
+              %h1
+        #main_content
+          .nav_bar
+            %h3
+              =link_to 'Announcements','#'
+              ='|'
+              =link_to 'Meeting Notes','#'
+              ='|'
+              =link_to 'Discussions','#'
+              ='|'
+              =link_to 'Files','#'
+              ='|'
+              =link_to 'Poeples','#'
+            %br
+              = yield
+          - if current_user.is_teacher?
+            %br
+      - else
+        = yield
+    - else
+      = yield
+  #footer_container
+    .footer
+      = image_tag "cclogo_small.png"
+      .contact
+        %h2
+          For more information, contact #{mail_to 'brian@classcloud.me', 'Brian Dear'}

@@ -109,7 +109,7 @@ class PeopleController < ApplicationController
   end
 
   def pick_username_and_password
-    @states = State.all
+    @states = State.where("name !=''")
     @person = User.find_by_confirmation_token(params[:confirmation_token])
     render :layout => false
   end

@@ -1,3 +1,8 @@
+= stylesheet_link_tag :all
+= javascript_include_tag :defaults
+= javascript_include_tag 'coffeescripts'
+= yield :calendar_js_and_css
+= csrf_meta_tag
 %h1 New meeting_room
 
 = render 'form'
@@ -5,3 +10,11 @@
 = link_to 'Add other user ','#',:onclick =>"addUser();"
 %br
 = link_to 'Back', meeting_rooms_path
+:javascript
+  $(document).ready(function() {
+      $("#country_name2").tokenInput("/pages/country/", {tokenLimit:1,
+         onAdd: function(item) {
+           $('#country_name1').val(item.name);
+         }
+       })
+  });
