@@ -1,28 +1,25 @@
-#main_content
-  .standard_text
-    %h3 Discussion started #{distance_of_time_in_words(@discussion.created_at, Time.now)} ago by #{user_full_name(@discussion.user)}.
-    %hr
-    - if current_user.id.eql?(@discussion.user_id) or current_user.is_teacher?
-      = link_to "Edit", edit_class_room_discussion_path(@class.id, @discussion)
-      = "|"
-      = link_to "Delete", class_room_discussion_path(@class.id, @discussion), :confirm => "Are you sure ?", :method => :delete
-    %td
+.standard_text
+  %h3 Started #{distance_of_time_in_words(@discussion.created_at, Time.now)} ago by #{user_full_name(@discussion.user)}.
+  %hr
+  - if current_user.id.eql?(@discussion.user_id) or current_user.is_teacher?
+    = link_to "Edit", edit_class_room_discussion_path(@class.id, @discussion)
+    = "|"
+    = link_to "Delete", class_room_discussion_path(@class.id, @discussion), :confirm => "Are you sure ?", :method => :delete
+  %br
+    %br
       %br
-        %h2
-          = @discussion.title
-      %td{:align => "right"}
-      
- 
-    %tr
-      %h4
-        .textile
-          != @discussion.description
-      %br
-    %tr
-      %hr
-      %hr
-    %tr
-      %td{:colspan => "3"}
+        #user_content
+          .user_titles
+            %h1
+              = @discussion.title
+          .textile
+            != @discussion.description
+            %br
+          %tr
+        %hr
+        %hr
+          %tr
+            %td{:colspan => "3"}
         #comments_container
           %h4 Comments
           %br

@@ -1,29 +1,37 @@
 %br
 %br
-  .headings Class Notes
-%table.board
-  %tr.blue
-    %th Title
-    %th Notes
-    %th Posted
+  .headings
+    %h1 Class Notes
+    %br
+    -if current_user.is_teacher? and !current_user.class_rooms.blank?
+      =link_to 'Add new Class Notes', new_class_room_note_path(@class.id)
+#user_content
+  .tables  
+    %table.assignments
+      %tr.white
+        %th Title
+        %th Notes
+        %th Posted
     
-    - @notes.each do |note|
-      %tr
-        - unless current_user.is_observer?
-        %td! = link_to note.title, comment_new_class_room_note_path(@class.id, note)
-        - else
-          - if @student
-          %td! = link_to note.title, go_to_student_note_class_room_note_path(@class.id, note, @student.id)
-          - elsif @teacher
-            %td! = link_to note.title, go_to_teacher_note_class_room_note_path(@class.id, note, @teacher.id)
-        %td! = truncate(note.description, :length =>100, :separator => ' ')
-        %td! =#{distance_of_time_in_words(note.created_at, Time.now)} ago
-        -if current_user.is_teacher? and !current_user.class_rooms.blank?
-          %td
-          %td= link_to 'Edit', edit_class_room_note_path(@class.id, note)
-          %td= link_to 'Destroy', class_room_note_path(@class.id, note), :confirm => 'Are you sure?', :method => :delete
+        - @notes.each do |note|
+          %tr.desc
+            - unless current_user.is_observer?
+            %td! = link_to note.title, comment_new_class_room_note_path(@class.id, note)
+            - else
+              - if @student
+              %td! = link_to note.title, go_to_student_note_class_room_note_path(@class.id, note, @student.id)
+              - elsif @teacher
+                %td! = link_to note.title, go_to_teacher_note_class_room_note_path(@class.id, note, @teacher.id)
+            %td! = truncate(note.description, :length =>100, :separator => ' ')
+            %td
+              %center
+                #{distance_of_time_in_words(note.created_at, Time.now)} ago
+            -if current_user.is_teacher? and !current_user.class_rooms.blank?
+              %td
+              %td= link_to 'Edit', edit_class_room_note_path(@class.id, note)
+              %td= link_to 'Delete', class_room_note_path(@class.id, note), :confirm => 'Are you sure?', :method => :delete
 
-%hr
--if current_user.is_teacher? and !current_user.class_rooms.blank?
-  =link_to 'Add new Class Notes', new_class_room_note_path(@class.id)
+    %br
+    -if current_user.is_teacher? and !current_user.class_rooms.blank?
+      =link_to 'Add new Class Notes', new_class_room_note_path(@class.id)
   

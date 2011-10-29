@@ -1,25 +1,29 @@
 %br
 %br
-  .headings Discussions
-%table.board
-  %tr.blue
-    %th Topic
-    %th Content
+  .headings
+    %h1 Discussions
+    %br
+    - unless current_user.is_observer?
+      = link_to "New Discussion", new_class_room_discussion_path(@class.id)
+#user_content  
+  .tables
+    %table.assignments
+      %tr.white
+        %th Topic
+        %th Content
   
-  - @discussions.each do |discussion|
-    %tr
-      - unless current_user.is_observer?
-        %td!= link_to discussion.title, comment_new_class_room_discussion_path(@class.id, discussion)
-      - else
-        - if @student
-          %td! = link_to discussion.title, go_to_student_discussion_class_room_discussion_path(@class.id, discussion, @student.id)
-        - elsif @teacher
-          %td! = link_to discussion.title, go_to_teacher_discussion_class_room_discussion_path(@class.id, discussion, @teacher.id)
-      %td! = truncate(discussion.description, :length =>100, :separator => ' ')
-      - if current_user.id.eql?(discussion.user_id) 
-        %td= link_to 'Edit', edit_class_room_discussion_path(@class.id, discussion)
-      - if current_user.id.eql?(discussion.user_id) or current_user.is_teacher?
-        %td= link_to 'Destroy', class_room_discussion_path(@class.id, discussion), :confirm => 'Are you sure?', :method => :delete
-%br
-- unless current_user.is_observer?
-  = link_to "New Discussion", new_class_room_discussion_path(@class.id)
+      - @discussions.each do |discussion|
+        %tr.desc
+          - unless current_user.is_observer?
+            %td!= link_to discussion.title, comment_new_class_room_discussion_path(@class.id, discussion)
+          - else
+            - if @student
+              %td! = link_to discussion.title, go_to_student_discussion_class_room_discussion_path(@class.id, discussion, @student.id)
+            - elsif @teacher
+              %td! = link_to discussion.title, go_to_teacher_discussion_class_room_discussion_path(@class.id, discussion, @teacher.id)
+          %td! = truncate(discussion.description, :length =>100, :separator => ' ')
+          - if current_user.id.eql?(discussion.user_id) 
+            %td= link_to 'Edit', edit_class_room_discussion_path(@class.id, discussion)
+          - if current_user.id.eql?(discussion.user_id) or current_user.is_teacher?
+            %td= link_to 'Delete', class_room_discussion_path(@class.id, discussion), :confirm => 'Are you sure?', :method => :delete
+    
