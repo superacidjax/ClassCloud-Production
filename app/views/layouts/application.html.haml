@@ -124,7 +124,7 @@
       = yield
   #footer_container
     .footer
-      = image_tag "cclogo_small.png"
+      = link_to image_tag('cclogo_small.png'), root_path
       .contact
         %h2
           For more information, contact #{mail_to 'brian@classcloud.me', 'Brian Dear'}

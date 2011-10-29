@@ -5,7 +5,7 @@
       #error_explanation
         %h3
           = pluralize(@writeboard.errors.count, "error")
-          prohibited this CloudPad from being saved:
+          prohibited this assignment from being saved:
         %ul
           - @writeboard.errors.full_messages.each do |msg|
             %li= msg
