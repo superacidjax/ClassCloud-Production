@@ -21,9 +21,9 @@
             = link_to image_tag('do_assignment_button.png'), new_class_room_assignment_writeboard_path(@class.id, @assignment)
           - if !current_user.is_observer?
             -unless vote_assignment(@assignment).nil?
-              = 'Weee!!'
+              = image_tag('supercool_button_grey.png')
             -else
-              = link_to 'Weee!!',vote_up_class_room_assignment_path(@class.id, @assignment)
+              = link_to image_tag('supercool_button.png'),vote_up_class_room_assignment_path(@class.id, @assignment)
       .textile
         %p
           != @assignment.description
@@ -37,30 +37,33 @@
     %tr
     %td{:colspan => "3"}
       #comments_container
+        %h1
+          Comments
+        %br
         - @assignment.comments.each do |comment|
-          %table
+          %table{:width => "100%"}
             %tr
-              %td{:colspan => "3"}
+              %h6{:colspan => "3"}
                 = "#{user_full_name(comment.user)}"
                 - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
                   = "(#{vote_count(comment.id)})"
-                = "said on "
-                %br 
-                = "#{date_format(comment.created_at)}"
+                said this #{distance_of_time_in_words(comment.created_at, Time.now)} ago:
             %tr
-              %td= comment.comment
+            %br
+            %h4
+              = comment.comment
               %td{:align => "right"}
                 - if current_user.id.eql?(comment.user_id)
                   = link_to "Edit", class_room_comment_edit_assignment_path(@class.id, @assignment, comment.id)
                 - if current_user.id.eql?(comment.user_id) or current_user.is_teacher?
                   = link_to "Delete", class_room_comment_destroy_assignment_path(@class.id, @assignment, comment.id), :method => :delete
                 - unless vote_comment(comment).nil?
-                  = 'Weee!!'
+                  = image_tag('supercool_button_grey.png')
                 - else
                   - unless current_user.is_observer?
-                    = link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@assignment.id,comment,:commentable_type =>"#{params[:controller]}")
-                - if current_user.id.eql?(@assignment.user_id) and !current_user.id.eql?(comment.user_id) and comment.replies.count.eql?(0)
-                  = link_to 'Reply', '#',:onclick => "$('.reply_#{comment.id}').show()"
+                    = link_to image_tag('supercool_button.png'),class_room_comment_vote_path(@class.id ,@assignment.id,comment,:commentable_type =>"#{params[:controller]}")
+                
+                  /= link_to 'Reply', '#',:onclick => "$('.reply_#{comment.id}').show()"
                   %div{:class =>"reply_#{comment.id}", :style=> "display: none;"}
                     %h1=link_to 'x','#',:onclick => "$('.reply_#{comment.id}').hide()"
                     = form_tag(class_room_reply_comment_path(@class.id, comment.id), :multipart => true)   do |f|
@@ -74,12 +77,16 @@
                       .actions
                         = submit_tag "Add this Comment"
               - comment.replies.each do |reply|
-                %tr
-                  %td{:style =>"text-align:center;",:bgcolor=>'red'}
-                    %h1="This is a reply: #{reply.body}"
-              %tr
-                %td{:colspan => "3"}
-                  %hr{:noshade => ""}
+                %br
+                .comment_replies
+                  %h6
+                    = "#{user_full_name(current_user)}"
+                    replied #{distance_of_time_in_words(reply.created_at, Time.now)} ago:
+                  %h5    
+                    %h4
+                      = "#{reply.body}"
+                        
+            %hr
 
   - unless @current_user.is_observer?
     %h1 Leave a comment
@@ -89,4 +96,3 @@
       .actions
         = submit_tag "Add this Comment"
         %span#assignment_comment_ajax_loader{:style => "display: none"}= image_tag "LoaderIcon.gif"
-/-rescue

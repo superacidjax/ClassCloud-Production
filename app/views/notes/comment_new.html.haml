@@ -43,9 +43,9 @@
                 - elsif current_user.id.eql?(comment.user_id) or current_user.is_teacher?
                   = link_to "Delete", class_room_comment_destroy_notes_path(@class.id, @note, comment.id), :method => :delete
                 - unless vote_comment(comment).nil?
-                  = 'Weee!!'
+                  = image_tag('supercool_button_grey.png')
                 - else
-                  = link_to 'Weee!!',class_room_comment_vote_path(@class.id ,@note.id,comment,:commentable_type =>"#{params[:controller]}")
+                  = link_to image_tag('supercool_button.png'),class_room_comment_vote_path(@class.id ,@note.id,comment,:commentable_type =>"#{params[:controller]}")
                 - if current_user.id.eql?(@note.user_id) and !current_user.id.eql?(comment.user_id) and comment.replies.count.eql?(0)
                   = link_to 'Reply', '#',:onclick => "$('.reply_#{comment.id}').show()"
                   %div{:class =>"reply_#{comment.id}", :style=> "display: none;"}

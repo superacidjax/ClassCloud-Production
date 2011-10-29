@@ -320,6 +320,10 @@ body {
       -webkit-font-smoothing: anti-aliased;
       color: #3f3d32; }
 
+#comments_container .comment_replies {
+  margin-left: 72px;
+  margin-top: 18px; }
+
 table.assignments {
   width: 792px;
   margin-top: 18px;
