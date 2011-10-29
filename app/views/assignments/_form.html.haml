@@ -16,10 +16,10 @@
       = f.label :assignment_category_id
       %br/
       - unless params[:assignment].blank?
-        = f.select :assignment_category_id, options_from_collection_for_select(@categories, "id", "name", params[:assignment][:assignment_category_id].to_i), :include_blank => true
+        = f.select :assignment_category_id, options_from_collection_for_select(@categories, "id", "name", params[:assignment][:assignment_category_id].to_i), :include_blank => false
       - else
         - unless @assignment.assignment_category_id.blank?
-          = f.select :assignment_category_id, options_from_collection_for_select(@categories, "id", "name", @assignment.assignment_category_id.to_i), :include_blank => true
+          = f.select :assignment_category_id, options_from_collection_for_select(@categories, "id", "name", @assignment.assignment_category_id.to_i), :include_blank => false
         - else
           = f.select :assignment_category_id, options_from_collection_for_select(@categories, "id", "name"), :include_blank => true
     .field
@@ -32,7 +32,7 @@
     .field
       = f.label :due_date
       %br/
-      = f.date_select :due_date, :prompt => true, :order => [:month, :day, :year], :start_year => Time.now.year
+      = f.date_select :due_date, :prompt => true, :order => [:month, :day, :year], :start_year => Time.now.year, :end_year => Time.now.year+2
     .field
       = f.check_box :group_allowed, :onclick => "uncheckAllSelectedStudents()"
       = f.label :group_allowed
