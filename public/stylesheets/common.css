@@ -339,7 +339,7 @@ table.assignments {
     padding-bottom: 8px;
     overflow: hidden; }
   table.assignments td.assignments {
-    font: normal 9px Helvetica, Arial, sans-serif;
+    font: normal 9px myriad-pro, Arial, sans-serif;
     color: #3f3d32;
     -webkit-font-smoothing: anti-aliased; }
   table.assignments td.assignments_desc {
