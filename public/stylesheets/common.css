@@ -56,8 +56,8 @@ body {
 
 #container {
   background-color: #f5f5f5;
-  background-image: -moz-linear-gradient(100% 100% 90deg, #8a8a8a, #f5f5f5);
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f5f5f5), to(#8a8a8a));
+  background-image: -moz-linear-gradient(100% 100% 90deg, #448ccb, #f5f5f5);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f5f5f5), to(#448ccb));
   height: auto; }
   #container .wrapper {
     margin: 0 auto;
@@ -381,9 +381,9 @@ table.assignments {
   color: #ff3030; }
 
 #footer_container {
-  background-color: #8a8a8a;
-  background-image: -moz-linear-gradient(100% 100% 90deg, #f5f5f5, #8a8a8a);
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8a8a8a), to(#f5f5f5));
+  background-color: #448ccb;
+  background-image: -moz-linear-gradient(100% 100% 90deg, #f5f5f5, #448ccb);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#448ccb), to(#f5f5f5));
   bottom: 0; }
   #footer_container .footer {
     text-align: center;
