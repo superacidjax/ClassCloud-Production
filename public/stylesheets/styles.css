@@ -317,7 +317,7 @@ body {
   background-color: #fffafa;
   background-image: -moz-linear-gradient(100% 100% 90deg, #eee9e9, #fffafa);
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fffafa), to(#eee9e9));
-  width: 828px;
+  width: 810px;
   border-style: ridge;
   border-color: #eecbad;
   -moz-border-radius-topright: 28px;
