@@ -68,13 +68,14 @@ class WriteboardsController < ApplicationController
       assignment = Assignment.find(params[:assignment_id])
       @writeboard.is_public = assignment.is_public
       writeboard = Writeboard.find(params[:id])
+      
       @writeboard.version = writeboard.version.to_i+1
       if @writeboard.save
         @assignment = @writeboard.assignment
         if current_user.is_student?
-          redirect_to (class_room_assignments_url(@class.id)), notice: 'Writeboard was successfully updated.'
+          redirect_to (class_room_assignments_url(@class.id)), notice: 'Successfully updated.'
         else
-          redirect_to (class_room_writeboards_url(@class.id)), notice: 'Writeboard was successfully updated.'
+          redirect_to (class_room_writeboards_url(@class.id)), notice: 'Successfully updated.'
         end
       else
         assignment_student = current_user.assignment_students.where(assignment_id: params[:assignment_id]).first
