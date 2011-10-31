@@ -2,7 +2,6 @@
   - content_for :calendar_js_and_css do
     = stylesheet_link_tag "event_calendar"
     = javascript_include_tag "event_calendar"
-  %body
     #container
       .header
         = link_to image_tag('cclogo_xsmall.png'), root_path
@@ -13,6 +12,9 @@
             = user_full_name(current_user)
             |
             = link_to "Sign Out", destroy_user_session_path, :method => :delete
+        .classname
+          %h1
+            My Dashboard
     #main_content
       .headline
         .classes
@@ -31,82 +33,15 @@
           %br
           %br
           %br
-          %br
+        .calendar_dashboard
           = raw(user_event)
           %br
           -if current_user.is_teacher?
             = link_to 'New Meeting',new_meeting_room_path
-        .students
-          - if current_user.is_teacher?
-            %h2
-              %strong
-                My Students
-            %hr
-              %ul
-                - @students.each do |student|
-                  %li
-                    - unless student.nil?
-                      = link_to user_full_name(student), student_dashboard_path(student.id)
-                      - unless karma_number(student).eql?(0)
-                        = "(#{karma_number(student)})"
+     
+          - if !@student.blank? and @teacher.blank?
+            .clear
               %br
-          - elsif current_user.is_observer? and @student.blank? 
-            %h3 Students
-            - @students.each do |student|
-              - begin
-                - unless params[:teacher_id]
-                  = link_to user_full_name(student), student_dashboard_path(student.id)
-                - else
-                  = link_to user_full_name(student), student_activity_feed_path(@teacher.id, student.id)
-                  - unless karma_number(student).eql?(0)
-                    = "(#{karma_number(student)})"
-              - rescue
-              %br
-            - if params[:teacher_id].blank?
-              %h3 Teacher
-              = link_to user_full_name(@teacher), teacher_dashboard_path(@teacher.id) if @teacher
-          - elsif current_user.is_observer? and @student and @teacher
-            %h3 Students
-            - @students.each do |student|
-              = link_to user_full_name(student), student_dashboard_path(student.id)
-              %br
-        .feed
-          %br
-          - if current_user.is_teacher? and @student
-            %h1
-              = "#{user_full_name(@student)}'s activity feed"
-          - else
-            %h1 My class activity feed
-          %table
-            - if current_user.is_teacher? and @student
-              - @activity_streams.each do |activity_stream|
-                - if activity_stream.actor_id.to_s.eql?(@student.id.to_s)
-                  - begin
-                    - actor = activity_stream.actor_type.constantize.find_by_id(activity_stream.actor_id)
-                    - object = activity_stream.object_type.constantize.find_by_id(activity_stream.object_id)
-                    %tr
-                      %td
-                        = "#{date_format(activity_stream.created_at)}"
-                        = link_feed_helper(activity_stream, actor, object)
-                  - rescue
-                    %strike= deleted_feed(activity_stream, actor)
-                - else
-                  - @activity_streams.each do |activity_stream|
-                    -begin
-                      - actor = activity_stream.actor_type.constantize.find(activity_stream.actor_id)
-                      - object = activity_stream.object_type.constantize.find(activity_stream.object_id)
-                      %tr
-                        %td
-                          - if current_user.is_student? and activity_stream.actor_id.to_s.eql?(current_user.id.to_s)
-                            = date_feed_format(activity_stream, actor)
-                            = link_feed_helper(activity_stream, actor, object)
-                      - rescue
-                        - if current_user.is_student? and activity_stream.actor_id.to_s.eql?(current_user.id)
-                          %strike= deleted_feed(activity_stream, actor)
-            - else
-              - if !@student.blank? and @teacher.blank?
-                .clear
-                %br
                 %br
                 %br
                 %div{:style => "text-align:left"}
@@ -184,70 +119,71 @@
                               %td
                                 = "#{date_format(activity_stream.created_at)}"
                                 = "#{actor.instance_eval(activity_stream.actor_name_method)} #{activity_stream.verb.gsub("_", " ")} #{activity_stream.activity} #{object.instance_eval(activity_stream.object_name_method)}"
-  
-  - elsif current_user.is_teacher?
+
+- elsif current_user.is_teacher?
   %center
-    %div{:style => "text-align:right; width:50%"}
-      = user_full_name(current_user)
-      = link_to_function "Settings", edit_user_registration_path
-      = link_to "Sign Out", destroy_user_session_path, :method => :delete
-      %div{:class => "clear"}
-      %br
-      %br
-      %div{:style => "text-align:left"}
-        %h2 Welcome to ClassCloud!
-        %h3 To get started, you'll need to add a class.
-        = form_tag(class_rooms_path, :method => :post) do
-          - if !@error_messages.blank?
-            #error_explanation
-              %h2
-                = pluralize(@error_messages.count, "error")
-                prohibited this create class from being saved:
-              %ul
-                - @error_messages.each do |msg|
-                  %li= msg
-          %div
-            = "Add a class"
-            - unless params[:class_room].blank?
-              = text_field_tag "class_room[name]", params[:class_room][:name],:class =>'class_name'
-            - else
-              = text_field_tag "class_room[name]", nil,:class =>'class_name'
-          %h3 Now you'll add students, you can always edit or add students later..
-          %div#form1
-            = "Add A student"
-            - unless params[:user].blank?
-              = text_field_tag "user[first_name][]", params[:user][:first_name], {:placeholder=>'First Name', :size => 10}
-              = text_field_tag "user[last_name][]", params[:user][:last_name], {:placeholder=>'Last Name', :size => 10}
-              = email_field_tag "user[email][]", params[:user][:email], {:placeholder=>'Email', :size => 10}
-            - else
-              = text_field_tag "user[first_name][]", nil, {:placeholder=>'First Name', :size => 10,:class =>'first_name'}
-              = text_field_tag "user[last_name][]", nil, {:placeholder=>'Last Name', :size => 10,:class =>'last_name'}
-              = email_field_tag "user[email][]", nil, {:placeholder=>'Email', :size => 10,:class =>'email'}
-            %br
-            %br
-          %div#clone
-          %div{:style => "text-align:right"}
-            = submit_tag "I'm done adding students",:onclick =>'return checkTextField()'
-          = link_to 'Add more students', '#', :onclick =>'addStudent()'
+    %br
+      %div{:style => "text-align:right; width:50%"}
+        = user_full_name(current_user)
+        = link_to_function "Settings", edit_user_registration_path
+        = link_to "Sign Out", destroy_user_session_path, :method => :delete
+        %div{:class => "clear"}
+        %br
+        %br
+        %div{:style => "text-align:left"}
+          %h2 Welcome to ClassCloud!
+          %h3 To get started, you'll need to add a class.
+          = form_tag(class_rooms_path, :method => :post) do
+            - if !@error_messages.blank?
+              #error_explanation
+                %h2
+                  = pluralize(@error_messages.count, "error")
+                  prohibited this create class from being saved:
+                %ul
+                  - @error_messages.each do |msg|
+                    %li= msg
+            %div
+              = "Add a class"
+              - unless params[:class_room].blank?
+                = text_field_tag "class_room[name]", params[:class_room][:name],:class =>'class_name'
+              - else
+                = text_field_tag "class_room[name]", nil,:class =>'class_name'
+            %h3 Now you'll add students, you can always edit or add students later..
+            %div#form1
+              = "Add A student"
+              - unless params[:user].blank?
+                = text_field_tag "user[first_name][]", params[:user][:first_name], {:placeholder=>'First Name', :size => 10}
+                = text_field_tag "user[last_name][]", params[:user][:last_name], {:placeholder=>'Last Name', :size => 10}
+                = email_field_tag "user[email][]", params[:user][:email], {:placeholder=>'Email', :size => 10}
+              - else
+                = text_field_tag "user[first_name][]", nil, {:placeholder=>'First Name', :size => 10,:class =>'first_name'}
+                = text_field_tag "user[last_name][]", nil, {:placeholder=>'Last Name', :size => 10,:class =>'last_name'}
+                = email_field_tag "user[email][]", nil, {:placeholder=>'Email', :size => 10,:class =>'email'}
+              %br
+              %br
+            %div#clone
+            %div{:style => "text-align:right"}
+              = submit_tag "I'm done adding students",:onclick =>'return checkTextField()'
+            = link_to 'Add more students', '#', :onclick =>'addStudent()'
 
-  - elsif (current_user.is_observer? and current_user.class_room_observers.blank?)
+    - elsif (current_user.is_observer? and current_user.class_room_observers.blank?)
 
-  #sitewrapper
-    .header
-      .nav
-        %h1
-          - if current_user.is_observer?
-            = link_to "Switch user", root_path
-          = user_full_name(current_user)
+    #sitewrapper
+      .header
+        .nav
+          %h1
+            - if current_user.is_observer?
+              = link_to "Switch user", root_path
+            = user_full_name(current_user)
 
-          |
-          = link_to "Sign Out", destroy_user_session_path, :method => :delete
-          - unless current_user.is_observer?
-            .clear
+            |
+            = link_to "Sign Out", destroy_user_session_path, :method => :delete
+            - unless current_user.is_observer?
+              .clear
+              %br
+              %br
+        .main
+          %p
             %br
-            %br
-      .main
-        %p
-          %br
-          = "after you are invited by your teacher, you will receive confirmation from us.thank you"
+            = "after you are invited by your teacher, you will receive confirmation from us.thank you"
 
