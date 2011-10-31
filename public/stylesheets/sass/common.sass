@@ -211,12 +211,19 @@ body
     &:visited
     color: #3f3d32
   .students
+    +gradient-bg(#FFFAFA,  #EEE9E9)
+    border-style: ridge
+    border-color: #EECBAD
+    +border-top-right-radius(28px)
+    +border-top-left-radius(28px)
+    +border-bottom-left-radius(28px)
+    +border-bottom-right-radius(28px)
+    margin-top: 36px
     margin-top: 9px
     padding: 9px
     float: right
     text-align: left
     max-width: 150px
-    min-height: 100
     h2
       font: normal 14px myriad-pro, sans-serif
       -webkit-font-smoothing: anti-aliased

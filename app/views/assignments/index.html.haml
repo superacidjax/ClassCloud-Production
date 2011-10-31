@@ -12,6 +12,8 @@
     = link_to image_tag('new_assignment_button.png'), new_class_room_assignment_path(@class.id) if current_user.is_teacher?
     - unless current_user.is_observer? or  current_user.is_student?
       = link_to image_tag('edit_categories_button.png'),assignment_category_class_room_assignments_path(@class.id)
+      = link_to "getting started", getting_started_path
+      
 #user_content
   .tables
     %table.assignments

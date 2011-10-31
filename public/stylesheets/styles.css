@@ -261,12 +261,25 @@ body {
     text-decoration: none;
     color: #3f3d32; }
   #main_content .students {
+    background-color: #fffafa;
+    background-image: -moz-linear-gradient(100% 100% 90deg, #eee9e9, #fffafa);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fffafa), to(#eee9e9));
+    border-style: ridge;
+    border-color: #eecbad;
+    -moz-border-radius-topright: 28px;
+    border-top-right-radius: 28px;
+    -moz-border-radius-topleft: 28px;
+    border-top-left-radius: 28px;
+    -moz-border-radius-bottomleft: 28px;
+    border-bottom-left-radius: 28px;
+    -moz-border-radius-bottomright: 28px;
+    border-bottom-right-radius: 28px;
+    margin-top: 36px;
     margin-top: 9px;
     padding: 9px;
     float: right;
     text-align: left;
-    max-width: 150px;
-    min-height: 100; }
+    max-width: 150px; }
     #main_content .students h2 {
       font: normal 14px myriad-pro, sans-serif;
       -webkit-font-smoothing: anti-aliased;

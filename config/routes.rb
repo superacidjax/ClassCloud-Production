@@ -250,6 +250,7 @@ Tes::Application.routes.draw do
   match "/teacher/:teacher_id/dashboard" => "dashboard#index", :as => :teacher_dashboard, :via => :get
   match "/teacher/:teacher_id/dashboard/student/:student_id/activity_feed" => "dashboard#index", :as => :student_activity_feed, :via => :get
   match 'pages/guest', to: 'pages#guest', as: :guest
+  match 'pages/getting_started', to: 'pages#getting_started', as: :getting_started
   match 'pages/development', to: 'pages#development', as: :development
   match 'users/password/new', to: 'users#password#new', as: :account_help
   devise_for :users
