@@ -15,6 +15,7 @@ class Devise::RegistrationsController < ApplicationController
 
   # POST /resource
   def create
+    debugger
     build_resource
     if resource.save
       resource.time_zone = params['user']['time_zone']
@@ -41,7 +42,11 @@ class Devise::RegistrationsController < ApplicationController
       end
     else
       clean_up_passwords(resource)
-      respond_with_navigational(resource) { render_with_scope :new }
+      if params[:state] && params[:state]["name"]
+        redirect_to :back
+      else
+        respond_with_navigational(resource) { render_with_scope :new }
+      end
     end
   end
 

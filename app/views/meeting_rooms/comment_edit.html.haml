@@ -15,8 +15,6 @@
           %tr
             %h6{:colspan => "3"}
               = "#{user_full_name(comment.user)}"
-              - if @meeting_room.user_meeting_rooms.where("user_id =? AND moderator = ?",comment.user.id, true) or @meeting_room.user_id.eql?(current_user.id)
-                = '(Moderator)'
               - unless vote_count(comment.id).eql?(0) or current_user.is_teacher?
                 = "(#{vote_count(comment.id)})"
               said this #{distance_of_time_in_words(comment.created_at, Time.now)} ago:
@@ -33,11 +31,11 @@
             %hr
 - unless @current_user.is_observer?
   %h1 Leave a comment
-  = form_tag(comment_create_meeting_room_path(@meeting_room)) do |f|
+  = form_tag(update_meeting_room_comment_path(@meeting_room),:method =>:put) do |f|
     .field
-      = text_area_tag "comment", nil, :rows => 4, :cols => 40
+      = text_area_tag "comment", @comment.comment, :rows => 4, :cols => 40
     .actions
-      = submit_tag "Add this Comment"
+      = submit_tag "Update Comment"
       %span#assignment_comment_ajax_loader{:style => "display: none"}= image_tag "LoaderIcon.gif"
 
 /= link_to 'Edit', edit_meeting_room_path(@meeting_room)

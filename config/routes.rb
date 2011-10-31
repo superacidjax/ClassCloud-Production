@@ -3,7 +3,17 @@ Tes::Application.routes.draw do
 
   resources :meeting_rooms do
     get "user",:on =>:collection
+    get "moderator", :on =>:member
+    put "add_moderator", :on =>:member
+    member do
+      get "comment_new"
+      post "comment_create"
+    end
   end
+  match "meeting_rooms/:id/comment_edit/:comment_id"=> "meeting_rooms#comment_edit", :as => :edit_meeting_room_comment, :via => :get
+  match "meeting_rooms/:id/comment_update/:comment_id"=> "meeting_rooms#comment_update", :as => :update_meeting_room_comment, :via => :put
+  match "meeting_rooms/:id/comment_destroy/:comment_id"=> "meeting_rooms#comment_destroy", :as => :destroy_meeting_room_comment, :via => :delete
+
 
   resources :states do
     get :autocomplete_state_name, :on => :collection
@@ -36,9 +46,11 @@ Tes::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => "devise/registrations" } do
     get "welcome"=> "devise/registrations#index", :as => :welcome
-
   end
 
+  devise_for :users, :controllers => {:registrations => "devise/registrations" }, :only =>:edit do
+    match "user/:id"=> "devise/registrations#edit", :as => :edit_user, :via => :get
+  end
 
   resources :activity_stream_preferences
   resources :activity_streams
@@ -50,7 +62,6 @@ Tes::Application.routes.draw do
     match "user_profiles/:student_id"=> "user_profiles#index", :as => :user_profile, :via => :get
     devise_for :users, :controllers => {:registrations => "devise/registrations" }, :only =>:edit do
       match "user/:id"=> "devise/registrations#edit", :as => :edit_user, :via => :get
-
     end
 
     resources :upload_files do

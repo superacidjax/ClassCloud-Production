@@ -33,29 +33,7 @@ class ClassRoomsController < ApplicationController
     else
       class_room = ClassRoom.new(:name => params[:class_room][:name], :user_id => current_user.id)
       if class_room.save!
-        if !params[:user][:first_name].blank? or !params[:user][:last_name].blank? or !params[:user][:email].blank?
-          params[:user][:first_name].each_with_index do |val, index|
-            @student = User.new(:first_name => params[:user][:first_name][index.to_i], :last_name => params[:user][:last_name][index.to_i], :email => params[:user][:email][index.to_i])
-            @student.is_not_teacher = true
-            @student.password = "123456"
-            @student.password_confirmation = "123456"
-            @student.user_type = "student"
-            @student.save
-            @student.add_role "student"
-            @student.save
-            ClassRoomStudent.create(:user_id => @student.id, :class_room_id => class_room.id)
-          end
-          if @student.save.eql?(true)
-            redirect_to root_url
-          else            
-            @error_messages = @student.errors.full_messages
-            class_room.destroy
-            render :template => "dashboard/index", :layout => false
-          end
-         
-        else
-          redirect_to root_url
-        end
+        redirect_to root_url
       else
         @error_messages = class_room.errors.full_messages
         render :template => "dashboard/index"

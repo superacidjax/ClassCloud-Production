@@ -175,7 +175,7 @@ function editSchool(id,school_id){
     });
 }
 function checkFieldEditSchool(){
-   if($("#country_name").val().length==0 || $("#city_name").val().length==0 || $("#school_name").val().length==0) {
+    if($("#country_name").val().length==0 || $("#city_name").val().length==0 || $("#school_name").val().length==0) {
         alert('country,city or school name must not empty');
         return false;
     }
@@ -189,8 +189,33 @@ function checkFieldEditSchool(){
 
 function addUser(){
     obj = $("#user_meeting_room").clone();
-        obj.appendTo("#clone").html('<div id="new_class_'+ window.classCounter +'">Add User<input class="email" id="user_email_'+ window.classCounter +'" name="user[email][]" placeholder="Enter Email" size="10" type="email" /><input class="first_name" id="first_name_'+ window.classCounter +'" name="user[first_name][]" placeholder="Enter first name" size="10" type="first_name" /><input class="last_name" id="last_name_'+ window.classCounter +'" name="user[last_name][]" placeholder="Enter last name" size="10" type="last_name" /><br><input type="checkbox" name="user[role][]" id="user_student_role_'+ window.classCounter +'" value="student">Student<input type="checkbox" name="user[role][]" id="user_teacher_role_'+ window.classCounter +'" value="teacher">Teacher<input type="checkbox" name="user[role][]" id="user_other_role_'+ window.classCounter +'" value="observer">Other      <a href="javascript:removeClass('+ window.classCounter +')">Remove</a></div><br>');
+    obj.appendTo("#clone").html('<div id="new_class_'+ window.classCounter +'">Add User<input class="email" id="user_email_'+ window.classCounter +'" name="user[email][]" placeholder="Enter Email" size="10" type="email" /><input class="first_name" id="first_name_'+ window.classCounter +'" name="user[first_name][]" placeholder="Enter first name" size="10" type="first_name" /><input class="last_name" id="last_name_'+ window.classCounter +'" name="user[last_name][]" placeholder="Enter last name" size="10" type="last_name" /><br><input type="checkbox" name="user[role][]" id="user_student_role_'+ window.classCounter +'" value="student">Student<input type="checkbox" name="user[role][]" id="user_teacher_role_'+ window.classCounter +'" value="teacher">Teacher<input type="checkbox" name="user[role][]" id="user_other_role_'+ window.classCounter +'" value="observer">Observer<a href="javascript:removeClass('+ window.classCounter +')">Remove</a></div><br>');
     window.classCounter++;
 
 
+}
+
+function addClassRoom(){
+    if ($('#class_room_name').val().length==0){
+        $('#submit').hide();
+    }else{
+        $('#submit').show();
+        $('#submit_class_name').val('Ok, take me to my dashboard!');
+    }
+}
+
+function checkMeetingRoomField(){
+    if ($('#meeting_room_title').val().length==0){
+        alert("Title can't be blank");
+        return false;
+    }else if($('#meeting_room_description').val().length==0){
+        alert("Description can't be blank");
+        return false;
+    }else if($('#meeting_room_user').val().length==0 || $('#user_first_name_0').val().length==0){
+        alert("User Meeting Room can't be blank");
+        return false;
+    }
+    else{
+        return true;
+    }
 }

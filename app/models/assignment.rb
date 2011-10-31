@@ -6,6 +6,7 @@ class Assignment < ActiveRecord::Base
 
   validates :title, :description, :user_id, :presence => true
   validates :title, :uniqueness => {:scope => :user_id}
+  
   acts_as_voteable
   acts_as_textiled :description
   

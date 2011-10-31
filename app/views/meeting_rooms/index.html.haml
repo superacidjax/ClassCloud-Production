@@ -1,1 +1,4 @@
 = raw(user_event)
+%br
+- if current_user.is_teacher?
+  = link_to 'Add Meeting Room',new_meeting_room_path

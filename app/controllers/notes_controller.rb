@@ -58,7 +58,7 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
     @note.comments.create(params[:comment])
     
-    redirect_to comment_new_class_room_note_path(@class, params[:id])
+    redirect_to comment_new_class_room_note_url(@class, params[:id])
   end
     
 
@@ -67,7 +67,7 @@ class NotesController < ApplicationController
     comment = @note.comments.find(params[:comment_id])
     comment.destroy if comment
     
-    redirect_to comment_new_class_room_note_path(@class, params[:id])
+    redirect_to comment_new_class_room_note_url(@class, params[:id])
   end
 
   def comment_edit
@@ -85,7 +85,7 @@ class NotesController < ApplicationController
     end
     
     if @comment.update_attributes(params[:comment])
-      redirect_to comment_new_class_room_note_path(@class, params[:id])
+      redirect_to comment_new_class_room_note_url(@class, params[:id])
     else
       render :action => "comment_edit"
     end

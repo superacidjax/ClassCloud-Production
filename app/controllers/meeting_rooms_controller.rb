@@ -6,7 +6,6 @@ class MeetingRoomsController < ApplicationController
     @meeting_rooms = MeetingRoom.all
     @month = (params[:month] || (Time.zone || Time).now.month).to_i
     @year = (params[:year] || (Time.zone || Time).now.year).to_i
-
     @shown_month = Date.civil(@year, @month)
     @class = current_user.class_rooms
     @event_strips = current_user.events.where("date(start_at) BETWEEN date(now()) and date(start_at) +14").event_strips_for_month(@shown_month)
@@ -20,6 +19,7 @@ class MeetingRoomsController < ApplicationController
 
   def show
     @meeting_room = MeetingRoom.find(params[:id])
+    @user_meeting_room = @meeting_room.user_meeting_rooms.where("user_id = ? AND moderator = ?",current_user.id, true)
   end
 
   def new
@@ -33,9 +33,29 @@ class MeetingRoomsController < ApplicationController
   def create
     @meeting_room = MeetingRoom.new(params[:meeting_room])
 
-    if @meeting_room.save
+      if @meeting_room.save
+      unless params[:user].nil?
+        counter = params[:user][:email].count
+        tmp = User.generate_random_string
+        for i in(0..counter)
+          user = User.new
+          user.email = params[:user][:email][i]
+          user.first_name = params[:user][:first_name][i]
+          user.last_name = params[:user][:last_name][i]
+          user.password = tmp
+          user.password_confirmation = tmp
+          if params[:user][:role].nil?
+            user.add_role "other"
+          else
+            user.add_role params[:user][:role][i]
+          end
+          user.is_user_meeting_room = true
+          user.save
+        end
+      end
+      
       @meeting_room.create_meeting_room_user(params[:user_meeting])
-      redirect_to meeting_rooms_path, notice: 'Meeting room was successfully created.'
+      redirect_to moderator_meeting_room_url(@meeting_room), notice: 'Meeting room was successfully created.'
     else
       render action: "new"
     end
@@ -60,9 +80,7 @@ class MeetingRoomsController < ApplicationController
 
   def user
     @user = User.search_by_name(params[:q])
-    require 'pp'
 
-    pp @user
     if @user.blank?
       render :json => []
     else
@@ -71,4 +89,53 @@ class MeetingRoomsController < ApplicationController
     
   end
 
+  def comment_new
+    @meeting_room = MeetingRoom.find(params[:id])
+    @user_meeting_room = @meeting_room.user_meeting_rooms.where("user_id = ? AND moderator = ?",current_user.id, true)
+  end
+
+  def comment_create
+    @meeting_room = MeetingRoom.find(params[:id])
+    @meeting_room.comments.create(:comment => params[:comment], :user_id => current_user.id)
+
+    redirect_to meeting_room_url(params[:id])
+  end
+
+  def comment_destroy
+    @meeting_room = MeetingRoom.find(params[:id])
+    comment = @meeting_room.comments.find(params[:comment_id])
+    comment.destroy if comment
+
+    redirect_to meeting_room_url(params[:id])
+  end
+
+  def comment_edit
+    @meeting_room = MeetingRoom.find(params[:id])
+    @comment = @meeting_room.comments.find(params[:comment_id])
+    @user_meeting_room = @meeting_room.user_meeting_rooms.where("user_id = ? AND moderator =?",current_user.id, true)
+ 
+  end
+
+  def comment_update
+    @meeting_room = MeetingRoom.find(params[:id])
+    @comment = @meeting_room.comments.find(params[:comment_id])
+
+    if @comment.update_attribute("comment", params[:comment])
+      redirect_to meeting_room_url(params[:id])
+    else
+      render :action => "comment_edit"
+    end
+  end
+
+  def moderator
+  @meeting_room = MeetingRoom.find(params[:id])
+  end
+
+  def add_moderator
+    user_meeting_room = UserMeetingRoom.find(params[:id])
+    user_meeting_room.update_attribute("moderator",params[:user][:moderator])
+    user_meeting_room.save!
+    
+    redirect_to moderator_meeting_room_url(user_meeting_room.meeting_room.id)
+  end
 end

@@ -35,7 +35,7 @@
           = raw(user_event)
           %br
           -if current_user.is_teacher?
-            = link_to 'New Meeting',new_meeting_room_path
+            = link_to 'Add Meeting Room',new_meeting_room_path
         .students
           - if current_user.is_teacher?
             %h2
@@ -209,26 +209,13 @@
           %div
             = "Add a class"
             - unless params[:class_room].blank?
-              = text_field_tag "class_room[name]", params[:class_room][:name],:class =>'class_name'
+              = text_field_tag "class_room[name]", params[:class_room][:name],:class =>'class_name',:onkeyup=>"addClassRoom();"
             - else
-              = text_field_tag "class_room[name]", nil,:class =>'class_name'
+              = text_field_tag "class_room[name]", nil,:class =>'class_name',:onkeyup=>"addClassRoom();"
           %h3 Now you'll add students, you can always edit or add students later..
-          %div#form1
-            = "Add A student"
-            - unless params[:user].blank?
-              = text_field_tag "user[first_name][]", params[:user][:first_name], {:placeholder=>'First Name', :size => 10}
-              = text_field_tag "user[last_name][]", params[:user][:last_name], {:placeholder=>'Last Name', :size => 10}
-              = email_field_tag "user[email][]", params[:user][:email], {:placeholder=>'Email', :size => 10}
-            - else
-              = text_field_tag "user[first_name][]", nil, {:placeholder=>'First Name', :size => 10,:class =>'first_name'}
-              = text_field_tag "user[last_name][]", nil, {:placeholder=>'Last Name', :size => 10,:class =>'last_name'}
-              = email_field_tag "user[email][]", nil, {:placeholder=>'Email', :size => 10,:class =>'email'}
-            %br
-            %br
-          %div#clone
-          %div{:style => "text-align:right"}
-            = submit_tag "I'm done adding students",:onclick =>'return checkTextField()'
-          = link_to 'Add more students', '#', :onclick =>'addStudent()'
+          %div#submit{:style => "text-align:right;display:none;"}
+            = submit_tag "I'm done adding students",:onclick =>'return checkTextField()',:id=>'submit_class_name'
+          /= link_to 'Add more students', '#', :onclick =>'addStudent()'
 
   - elsif (current_user.is_observer? and current_user.class_room_observers.blank?)
 
@@ -239,7 +226,6 @@
           - if current_user.is_observer?
             = link_to "Switch user", root_path
           = user_full_name(current_user)
-
           |
           = link_to "Sign Out", destroy_user_session_path, :method => :delete
           - unless current_user.is_observer?
@@ -250,4 +236,3 @@
         %p
           %br
           = "after you are invited by your teacher, you will receive confirmation from us.thank you"
-

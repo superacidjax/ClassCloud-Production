@@ -109,7 +109,7 @@ class Admin::AdminsController < ApplicationController
     end
     school.save!
      
-    redirect_to school_admin_admins_path
+    redirect_to school_admin_admins_url
   end
 
   def new_school
@@ -121,7 +121,7 @@ class Admin::AdminsController < ApplicationController
     city = City.find_or_create_by_name_and_state_id(:name =>params[:city], :state_id => state.id)
     school = School.find_or_create_by_name_and_state_id_and_city_id(:name => params[:school],:state_id=>state.id, :city_id=>city.id)
 
-    redirect_to school_admin_admins_path
+    redirect_to school_admin_admins_url
   end
 
 end

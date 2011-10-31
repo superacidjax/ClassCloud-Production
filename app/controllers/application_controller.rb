@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :get_my_students_and_class
   before_filter :admin?
   before_filter :set_timezone
+  before_filter :is_user_meeting_room
 
   def user_teacher?
     current_user.nil? ? false : current_user.is_teacher?
@@ -42,7 +43,7 @@ class ApplicationController < ActionController::Base
  
   def provide_system_the_username_and_password
     if params[:controller].eql?("devise/confirmations") and params[:action].eql?("show")
-      
+
       unactivated_user = User.find_by_confirmation_token(params[:confirmation_token])
       redirect_to pick_username_and_password_url(:confirmation_token => params[:confirmation_token]) if unactivated_user and unactivated_user.username.nil? and params[:user_save_username_and_password].blank?
     end
@@ -58,15 +59,23 @@ class ApplicationController < ActionController::Base
   end
 
   def admin?
-    if params[:controller].eql?("dashboard")and current_user.admin?
-      redirect_to admin_admins_path
+    if params[:controller].eql?("dashboard") and current_user.admin?
+      redirect_to admin_admins_url
+    end
+  end
+
+  def is_user_meeting_room
+    if current_user
+      if params[:controller].eql?("dashboard") and current_user.is_user_meeting_room? and current_user.username.nil?
+        redirect_to meeting_rooms_url
+      end
     end
   end
 
   def set_timezone
     Time.zone = current_user.time_zone if current_user && current_user.time_zone
   end
-  
+
   private
   
   def get_my_students_and_class
