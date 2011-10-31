@@ -119,7 +119,7 @@ body
     margin: auto
     width: 960px
     text-align: left
-    padding: 9px
+    padding: 12px
     h2
       font: normal 18px myriad-pro, sans-serif
       -webkit-font-smoothing: anti-aliased
@@ -214,19 +214,22 @@ body
     &:visited
     color: #3f3d32
   .students
-    +gradient-bg(#FFFAFA,  #EEE9E9)
-    border-style: ridge
-    border-color: #EECBAD
-    +border-top-right-radius(28px)
-    +border-top-left-radius(28px)
-    +border-bottom-left-radius(28px)
-    +border-bottom-right-radius(28px)
     margin-top: 36px
     margin-top: 9px
-    padding: 9px
     float: right
-    text-align: left
     max-width: 150px
+    .names
+      +gradient-bg(#FFFAFA, #F5F5F5)
+      border-style: ridge
+      border-color: #448CCB
+      +border-top-right-radius(18px)
+      +border-top-left-radius(18px)
+      +border-bottom-left-radius(18px)
+      +border-bottom-right-radius(18px)   
+      padding: 9px  
+      text-align: left
+      height: 500px
+      overflow: auto
     
     h2
       font: normal 14px myriad-pro, sans-serif
@@ -315,7 +318,7 @@ body
   
 #user_content
   +gradient-bg(#FFFAFA,  #EEE9E9)
-  width: 810px
+  width: 800px
   border-style: ridge
   border-color: #EECBAD
   +border-top-right-radius(28px)
@@ -324,7 +327,7 @@ body
   +border-bottom-right-radius(28px)
   margin-top: 36px
   .tables
-    padding: 18px
+    padding: 9px
   .textile
     padding: 18px
     white-space: pre-wrap
@@ -342,6 +345,7 @@ body
       color: #3f3d32  
   
 #comments_container
+  clear: right
   .comment_replies
     margin-left: 72px
     margin-top: 18px
@@ -349,7 +353,7 @@ body
   
    
 table.assignments
-  width: 792px
+  width: 783px
   margin-top: 18px
   text-align: left
   white-space: normal
@@ -417,7 +421,6 @@ table.assignments
   bottom: 0
   .footer
     text-align: center
-    padding: 9px
     margin: 0 auto
     width: 960px
     padding: 9px

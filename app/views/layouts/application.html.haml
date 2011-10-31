@@ -103,18 +103,19 @@
                   = link_to image_tag('student_work_button.png'), teacher_writeboards_index_class_room_writeboards_path(@class.id, @teacher.id)
               %br
               .students
-                - unless current_user.is_student?  
-                  %h2
-                    %strong
-                      My Students
-                  %hr
+                %h2
+                  %strong
+                    My Students
+                %hr
+                .names
+                  - unless current_user.is_student?  
                     %ul
                       - @students.each do |student|
                         %li
                           = link_to student.full_name, class_room_user_profile_path(@class.id, student.id)
                           - unless karma_number(student).eql?(0)
                             = "(#{karma_number(student)})"
-              %br
+                %br
               = yield
           - if current_user.is_teacher?
             %br
