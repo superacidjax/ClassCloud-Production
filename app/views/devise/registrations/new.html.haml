@@ -1,97 +1,117 @@
 =stylesheet_link_tag 'token-input.css'
 =javascript_include_tag 'jquery.tokeninput.js'
+<script type="text/javascript" src="http://use.typekit.com/zsr1ror.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script type="text/javascript"> function woopraReady(tracker) {tracker.setDomain('classcloud.me'); tracker.setIdleTimeout(1800000); tracker.trackPageview({type:'pageview',url:window.location.pathname+window.location.search,title:document.title}); return false;} (function() {var wsc = document.createElement('script'); wsc.src = document.location.protocol+'//static.woopra.com/js/woopra.js'; wsc.type = 'text/javascript'; wsc.async = true; var ssc = document.getElementsByTagName('script')[0]; ssc.parentNode.insertBefore(wsc, ssc);})();</script>
 
 #sitewrapper
-  .header
-    .nav
+  #container
+    .wrapper
+    
+      
+#main_content
+  .headline
+    .headline_text
+      %h1 You're special. You're a teacher.
+    .invite_text
+      %br
+      %br
       %h1
-        Already signed up?
-        =link_to "Sign in", root_path
-    .main
-      .signup
-        %h1 Sign up for the ClassCloud beta
-        %br
-        %h2
-          You're only three clicks away from the paperless classroom!
-        .form 
-          = form_for(resource, :as => resource_name, :url => registration_path(resource_name),:multipart=>true) do |f|
-            = devise_error_messages!
+        We aren't inviting just anyone to use ClassCloud..
+      %br
+      %h2
+        ClassCloud is currently in a private beta, which means, it isn't available to everyone yet.
+        With your feedback, we're going to make ClassCloud into the new standard in classroom management
+        and student interaction.
+      %br
+      %h1
+        %center
+          Oh, and it's free! (We thought you'd like that part!)
+      %br
+      .logo
+        = image_tag "cclogo_xsmall.png"
+    .sign_up
+      %h2
+        Just fill out this short form and you'll get a confirmation email to set up your classes.
+      .form 
+        = form_for(resource, :as => resource_name, :url => registration_path(resource_name),:multipart=>true) do |f|
+          = devise_error_messages!
+          %br
+          %h3
+            = "First name"
+            = f.text_field :first_name
+          %br
+          %h3
+            = "Last name"
+            = f.text_field :last_name
+          %br
+          %h3
+            = "Username"
+            = f.text_field :username, :placeholder=>'use your email address'
+          %br
+          %h3
+            = "Email"
+            = f.email_field :email
+          %br
+          %h3
+            = "Your password"
+            = f.password_field :password
+          %br
+          %h3
+            = "Confirm your password"
+            = f.password_field :password_confirmation
+          %br
+          %h3
+            = "Time zone"
+            = time_zone_select("user", "time_zone", nil, :default => "Pacific Time (US & Canada)" )
+          %br
+          %h3
+            /= "School:"
+          %br
+          %h3
+          %div#school_list
+            %div{:style=>"float:left"}
+              /= "State :"
+              /= select_tag "city", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "$('#city_name').load('/pages/city/'+this.value)"
+            /%div#city_name{:style=>"float:left"}
+            /  = "City :"
+            /  = select("user","school_id",@states.collect {|p| [ p.city, p.id ] })
+            /%div#school_name{:style=>"float:center"}
+            /  = "Name :"
+            /  = select("user","school_id",@states.collect {|p| [ p.schools.first.name, p.id ] })
             %br
-            %h3
-              = "First name"
-              = f.text_field :first_name
-            %br
-            %h3
-              = "Last name"
-              = f.text_field :last_name
-            %br
-            %h3
-              = "Username"
-              = f.text_field :username, :placeholder=>'use your email address'
-            %br
-            %h3
-              = "Email"
-              = f.email_field :email
-            %br
-            %h3
-              = "Your password"
-              = f.password_field :password
-            %br
-            %h3
-              = "Confirm your password"
-              = f.password_field :password_confirmation
-            %br
-            %h3
-              = "Time zone"
-              = time_zone_select("user", "time_zone", nil, :default => "Pacific Time (US & Canada)" )
-            %br
-            %h3
-              /= "School:"
-            %br
-            %h3
-            %div#school_list
-              %div{:style=>"float:left"}
-                /= "State :"
-                /= select_tag "city", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "$('#city_name').load('/pages/city/'+this.value)"
-              /%div#city_name{:style=>"float:left"}
-              /  = "City :"
-              /  = select("user","school_id",@states.collect {|p| [ p.city, p.id ] })
-              /%div#school_name{:style=>"float:center"}
-              /  = "Name :"
-              /  = select("user","school_id",@states.collect {|p| [ p.schools.first.name, p.id ] })
-              %br
 
-                = "State :"
-                = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value,'#{params[:controller]}');"
-              %div#city_name{:style=>"float:left;"}
-              %div#school_name{:style=>"float:center;"}
-              %div#loader{:style=>"display:none;float:left;"}
-                = image_tag('ajax-loading.gif')
-              %br
-              %h3
-                = 'If you not found your school'
-                = link_to 'Click here', '#', :onclick => "$('#school_list').hide();$('#user_school_name').show();"
-            %div#user_school_name{:style => "display:none"}
-              %h3
-                = "Country"
-                = text_field_tag "country[name]", nil,:placeholder =>"enter your country"
-                = "State"
-                = text_field_tag "state[name2]", nil, :placeholder =>"enter your state"
-                = "City"
-                = text_field_tag "state[city2]", nil, :placeholder =>"enter your city"
-                = "School"
-                = text_field_tag "school[name2]", nil, :placeholder =>"enter your school"
-                = hidden_field_tag 'country_name1'
-                %br
+              = "State :"
+              = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value,'#{params[:controller]}');"
+            %div#city_name{:style=>"float:left;"}
+            %div#school_name{:style=>"float:center;"}
+            %div#loader{:style=>"display:none;float:left;"}
+              = image_tag('ajax-loading.gif')
+            %br
             %h3
-              = f.submit "Sign up", :class=>'submit'              
-
+              = 'If you not found your school'
+              = link_to 'Click here', '#', :onclick => "$('#school_list').hide();$('#user_school_name').show();"
+          %div#user_school_name{:style => "display:none"}
+            %h3
+              = "Country"
+              = text_field_tag "country[name]", nil,:placeholder =>"enter your country"
+              = "State"
+              = text_field_tag "state[name2]", nil, :placeholder =>"enter your state"
+              = "City"
+              = text_field_tag "state[city2]", nil, :placeholder =>"enter your city"
+              = "School"
+              = text_field_tag "school[name2]", nil, :placeholder =>"enter your school"
+              = hidden_field_tag 'country_name1'
+              %br
+          %h3
+            = f.submit "Sign up", :class=>'submit'              
+    
 
 :javascript
-  $(document).ready(function () {
-      $("#country_name2").tokenInput("/pages/country/", {tokenLimit:1,
-         onAdd: function(item) {
-           $('#country_name1').val(item.name);
-         }
-       })
-  });
+$(document).ready(function () {
+    $("#country_name2").tokenInput("/pages/country/", {tokenLimit:1,
+       onAdd: function(item) {
+         $('#country_name1').val(item.name);
+       }
+     })
+});

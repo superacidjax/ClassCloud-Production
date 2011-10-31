@@ -1,11 +1,30 @@
 #sitewrapper
-  .header
-    .nav
-      %h1
-        Already signed up?
-        =link_to "Sign in", root_path
-    .main
-      .signup
-        %h1
-          Thanks for signing up! Check your email for your registration confirmation.
+  #container
+    .wrapper
+    
       
+#main_content
+  .headline
+    .headline_text
+      %h1 Thanks.  
+    .thanks_text
+      %br
+      %br
+      %h1
+        %center
+          Now check your email! You'll receive a confirmation.
+      %br
+      %h2
+        Click the link, and start adding your first class.
+        If you don't receive the confirmation email, check your spam folder.
+        If you still didn't receive it, go to the classcloud.me homepage and
+        under the login section, there's a link to resend your confirmation email.
+      %br
+      %hr
+        .right
+          %h2
+            Follow ClassCloud on Twitter.
+            = link_to image_tag('icon_twitter.png'), "http://twitter.com/classcloud"
+      %br
+      .logo
+        = image_tag "cclogo_xsmall.png"

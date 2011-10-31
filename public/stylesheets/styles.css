@@ -162,6 +162,8 @@ body {
       font: normal 12px myriad-pro, sans-serif;
       -webkit-font-smoothing: anti-aliased;
       color: #3f3d32; }
+    #main_content .headline .subhead_text a {
+      text-decoration: underline; }
   #main_content .standard_text {
     margin: auto;
     width: 960px;
@@ -175,26 +177,62 @@ body {
       font: normal 12px myriad-pro, sans-serif;
       -webkit-font-smoothing: anti-aliased;
         -webkit-font-smoothing-color: #3f3d32; }
-    #main_content .standard_text .invite_request h1 {
-      font: normal 36px myriad-pro, sans-serif;
-      -webkit-font-smoothing: anti-aliased;
-      color: #b22222; }
-    #main_content .standard_text .invite_request h2 {
+  #main_content .invite_text {
+    width: 810px;
+    text-align: left;
+    padding-left: 18px;
+    line-height: 27px; }
+  #main_content .thanks_text {
+    width: 960px;
+    text-align: left;
+    padding-left: 18px;
+    line-height: 27px; }
+  #main_content .sign_up {
+    background-color: #fffafa;
+    background-image: -moz-linear-gradient(100% 100% 90deg, #eee9e9, #fffafa);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fffafa), to(#eee9e9));
+    border-style: ridge;
+    border-color: #eecbad;
+    -moz-border-radius-topright: 28px;
+    border-top-right-radius: 28px;
+    -moz-border-radius-topleft: 28px;
+    border-top-left-radius: 28px;
+    -moz-border-radius-bottomleft: 28px;
+    border-bottom-left-radius: 28px;
+    -moz-border-radius-bottomright: 28px;
+    border-bottom-right-radius: 28px;
+    margin-top: 36px;
+    text-align: left;
+    width: 640px;
+    padding: 9px; }
+    #main_content .sign_up h2 {
       font: normal 18px myriad-pro, sans-serif;
       -webkit-font-smoothing: anti-aliased;
       color: #3f3d32; }
-    #main_content .standard_text .testimonials {
+    #main_content .sign_up h3 {
+      font: normal 12px myriad-pro, sans-serif;
+      -webkit-font-smoothing: anti-aliased;
+        -webkit-font-smoothing-color: #3f3d32; }
+    #main_content .sign_up .invite_request h1 {
+      font: normal 36px myriad-pro, sans-serif;
+      -webkit-font-smoothing: anti-aliased;
+      color: #b22222; }
+    #main_content .sign_up .invite_request h2 {
+      font: normal 18px myriad-pro, sans-serif;
+      -webkit-font-smoothing: anti-aliased;
+      color: #3f3d32; }
+    #main_content .sign_up .testimonials {
       margin-top: 36px;
       text-align: left; }
-      #main_content .standard_text .testimonials h1 {
+      #main_content .sign_up .testimonials h1 {
         font: normal 24px myriad-pro, sans-serif;
         -webkit-font-smoothing: anti-aliased;
         color: #b22222; }
-      #main_content .standard_text .testimonials h2 {
+      #main_content .sign_up .testimonials h2 {
         font: normal 18px daniel, cursive;
         -webkit-font-smoothing: anti-aliased;
         color: #3f3d32; }
-      #main_content .standard_text .testimonials h3 {
+      #main_content .sign_up .testimonials h3 {
         text-align: right;
         font: normal 18px daniel, cursive;
         -webkit-font-smoothing: anti-aliased;
