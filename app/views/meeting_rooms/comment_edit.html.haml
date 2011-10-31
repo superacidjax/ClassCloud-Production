@@ -37,7 +37,3 @@
     .actions
       = submit_tag "Update Comment"
       %span#assignment_comment_ajax_loader{:style => "display: none"}= image_tag "LoaderIcon.gif"
-
-/= link_to 'Edit', edit_meeting_room_path(@meeting_room)
-/\|
-/= link_to 'Back', meeting_rooms_path

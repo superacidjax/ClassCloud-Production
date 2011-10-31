@@ -19,6 +19,7 @@ class MeetingRoomsController < ApplicationController
 
   def show
     @meeting_room = MeetingRoom.find(params[:id])
+    @user_meeting_rooms = @meeting_room.user_meeting_rooms
     @user_meeting_room = @meeting_room.user_meeting_rooms.where("user_id = ? AND moderator = ?",current_user.id, true)
   end
 

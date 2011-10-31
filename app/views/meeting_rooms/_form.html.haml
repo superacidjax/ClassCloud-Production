@@ -13,9 +13,6 @@
   .field
     = f.label :description
     = f.text_area :description,:placeholder=>'Enter description'
-  /.field
-    /= f.label :meeting_type
-    /= f.select :meeting_type, MeetingRoom::MEETING_TYPE, :unclude_blank =>:true
   .field
     = label_tag 'User meeting'
     = hidden_field_tag 'meeting_room[user_id]',current_user.id

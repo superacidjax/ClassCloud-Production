@@ -5,6 +5,15 @@
 %h3 Description
 = @meeting_room.description
 %br
+%div{:style=>"float:right;"}
+  = @meeting_room.user.full_name
+  = '(moderator)'
+  %br
+  - @user_meeting_rooms.each do |user_meeting_room|
+    = user_meeting_room.user.full_name
+    - if user_meeting_room.moderator?
+      ='(moderator)'
+    %br
 %table
 %tr
   %td{:colspan => "3"}
@@ -39,7 +48,3 @@
     .actions
       = submit_tag "Add this Comment"
       %span#assignment_comment_ajax_loader{:style => "display: none"}= image_tag "LoaderIcon.gif"
-
-/= link_to 'Edit', edit_meeting_room_path(@meeting_room)
-/\|
-/= link_to 'Back', meeting_rooms_path
