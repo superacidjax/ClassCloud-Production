@@ -3,10 +3,9 @@
 = javascript_include_tag 'coffeescripts'
 = yield :calendar_js_and_css
 = csrf_meta_tag
-%h1 New meeting_room
+%h1 New meeting room
 
 = render 'form'
-
 = link_to 'Add other user ','#',:onclick =>"addUser();"
 %br
 = link_to 'Back', meeting_rooms_path

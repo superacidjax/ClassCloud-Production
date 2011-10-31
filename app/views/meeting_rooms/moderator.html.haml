@@ -1,0 +1,17 @@
+%h1="title: #{@meeting_room.title}"
+%table{:border =>"1"}
+  %tr
+    %td User
+    %td Moderator
+    - @meeting_room.user_meeting_rooms.each do |user_meeting_room|
+      %tr
+        %td= user_meeting_room.user.full_name
+        = form_tag add_moderator_meeting_room_path(user_meeting_room),:method=>:put ,:remote => true do
+          %td
+            - if user_meeting_room.moderator?
+              = check_box_tag 'user[moderator]', 0,false,{:onchange =>'this.form.submit()', :onclick => "$('#loading').show()"}
+              = 'done'
+            - else
+              = check_box_tag 'user[moderator]', 1,false,{:onchange =>'this.form.submit()', :onclick => "$('#loading').show()"}
+        #loading{:style=> "display: none;"}
+          = image_tag ('LoaderIcon.gif')

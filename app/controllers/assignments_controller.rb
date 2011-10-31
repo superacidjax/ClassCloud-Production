@@ -123,7 +123,7 @@ class AssignmentsController < ApplicationController
     @assignment.comments.create(:comment => params[:comment], :user_id => current_user.id)
     @assignment.reload
     
-    redirect_to comment_new_class_room_assignment_path(params[:class_room_id],params[:id])
+    redirect_to comment_new_class_room_assignment_url(params[:class_room_id],params[:id])
   end
 
   def comment_destroy
@@ -131,7 +131,7 @@ class AssignmentsController < ApplicationController
     comment = @assignment.comments.find(params[:comment_id])
     comment.destroy if comment
     
-    redirect_to comment_new_class_room_assignment_path(params[:class_room_id],params[:id])
+    redirect_to comment_new_class_room_assignment_url(params[:class_room_id],params[:id])
   end
 
   def comment_edit
@@ -144,7 +144,7 @@ class AssignmentsController < ApplicationController
     @comment = @assignment.comments.find(params[:comment_id])
 
     if @comment.update_attribute("comment", params[:comment])
-      redirect_to comment_new_class_room_assignment_path(params[:class_room_id],params[:id])
+      redirect_to comment_new_class_room_assignment_url(params[:class_room_id],params[:id])
     else
       render :action => "comment_edit"
     end

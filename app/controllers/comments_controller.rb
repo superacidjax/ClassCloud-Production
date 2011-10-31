@@ -8,15 +8,15 @@ class CommentsController < ApplicationController
     current_user.vote_for(post)
     controller = params[:commentable_type]
     if controller.eql?('assignments')
-      redirect_to comment_new_class_room_assignment_path(@class.id,params[:id])
+      redirect_to comment_new_class_room_assignment_url(@class.id,params[:id])
     elsif controller.eql?('notes')
-      redirect_to  comment_new_class_room_note_path(@class.id,params[:id])
+      redirect_to  comment_new_class_room_note_url(@class.id,params[:id])
     elsif controller.eql?('discussions')
-      redirect_to  comment_new_class_room_discussion_path(@class.id,params[:id])
+      redirect_to  comment_new_class_room_discussion_url(@class.id,params[:id])
     elsif controller.eql?('calendar')
-      redirect_to  class_room_event_path(@class.id,params[:id])
+      redirect_to  class_room_event_url(@class.id,params[:id])
     elsif controller.eql?('writeboards')
-      redirect_to  class_room_writeboard_path(@class.id,params[:id])
+      redirect_to  class_room_writeboard_url(@class.id,params[:id])
     end
   end
 
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
     @reply = Reply.create(params[:reply])
     @reply.save
     if params[:comment_controller].eql?('calendar')
-      redirect_to(event_path(params[:id]),notice: 'Comment has been replied')
+      redirect_to(event_url(params[:id]),notice: 'Comment has been replied')
     else
       redirect_to(("/class_rooms/#{@class.id}/#{params[:comment_controller]}/#{params[:id]}/comment_new"),notice: 'Comment has been replied')
     end

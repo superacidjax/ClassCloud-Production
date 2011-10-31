@@ -105,7 +105,7 @@ class PeopleController < ApplicationController
       class_room_observer = user.class_room_observers.where(class_room_id: params[:class_room_id]).first
       class_room_observer.destroy if class_room_observer
     end
-    redirect_to class_room_people_path(params[:class_room_id])
+    redirect_to class_room_people_url(params[:class_room_id])
   end
 
   def pick_username_and_password
