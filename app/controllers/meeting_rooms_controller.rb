@@ -60,7 +60,6 @@ class MeetingRoomsController < ApplicationController
   end
 
   def create
-    require "pp"
     @meeting_room = MeetingRoom.new(params[:meeting_room])
 
     if @meeting_room.save
@@ -91,7 +90,7 @@ class MeetingRoomsController < ApplicationController
           user.is_user_meeting_room = true
           if user.save
             @meeting_room.user_meeting_rooms.create(:user_id =>user.id)
-
+            MeetingRoomMailer.welcome_email(user,@meeting_room.id).deliver
           end
         end
       end
