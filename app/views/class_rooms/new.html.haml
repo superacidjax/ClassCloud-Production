@@ -1,36 +1,38 @@
-%center
-  %div{:style => "text-align:right; width:50%"}
-    = current_user.full_name
-    = link_to_function "Settings", "return false"
-    = link_to "Sign Out", destroy_user_session_path, :method => :delete
-    .clear
-    %br
-    %br
-    %h2 Add a class
+%body
+  #container
+    .header
+      = link_to image_tag('cclogo_xsmall.png'), root_path
+      
+      .right
+        %h3
+          = "Hello, #{current_user.first_name}!"
+          = "|"
+          = link_to "Sign Out", destroy_user_session_path, :method => :delete
     
-    = form_for(@class_room, :url => class_rooms_path(:without_student => true), :html => {:method => :post, :multipart =>true}) do |f|
-      %div#form1{:style => "text-align:left"}
-        - if @class_room.errors.any?
-          #error_explanation
-            %h2
-              = pluralize(@class_room.errors.count, "error")
-              prohibited this create class from being saved:
-            %ul
-              - @class_room.errors.full_messages.each do |msg|
-                %li= msg
-        %div
-          = f.label :name, "Class name"
-        %br
-          = text_field_tag 'class_room[name][]'
-      %div#clone
-      %div#submit{:style => "text-align:center"}
-        = f.submit "Save"
-    %div{:style => "text-align:center"}
-      = link_to "Back", root_path
-      = link_to 'Add another class', '#', :onclick =>'cloneElement()'
-  %div{:style => "margin-left: 930px; margin-top: -151px; position:absolute"}
-    %h3 My Students
-    - @students.each do |student|
-      = link_to_function student.full_name, "return false"
       %br
-      = link_to 'Add More Class', '#', :onclick =>'cloneElement()'
+      %br
+      
+  #main_content
+    .headline
+      .testimonials
+        %br
+        %br
+        %h1 Add a new class
+        %br
+      = form_for(@class_room, :url => class_rooms_path(:without_student => true), :html => {:method => :post, :multipart =>true}) do |f|
+        %div
+          - if @class_room.errors.any?
+            #error_explanation
+              %h2
+                = pluralize(@class_room.errors.count, "error")
+                prohibited this create class from being saved:
+              %ul
+                - @class_room.errors.full_messages.each do |msg|
+                  %li= msg  
+        = text_field_tag 'class_room[name][]'
+        = f.submit "Save"
+        %br
+        %br
+        %h2
+          = link_to "Go back", root_path
+        
