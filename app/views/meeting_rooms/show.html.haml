@@ -6,14 +6,22 @@
 = @meeting_room.description
 %br
 %div{:style=>"float:right;"}
-  = @meeting_room.user.full_name
-  = '(moderator)'
-  %br
-  - @user_meeting_rooms.each do |user_meeting_room|
-    = user_meeting_room.user.full_name
-    - if user_meeting_room.moderator?
-      ='(moderator)'
-    %br
+  .students{:style=>"float:left"}
+  %h2
+    %strong
+      My Meeting Rooms
+      %hr
+    .names
+      %ul
+        %li
+          = @meeting_room.user.full_name
+          = '(moderator)'
+        - @user_meeting_rooms.each do |user_meeting_room|
+          %li
+            = user_meeting_room.user.full_name
+            - if user_meeting_room.moderator?
+              ='(moderator)'
+              %br
 %table
 %tr
   %td{:colspan => "3"}

@@ -15,7 +15,6 @@ class Devise::RegistrationsController < ApplicationController
 
   # POST /resource
   def create
-    debugger
     build_resource
     if resource.save
       resource.time_zone = params['user']['time_zone']

@@ -36,6 +36,9 @@
           %br
           -if current_user.is_teacher?
             = link_to 'Add Meeting Room',new_meeting_room_path
+            %br
+          - unless current_user.meeting_rooms.nil? and current_user.user_meeting_rooms.nil?
+            = link_to 'My meeting Room',meeting_rooms_path
         .students
           - if current_user.is_teacher?
             %h2
@@ -215,7 +218,6 @@
           %h3 Now you'll add students, you can always edit or add students later..
           %div#submit{:style => "text-align:right;display:none;"}
             = submit_tag "I'm done adding students",:onclick =>'return checkTextField()',:id=>'submit_class_name'
-          /= link_to 'Add more students', '#', :onclick =>'addStudent()'
 
   - elsif (current_user.is_observer? and current_user.class_room_observers.blank?)
 

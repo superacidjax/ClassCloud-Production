@@ -3,7 +3,9 @@ class MeetingRoomsController < ApplicationController
   layout 'layouts/meeting_room'
   
   def index
-    @meeting_rooms = MeetingRoom.all
+    
+    @meeting_rooms = current_user.meeting_rooms
+    @user_meeting_rooms = current_user.user_meeting_rooms
     @month = (params[:month] || (Time.zone || Time).now.month).to_i
     @year = (params[:year] || (Time.zone || Time).now.year).to_i
     @shown_month = Date.civil(@year, @month)
@@ -15,26 +17,62 @@ class MeetingRoomsController < ApplicationController
         @event_strips += Event.where("user_id =? and date(start_at) BETWEEN date(now()) and date(start_at) +14",class_room_student.class_room.user_id).event_strips_for_month(@shown_month)
       end
     end
+    @students = []
+    current_user.class_rooms.each do |class_room|
+      @students << class_room.students
+    end
+    @students.flatten!
   end
 
   def show
+    @meeting_rooms = current_user.meeting_rooms
+    @user_meeting_rooms = current_user.user_meeting_rooms
     @meeting_room = MeetingRoom.find(params[:id])
     @user_meeting_rooms = @meeting_room.user_meeting_rooms
     @user_meeting_room = @meeting_room.user_meeting_rooms.where("user_id = ? AND moderator = ?",current_user.id, true)
+    @students = []
+    current_user.class_rooms.each do |class_room|
+      @students << class_room.students
+    end
+    @students.flatten!
   end
 
   def new
     @meeting_room = MeetingRoom.new
+    @meeting_rooms = current_user.meeting_rooms
+    @user_meeting_rooms = current_user.user_meeting_rooms
+    @students = []
+    current_user.class_rooms.each do |class_room|
+      @students << class_room.students
+    end
+    @students.flatten!
   end
 
   def edit
     @meeting_room = MeetingRoom.find(params[:id])
+    @meeting_rooms = current_user.meeting_rooms
+    @user_meeting_rooms = current_user.user_meeting_rooms
+    @students = []
+    current_user.class_rooms.each do |class_room|
+      @students << class_room.students
+    end
+    @students.flatten!
   end
 
   def create
+    require "pp"
     @meeting_room = MeetingRoom.new(params[:meeting_room])
 
-      if @meeting_room.save
+    if @meeting_room.save
+      user_meeting = []
+      counter = params[:user_meeting].split(',').count
+      for i in(1..counter)
+        if (i%2).eql?(1)
+          user_meeting << params[:user_meeting].split(',')[i]
+        end
+      end
+      @meeting_room.create_meeting_room_user(user_meeting)
+      
       unless params[:user].nil?
         counter = params[:user][:email].count
         tmp = User.generate_random_string
@@ -51,11 +89,12 @@ class MeetingRoomsController < ApplicationController
             user.add_role params[:user][:role][i]
           end
           user.is_user_meeting_room = true
-          user.save
+          if user.save
+            @meeting_room.user_meeting_rooms.create(:user_id =>user.id)
+
+          end
         end
       end
-      
-      @meeting_room.create_meeting_room_user(params[:user_meeting])
       redirect_to moderator_meeting_room_url(@meeting_room), notice: 'Meeting room was successfully created.'
     else
       render action: "new"
@@ -93,12 +132,19 @@ class MeetingRoomsController < ApplicationController
   def comment_new
     @meeting_room = MeetingRoom.find(params[:id])
     @user_meeting_room = @meeting_room.user_meeting_rooms.where("user_id = ? AND moderator = ?",current_user.id, true)
+    @meeting_rooms = current_user.meeting_rooms
+    @user_meeting_rooms = current_user.user_meeting_rooms
+    @students = []
+    current_user.class_rooms.each do |class_room|
+      @students << class_room.students
+    end
+    @students.flatten!
   end
 
   def comment_create
     @meeting_room = MeetingRoom.find(params[:id])
     @meeting_room.comments.create(:comment => params[:comment], :user_id => current_user.id)
-
+    
     redirect_to meeting_room_url(params[:id])
   end
 
@@ -114,7 +160,13 @@ class MeetingRoomsController < ApplicationController
     @meeting_room = MeetingRoom.find(params[:id])
     @comment = @meeting_room.comments.find(params[:comment_id])
     @user_meeting_room = @meeting_room.user_meeting_rooms.where("user_id = ? AND moderator =?",current_user.id, true)
- 
+    @meeting_rooms = current_user.meeting_rooms
+    @user_meeting_rooms = current_user.user_meeting_rooms
+    @students = []
+    current_user.class_rooms.each do |class_room|
+      @students << class_room.students
+    end
+    @students.flatten!
   end
 
   def comment_update
@@ -129,7 +181,14 @@ class MeetingRoomsController < ApplicationController
   end
 
   def moderator
-  @meeting_room = MeetingRoom.find(params[:id])
+    @meeting_room = MeetingRoom.find(params[:id])
+    @meeting_rooms = current_user.meeting_rooms
+    @user_meeting_rooms = current_user.user_meeting_rooms
+    @students = []
+    current_user.class_rooms.each do |class_room|
+      @students << class_room.students
+    end
+    @students.flatten!
   end
 
   def add_moderator

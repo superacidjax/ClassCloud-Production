@@ -117,9 +117,10 @@ class User < ActiveRecord::Base
     results = []
 
     self.all.each do |list|
-      results << {:name => list.username}
+      results << {:name => list.full_name + ',' + list.email }
     end
 
     return results
   end
+
 end

@@ -66,6 +66,20 @@
               =link_to 'People','#'
             %br
               = yield
+              .students
+                %h2
+                  %strong
+                    My Students
+                %hr
+                .names
+                  - unless current_user.is_student?
+                    %ul
+                      - @students.each do |student|
+                        %li
+                          = link_to student.full_name, class_room_user_profile_path(student.class_room_students.first.class_room.id, student.id)
+                          - unless karma_number(student).eql?(0)
+                            = "(#{karma_number(student)})"
+                %br
           - if current_user.is_teacher?
             %br
       - else
