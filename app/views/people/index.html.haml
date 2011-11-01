@@ -1,23 +1,26 @@
 /- content_for :middle_content do
-%h1 All People
-= link_to "Add a new person", new_class_room_person_path(@class.id)
-%br
-%br
-%div{:style => "width: 800px"}
-  - @people.each_with_index do |person, index|
-    %div{:style => "float: left;width: 300px"}
-      %b= user_full_name(person)
-      %br
-      = mail_to person.email
-      %br
-      = person.is_teacher? ? "Teacher" : (person.is_student? ? "Student" : "Observer")
-      %br
-      - if current_user.is_teacher? and current_user.id.to_s.eql?(person.id.to_s)
-        = link_to "Edit", edit_class_room_person_path(@class.id, person.id)
-      - elsif current_user.is_teacher?
-        = link_to "Edit", edit_class_room_person_path(@class.id, person.id)
-        = link_to "Remove from this class", remove_from_class_class_room_person_path(@class.id, person.id), :method => :delete,:confirm=>"are you sure?"
-      - else
-        = link_to "Edit", edit_class_room_person_path(@class.id, person.id)
-    - if ((index+1) % 3).zero?
-      .clear
+.standard_text
+  %h1
+    = "#{@class.name}"
+    People
+  %h2
+    = link_to "Add a new person", new_class_room_person_path(@class.id)
+
+  %p
+    - @people.each_with_index do |person, index|
+      %div{:style => "float: left;width: 300px"}
+        %b= user_full_name(person)
+        %br
+        = mail_to person.email
+        %br
+        = person.is_teacher? ? "Teacher" : (person.is_student? ? "Student" : "Observer")
+        %br
+        - if current_user.is_teacher? and current_user.id.to_s.eql?(person.id.to_s)
+          = link_to "Edit", edit_class_room_person_path(@class.id, person.id)
+        - elsif current_user.is_teacher?
+          = link_to "Edit", edit_class_room_person_path(@class.id, person.id)
+          = link_to "Remove from this class", remove_from_class_class_room_person_path(@class.id, person.id), :method => :delete,:confirm=>"are you sure?"
+        - else
+          = link_to "Edit", edit_class_room_person_path(@class.id, person.id)
+      - if ((index+1) % 3).zero?
+        .clear
