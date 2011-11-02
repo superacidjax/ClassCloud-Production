@@ -22,6 +22,7 @@ gem 'easy_roles'
 gem 'acts_as_commentable'
 gem "haml", "~> 3.1.2"
 gem "haml-rails"
+gem "rack", "~> 1.3.5"
 
 gem "jquery-rails"
 gem "paperclip", "~> 2.4"

@@ -5368,3 +5368,9 @@ LINE 1: ...NSERT INTO "assignments" ("title", "description", "category_...
   [1m[35m (0.3ms)[0m  ALTER TABLE "blog_comments" ENABLE TRIGGER ALL;ALTER TABLE "activity_stream_preferences" ENABLE TRIGGER ALL;ALTER TABLE "activity_stream_totals" ENABLE TRIGGER ALL;ALTER TABLE "activity_streams" ENABLE TRIGGER ALL;ALTER TABLE "assignment_categories" ENABLE TRIGGER ALL;ALTER TABLE "assignment_students" ENABLE TRIGGER ALL;ALTER TABLE "assignments" ENABLE TRIGGER ALL;ALTER TABLE "blog_posts" ENABLE TRIGGER ALL;ALTER TABLE "blog_tags" ENABLE TRIGGER ALL;ALTER TABLE "class_room_observers" ENABLE TRIGGER ALL;ALTER TABLE "class_room_students" ENABLE TRIGGER ALL;ALTER TABLE "class_rooms" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "discussions" ENABLE TRIGGER ALL;ALTER TABLE "events" ENABLE TRIGGER ALL;ALTER TABLE "message_files" ENABLE TRIGGER ALL;ALTER TABLE "messages" ENABLE TRIGGER ALL;ALTER TABLE "notes" ENABLE TRIGGER ALL;ALTER TABLE "to_dos" ENABLE TRIGGER ALL;ALTER TABLE "upload_files" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "votes" ENABLE TRIGGER ALL;ALTER TABLE "writeboards" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
 =======
 >>>>>>> 9e61f9c8bf30a244cc4a2714ffef97145fbd9d36
+New Relic Agent not running.
+New Relic Agent not running.
+New Relic Agent not running.
+New Relic Agent not running.
+New Relic Agent not running.
+New Relic Agent not running.
