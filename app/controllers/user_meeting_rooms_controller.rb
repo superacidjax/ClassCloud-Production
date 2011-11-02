@@ -36,12 +36,11 @@ class UserMeetingRoomsController < ApplicationController
       render action: "edit"
     end
   end
-end
 
-def destroy
-  @user_meeting_room = UserMeetingRoom.find(params[:id])
-  @user_meeting_room.destroy
+  def destroy
+    @user_meeting_room = UserMeetingRoom.find(params[:id])
+    @user_meeting_room.destroy
 
-  redirect_to user_meeting_rooms_url 
-end
+    redirect_to user_meeting_rooms_url
+  end
 end
