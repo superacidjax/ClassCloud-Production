@@ -13,7 +13,7 @@ Tes::Application.configure do
   config.action_dispatch.x_sendfile_header = "X-Sendfile"
   config.action_mailer.default_url_options = { :host => 'secure.classcloud.me' }
 
-  config.assets.enabled = true
+  #config.assets.enabled = true
   # For nginx:
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
 
