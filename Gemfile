@@ -16,7 +16,7 @@ gem 'sass'
 #gem 'sqlite3'
 gem 'barista'
 gem 'json'
-gem 'therubyracer', :require => nil
+#gem 'therubyracer', :require => nil
 gem 'acts-as-messageable'
 gem 'easy_roles'
 gem 'acts_as_commentable'
