@@ -5,4 +5,4 @@ require File.expand_path('../application', __FILE__)
 Tes::Application.initialize!
 
 # added by Brian 
-#ENV['RAILS_ENV'] ||= 'production'
+ENV['RAILS_ENV'] ||= 'production'
