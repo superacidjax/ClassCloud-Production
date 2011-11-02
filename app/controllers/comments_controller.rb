@@ -12,9 +12,9 @@ class CommentsController < ApplicationController
 #      redirect_to comment_new_class_room_assignment_url(@class.id,params[:id])
       redirect_to "/class_rooms/#{@class.id}/assignments/#{params[:id]}/comment_new#comment#{params[:comment_id]}"
     elsif controller.eql?('notes')
-      redirect_to  comment_new_class_room_note_url(@class.id,params[:id])
+      redirect_to  "/class_rooms/#{@class.id}/notes/#{params[:id]}/comment_new#comment#{params[:comment_id]}"
     elsif controller.eql?('discussions')
-      redirect_to  comment_new_class_room_discussion_url(@class.id,params[:id])
+      redirect_to  "/class_rooms/#{@class.id}/discussions/#{params[:id]}/comment_new#comment#{params[:comment_id]}"
     elsif controller.eql?('calendar')
       redirect_to  class_room_event_url(@class.id,params[:id])
     elsif controller.eql?('writeboards')
