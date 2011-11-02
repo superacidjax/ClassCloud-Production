@@ -934,3 +934,15 @@ _hamlout.push_text("<div class='field'>\n", 1, false); if c...
 [11/02/11 15:18:33 +0800 Brians-iMac.local (31393)] INFO : Application: ClassCloud
 [11/02/11 15:18:33 +0800 Brians-iMac.local (31393)] INFO : New Relic Ruby Agent 3.2.0.1 Initialized: pid = 31393
 [11/02/11 15:18:33 +0800 Brians-iMac.local (31393)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log
+[11/02/11 21:17:55 +0800 Brians-iMac.local (33039)] INFO : Dispatcher: thin
+[11/02/11 21:17:55 +0800 Brians-iMac.local (33039)] INFO : Application: ClassCloud
+[11/02/11 21:17:55 +0800 Brians-iMac.local (33039)] INFO : New Relic Ruby Agent 3.2.0.1 Initialized: pid = 33039
+[11/02/11 21:17:55 +0800 Brians-iMac.local (33039)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log
+[11/02/11 21:18:53 +0800 Brians-iMac.local (33062)] INFO : Dispatcher: thin
+[11/02/11 21:18:53 +0800 Brians-iMac.local (33062)] INFO : Application: ClassCloud
+[11/02/11 21:18:53 +0800 Brians-iMac.local (33062)] INFO : New Relic Ruby Agent 3.2.0.1 Initialized: pid = 33062
+[11/02/11 21:18:53 +0800 Brians-iMac.local (33062)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log
+[11/02/11 21:20:50 +0800 Brians-iMac.local (33090)] INFO : Dispatcher: thin
+[11/02/11 21:20:50 +0800 Brians-iMac.local (33090)] INFO : Application: ClassCloud
+[11/02/11 21:20:50 +0800 Brians-iMac.local (33090)] INFO : New Relic Ruby Agent 3.2.0.1 Initialized: pid = 33090
+[11/02/11 21:20:50 +0800 Brians-iMac.local (33090)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log
