@@ -902,3 +902,35 @@ _hamlout.push_text("<div class='field'>\n", 1, false); if c...
 [11/02/11 14:54:46 +0800 Brians-iMac.local (31126)] INFO : Application: ClassCloud
 [11/02/11 14:54:46 +0800 Brians-iMac.local (31126)] INFO : New Relic Ruby Agent 3.2.0.1 Initialized: pid = 31126
 [11/02/11 14:54:46 +0800 Brians-iMac.local (31126)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log
+[11/02/11 15:07:51 +0800 Brians-iMac.local (31265)] INFO : Dispatcher: thin
+[11/02/11 15:07:51 +0800 Brians-iMac.local (31265)] INFO : Application: ClassCloud
+[11/02/11 15:07:51 +0800 Brians-iMac.local (31265)] WARN : Agent configured not to send data in this environment - edit newrelic.yml to change this
+[11/02/11 15:07:51 +0800 Brians-iMac.local (31265)] INFO : New Relic Ruby Agent 3.2.0.1 Initialized: pid = 31265
+[11/02/11 15:07:51 +0800 Brians-iMac.local (31265)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log
+[11/02/11 15:08:07 +0800 Brians-iMac.local (31274)] INFO : Dispatcher: thin
+[11/02/11 15:08:07 +0800 Brians-iMac.local (31274)] INFO : Application: ClassCloud
+[11/02/11 15:08:07 +0800 Brians-iMac.local (31274)] WARN : Agent configured not to send data in this environment - edit newrelic.yml to change this
+[11/02/11 15:08:07 +0800 Brians-iMac.local (31274)] INFO : New Relic Ruby Agent 3.2.0.1 Initialized: pid = 31274
+[11/02/11 15:08:07 +0800 Brians-iMac.local (31274)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log
+[11/02/11 15:09:01 +0800 Brians-iMac.local (31289)] INFO : Dispatcher: thin
+[11/02/11 15:09:01 +0800 Brians-iMac.local (31289)] INFO : Application: ClassCloud
+[11/02/11 15:09:01 +0800 Brians-iMac.local (31289)] INFO : New Relic Ruby Agent 3.2.0.1 Initialized: pid = 31289
+[11/02/11 15:09:01 +0800 Brians-iMac.local (31289)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log
+[11/02/11 15:13:11 +0800 Brians-iMac.local (31325)] INFO : Dispatcher: thin
+[11/02/11 15:13:11 +0800 Brians-iMac.local (31325)] INFO : Application: ClassCloud
+[11/02/11 15:13:11 +0800 Brians-iMac.local (31325)] WARN : Agent configured not to send data in this environment - edit newrelic.yml to change this
+[11/02/11 15:13:11 +0800 Brians-iMac.local (31325)] INFO : New Relic Ruby Agent 3.2.0.1 Initialized: pid = 31325
+[11/02/11 15:13:11 +0800 Brians-iMac.local (31325)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log
+[11/02/11 15:14:48 +0800 Brians-iMac.local (31339)] INFO : Dispatcher: thin
+[11/02/11 15:14:48 +0800 Brians-iMac.local (31339)] INFO : Application: ClassCloud
+[11/02/11 15:14:48 +0800 Brians-iMac.local (31339)] INFO : New Relic Ruby Agent 3.2.0.1 Initialized: pid = 31339
+[11/02/11 15:14:48 +0800 Brians-iMac.local (31339)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log
+[11/02/11 15:18:18 +0800 Brians-iMac.local (31384)] INFO : Dispatcher: thin
+[11/02/11 15:18:18 +0800 Brians-iMac.local (31384)] INFO : Application: ClassCloud
+[11/02/11 15:18:18 +0800 Brians-iMac.local (31384)] WARN : Agent configured not to send data in this environment - edit newrelic.yml to change this
+[11/02/11 15:18:18 +0800 Brians-iMac.local (31384)] INFO : New Relic Ruby Agent 3.2.0.1 Initialized: pid = 31384
+[11/02/11 15:18:18 +0800 Brians-iMac.local (31384)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log
+[11/02/11 15:18:33 +0800 Brians-iMac.local (31393)] INFO : Dispatcher: thin
+[11/02/11 15:18:33 +0800 Brians-iMac.local (31393)] INFO : Application: ClassCloud
+[11/02/11 15:18:33 +0800 Brians-iMac.local (31393)] INFO : New Relic Ruby Agent 3.2.0.1 Initialized: pid = 31393
+[11/02/11 15:18:33 +0800 Brians-iMac.local (31393)] INFO : Agent Log at /Users/brian/Development/ClassCloud-Cedar/classcloud-cedar/log/newrelic_agent.log

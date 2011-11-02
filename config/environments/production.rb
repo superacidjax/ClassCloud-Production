@@ -13,7 +13,7 @@ Tes::Application.configure do
   config.action_dispatch.x_sendfile_header = "X-Sendfile"
   config.action_mailer.default_url_options = { :host => 'secure.classcloud.me' }
 
-  #config.assets.enabled = true
+  config.assets.enabled = true
   # For nginx:
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
 
@@ -21,7 +21,7 @@ Tes::Application.configure do
   # just comment this out and Rails will serve the files
 
   # See everything in the log (default is :info)
-  config.log_level = :debug
+  #config.log_level = :debug
 
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new
