@@ -149,13 +149,23 @@
 //    }
 //}
 function showCity(id,controller){
-    $('#city_name').load('/pages/city/' + id + '?user_controller='+controller);
+        $('#city_list').load('/pages/city/' + id + '?user_controller='+controller);
+        $('#loader').ajaxStart(function() {
+            $(this).show();
+        }).ajaxComplete(function() {
+            $(this).hide();
+        });
+}
+
+function cityList(id,controller){
+    $('#state_name').load('/pages/city_list/' + id + '?user_controller='+controller);
     $('#loader').ajaxStart(function() {
         $(this).show();
     }).ajaxComplete(function() {
         $(this).hide();
     });
 }
+
 
 function showSchool(state_id,controller){
     $('#school_name').load('/pages/school/' + state_id +'?user_controller='+controller);

@@ -7,8 +7,10 @@ class CommentsController < ApplicationController
     post = Comment.find(params[:comment_id])
     current_user.vote_for(post)
     controller = params[:commentable_type]
+    
     if controller.eql?('assignments')
-      redirect_to comment_new_class_room_assignment_url(@class.id,params[:id])
+#      redirect_to comment_new_class_room_assignment_url(@class.id,params[:id])
+      redirect_to "/class_rooms/#{@class.id}/assignments/#{params[:id]}/comment_new#comment#{params[:comment_id]}"
     elsif controller.eql?('notes')
       redirect_to  comment_new_class_room_note_url(@class.id,params[:id])
     elsif controller.eql?('discussions')

@@ -1,6 +1,6 @@
 - if controller.eql?('people') or controller.eql?('devise/registrations')
   ="City :"
-  = select_tag "user[city]", options_from_collection_for_select(@cities,'id','name',params[:client]), :include_blank => true
+  = select_tag "user[city]", options_from_collection_for_select(@cities,'id','name',params[:client]), :include_blank => true,:onchange=> "showSchool(this.value,'#{params[:controller]}');"
 - else
   %br
   %table
