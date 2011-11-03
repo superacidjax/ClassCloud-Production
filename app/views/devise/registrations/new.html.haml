@@ -79,9 +79,13 @@
               = image_tag('ajax-loading.gif')
             %br
             %h3
-              = 'If you not found your school'
-              = link_to 'Click here', '#', :onclick => "$('#school_name').hide();$('#user_school_name').show();"
+              = 'If you not found your city and your school'
+              = link_to 'Click here', '#', :onclick => "$('#school_name').hide();$('#user_school_name').show();$('#city_list').hide();"
           %div#user_school_name{:style=>"display:none;"}
+
+            = 'City'
+            = text_field_tag 'user[city2]',nil,:placeholder=>"enter your city"
+            = 'School'
             = text_field_tag 'user[school]',nil,:placeholder=>"enter your school"
           %h3
             = f.submit "Sign up", :class=>'submit'
