@@ -4,7 +4,7 @@
     %h1 Discussions
     %br
     - unless current_user.is_observer?
-      = link_to "New Discussion", new_class_room_discussion_path(@class.id)
+      = link_to "Start a New Discussion", new_class_room_discussion_path(@class.id)
 #user_content  
   .tables
     %table.assignments

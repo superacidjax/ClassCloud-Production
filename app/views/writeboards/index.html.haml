@@ -3,11 +3,11 @@
 .headings
 - if not (current_user.is_teacher? or current_user.is_observer?)
   .headings
-  %h1 My Work
+    %h1 My Work
 -else
   .headings
-  %h1 
-    Student Work
+    %h1 
+      Student Work
 #user_content
   .tables
     %table.assignments
@@ -37,8 +37,8 @@
   %br
   %br
   .headings
-  %h1
-    Everyone Else's Public Work
+    %h2
+      Everyone Else's Public Work
 
   %table.board
     %tr.blue

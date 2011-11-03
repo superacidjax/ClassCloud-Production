@@ -284,6 +284,20 @@ body {
       font: normal 12px myriad-pro, sans-serif;
       -webkit-font-smoothing: anti-aliased;
       color: #3f3d32; }
+  #main_content .headings {
+    text-align: left; }
+    #main_content .headings h1 {
+      font: normal 48px zubilo-web-inline, sans-serif;
+      -webkit-font-smoothing: anti-aliased;
+      color: #b22222; }
+    #main_content .headings h2 {
+      font: normal 36px zubilo-web-inline, sans-serif;
+      -webkit-font-smoothing: anti-aliased;
+      color: #b22222; }
+    #main_content .headings h3 {
+      font: normal 24px zubilo-web-inline, sans-serif;
+      -webkit-font-smoothing: anti-aliased;
+      color: #3f3d32; }
 
 .analytics {
   text-align: center;

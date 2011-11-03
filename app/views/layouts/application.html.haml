@@ -103,12 +103,12 @@
                   = link_to image_tag('student_work_button.png'), teacher_writeboards_index_class_room_writeboards_path(@class.id, @teacher.id)
               %br
               .students
-                %h2
-                  %strong
-                    My Students
-                %hr
-                .names
-                  - unless current_user.is_student?  
+                - unless current_user.is_student?
+                  %h2
+                    %strong
+                      My Students
+                  %hr
+                  .names
                     %ul
                       - @students.each do |student|
                         %li
