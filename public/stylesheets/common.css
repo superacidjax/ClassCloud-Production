@@ -287,17 +287,20 @@ body {
   #main_content .headings {
     text-align: left; }
     #main_content .headings h1 {
-      font: normal 48px zubilo-web-inline, sans-serif;
+      font: normal 36px museo-sans, sans-serif;
       -webkit-font-smoothing: anti-aliased;
-      color: #b22222; }
+      color: #b22222;
+      weight: 500; }
     #main_content .headings h2 {
-      font: normal 36px zubilo-web-inline, sans-serif;
+      font: normal 27px museo-sans, sans-serif;
       -webkit-font-smoothing: anti-aliased;
-      color: #b22222; }
+      color: #b22222;
+      weight: 500; }
     #main_content .headings h3 {
-      font: normal 24px zubilo-web-inline, sans-serif;
+      font: normal 18px museo-sans, sans-serif;
       -webkit-font-smoothing: anti-aliased;
-      color: #3f3d32; }
+      color: #3f3d32;
+      weight: 500; }
 
 .analytics {
   text-align: center;

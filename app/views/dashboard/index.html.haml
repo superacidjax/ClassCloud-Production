@@ -16,12 +16,14 @@
     #main_content
       .headline
         .headings
+          %br
           %h1
             The Dashboard
         .classes
           - unless current_user.is_observer? 
             .headings
               %h3 My Classes
+              %hr
             %br
             %h2
               - @my_class_rooms.each_with_index do |class_room, index|
@@ -29,6 +31,9 @@
                   %fieldset
                     %legend
                       = link_to "#{class_room.name}", class_room_path(class_room.id)
+            %br
+            %hr
+            = link_to image_tag('matt_tutoring.png'), "mailto:coffka45@hotmail.com?Subject=SAT%20ClassCloud" if current_user.is_student?
           %br
           %h3
             = link_to "Add new class", new_class_room_path if current_user.is_teacher?
