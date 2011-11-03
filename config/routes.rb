@@ -26,6 +26,9 @@ Tes::Application.routes.draw do
   match "pages/school/:school"=> "pages#school", :as => :school_city, :via => :get
   match "pages/search_state/"=> "pages#search_state", :as => :search_state, :via => :get
   match "pages/country/"=> "pages#country", :as => :country, :via => :get
+  match "pages/city_list/:country_id"=> "pages#city_list", :as => :city_list, :via => :get
+  match "pages/states_list/"=> "pages#state_list", :as => :state_list, :via => :get
+
   namespace :admin do
 
     resources :admins do

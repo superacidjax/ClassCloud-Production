@@ -1,0 +1,21 @@
+-if @country.name.eql?('USA')
+  :javascript
+    $(document).ready(function(){
+      $('#city').hide();
+      $('#user_school').hide();
+      $('#city_list').hide();
+
+    });
+  = "State :"
+  = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value,'devise/registrations');"
+%div#city_list
+  :javascript
+    $(document).ready(function(){
+      $('#city_list').show();
+    });
+  = 'City'
+  = text_field_tag 'city',nil,:placeholder =>"enter your city"
+  = 'School'
+  = text_field_tag 'user_school',nil,:placeholder =>"enter your school"
+  /="City :"
+  /= select_tag "city", options_from_collection_for_select(@cities,'id','name',nil), :include_blank => true,:onchange=> "showSchool(this.value,'#{params[:controller]}');"

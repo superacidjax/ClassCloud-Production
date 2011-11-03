@@ -53,29 +53,30 @@
             %h4
               = comment.comment
               %td{:align => "right"}
-                - if current_user.id.eql?(comment.user_id)
-                  = link_to "Edit", class_room_comment_edit_assignment_path(@class.id, @assignment, comment.id)
-                - if current_user.id.eql?(comment.user_id) or current_user.is_teacher?
-                  = link_to "Delete", class_room_comment_destroy_assignment_path(@class.id, @assignment, comment.id), :method => :delete
-                - unless vote_comment(comment).nil?
-                  = image_tag('supercool_button_grey.png')
-                - else
-                  - unless current_user.is_observer?
-                    = link_to image_tag('supercool_button.png'),class_room_comment_vote_path(@class.id ,@assignment.id,comment,:commentable_type =>"#{params[:controller]}")
+                %div{:id=>"comment"+comment.id.to_s}
+                  - if current_user.id.eql?(comment.user_id)
+                    = link_to "Edit", class_room_comment_edit_assignment_path(@class.id, @assignment, comment.id)
+                  - if current_user.id.eql?(comment.user_id) or current_user.is_teacher?
+                    = link_to "Delete", class_room_comment_destroy_assignment_path(@class.id, @assignment, comment.id), :method => :delete
+                  - unless vote_comment(comment).nil?
+                    = image_tag('supercool_button_grey.png')
+                  - else
+                    - unless current_user.is_observer?
+                      = link_to image_tag('supercool_button.png'),class_room_comment_vote_path(@class.id ,@assignment.id,comment,:commentable_type =>"#{params[:controller]}")
                 
-                  /= link_to 'Reply', '#',:onclick => "$('.reply_#{comment.id}').show()"
-                  %div{:class =>"reply_#{comment.id}", :style=> "display: none;"}
-                    %h1=link_to 'x','#',:onclick => "$('.reply_#{comment.id}').hide()"
-                    = form_tag(class_room_reply_comment_path(@class.id, comment.id), :multipart => true)   do |f|
-                      .field
-                        = text_area_tag "reply[body]", nil, :rows => 4, :cols => 40
-                        = hidden_field_tag 'reply[user_id]',comment.user_id
-                        = hidden_field_tag 'reply[replier_id]',current_user.id
-                        = hidden_field_tag 'reply[comment_id]',comment.id
-                        = hidden_field_tag 'comment_controller',"#{params[:controller]}"
-                        = hidden_field_tag 'id',"#{params[:id]}"
-                      .actions
-                        = submit_tag "Add this Comment"
+                    /= link_to 'Reply', '#',:onclick => "$('.reply_#{comment.id}').show()"
+                    %div{:class =>"reply_#{comment.id}", :style=> "display: none;"}
+                      %h1=link_to 'x','#',:onclick => "$('.reply_#{comment.id}').hide()"
+                      = form_tag(class_room_reply_comment_path(@class.id, comment.id), :multipart => true)   do |f|
+                        .field
+                          = text_area_tag "reply[body]", nil, :rows => 4, :cols => 40
+                          = hidden_field_tag 'reply[user_id]',comment.user_id
+                          = hidden_field_tag 'reply[replier_id]',current_user.id
+                          = hidden_field_tag 'reply[comment_id]',comment.id
+                          = hidden_field_tag 'comment_controller',"#{params[:controller]}"
+                          = hidden_field_tag 'id',"#{params[:id]}"
+                        .actions
+                          = submit_tag "Add this Comment"
               - comment.replies.each do |reply|
                 %br
                 .comment_replies

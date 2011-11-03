@@ -7,8 +7,8 @@
 #sitewrapper
   #container
     .wrapper
-    
-      
+
+
 #main_content
   .headline
     .headline_text
@@ -33,7 +33,7 @@
     .sign_up
       %h2
         Just fill out this short form and you'll get a confirmation email to set up your classes.
-      .form 
+      .form
         = form_for(resource, :as => resource_name, :url => registration_path(resource_name),:multipart=>true) do |f|
           = devise_error_messages!
           %br
@@ -65,47 +65,31 @@
             = "Time zone"
             = time_zone_select("user", "time_zone", nil, :default => "Pacific Time (US & Canada)" )
           %br
-          %h3
-            /= "School:"
           %br
           %h3
+
           %div#school_list
             %div{:style=>"float:left"}
-              /= "State :"
-              /= select_tag "city", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "$('#city_name').load('/pages/city/'+this.value)"
-            /%div#city_name{:style=>"float:left"}
-            /  = "City :"
-            /  = select("user","school_id",@states.collect {|p| [ p.city, p.id ] })
-            /%div#school_name{:style=>"float:center"}
-            /  = "Name :"
-            /  = select("user","school_id",@states.collect {|p| [ p.schools.first.name, p.id ] })
-            %br
-
-              = "State :"
-              = select_tag "state[name]", options_from_collection_for_select(@states,'id','name',params[:client]), :include_blank => true,:onchange=> "showCity(this.value,'#{params[:controller]}');"
+              = "Country"
+              = select_tag "country[name]", options_from_collection_for_select(@countries,'id','name',nil),:include_blank=>:true,:onchange=> "cityList(this.value,'country');"
+            %div#state_name{:style=>"float:left;"}
             %div#city_name{:style=>"float:left;"}
             %div#school_name{:style=>"float:center;"}
             %div#loader{:style=>"display:none;float:left;"}
               = image_tag('ajax-loading.gif')
             %br
             %h3
-              = 'If you not found your school'
-              = link_to 'Click here', '#', :onclick => "$('#school_list').hide();$('#user_school_name').show();"
-          %div#user_school_name{:style => "display:none"}
-            %h3
-              = "Country"
-              = text_field_tag "country[name]", nil,:placeholder =>"enter your country"
-              = "State"
-              = text_field_tag "state[name2]", nil, :placeholder =>"enter your state"
-              = "City"
-              = text_field_tag "state[city2]", nil, :placeholder =>"enter your city"
-              = "School"
-              = text_field_tag "school[name2]", nil, :placeholder =>"enter your school"
-              = hidden_field_tag 'country_name1'
-              %br
+              = 'If you not found your city and your school'
+              = link_to 'Click here', '#', :onclick => "$('#school_name').hide();$('#user_school_name').show();$('#city_list').hide();"
+          %div#user_school_name{:style=>"display:none;"}
+
+            = 'City'
+            = text_field_tag 'user[city2]',nil,:placeholder=>"enter your city"
+            = 'School'
+            = text_field_tag 'user[school]',nil,:placeholder=>"enter your school"
           %h3
-            = f.submit "Sign up", :class=>'submit'              
-    
+            = f.submit "Sign up", :class=>'submit'
+
 
 :javascript
 $(document).ready(function () {
