@@ -68,34 +68,5 @@
           %br
           %h3
 
-          %div#school_list
-            %div{:style=>"float:left"}
-              = "Country"
-              = select_tag "country[name]", options_from_collection_for_select(@countries,'id','name',nil),:include_blank=>:true,:onchange=> "cityList(this.value,'country');"
-            %div#state_name{:style=>"float:left;"}
-            %div#city_name{:style=>"float:left;"}
-            %div#school_name{:style=>"float:center;"}
-            %div#loader{:style=>"display:none;float:left;"}
-              = image_tag('ajax-loading.gif')
-            %br
-            %h3
-              = 'If you not found your city and your school'
-              = link_to 'Click here', '#', :onclick => "$('#school_name').hide();$('#user_school_name').show();$('#city_list').hide();"
-          %div#user_school_name{:style=>"display:none;"}
-
-            = 'City'
-            = text_field_tag 'user[city2]',nil,:placeholder=>"enter your city"
-            = 'School'
-            = text_field_tag 'user[school]',nil,:placeholder=>"enter your school"
-          %h3
+          
             = f.submit "Sign up", :class=>'submit'
-
-
-:javascript
-$(document).ready(function () {
-    $("#country_name2").tokenInput("/pages/country/", {tokenLimit:1,
-       onAdd: function(item) {
-         $('#country_name1').val(item.name);
-       }
-     })
-});

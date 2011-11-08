@@ -19,24 +19,9 @@ class Devise::RegistrationsController < ApplicationController
     build_resource
     if resource.save
       resource.time_zone = params[:user][:time_zone]
-      country = Country.find(params[:country][:name])
+      
      
-      unless params[:state].nil?
-        resource.state_id = params[:state][:name]
-      end
-      if !params[:city].nil?
-        city = City.find_or_create_by_name(:name =>params[:city])
-      elsif !params[:user][:city2].nil? or !params[:user][:city2].empty?
-        city = City.find_or_create_by_name_and_state_id_and_country_id(:name=>params[:user][:city2], :state_id =>params[:state][:name],:country_id => country.id)
-      else
-        city = City.find(params[:user][:city])
-      end
-      if !params[:user][:school].nil?
-        school = School.find_or_create_by_name_and_city_id_and_state_id(:name =>params[:user][:school],:city_id=>city.id,:state_id => params[:state][:name])
-        resource.school_id = school.id
-      else
-        resource.school_id = params[:school][:name]
-      end
+      
       resource.save
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?

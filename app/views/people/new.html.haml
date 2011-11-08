@@ -27,19 +27,6 @@
   %div= f.submit "Save"
 
 %br
-%h2 Add a person from another class
-= form_tag add_person_from_existing_people_class_room_people_path(@class.id), :method => :post do
-  = radio_button_tag "type", "observer", false, :onclick => "observerAndStudentListToggle()"
-  = "Observer"
-  = radio_button_tag "type", "student", true, :onclick => "observerAndStudentListToggle()"
-  = "Student"
-  %br
-  = "Select a person"
-  %span{:id => "observer_list", :style => "display:none"}
-    = select_tag "observers", options_from_collection_for_select(@existing_observers, "id", "full_name")
-  %span{:id => "student_list"}
-    = select_tag "students", options_from_collection_for_select(@existing_students, "id", "full_name")
-  %br
-  = submit_tag "Save"
+
 
 = link_to "Back", :back
