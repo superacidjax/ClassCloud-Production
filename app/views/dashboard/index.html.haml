@@ -97,9 +97,8 @@
             
   
   - elsif current_user.is_teacher?
-  #sitewrapper
-    .header
-      .nav
+  %center
+    %div{:style => "text-align:right; width:50%"}
       = user_full_name(current_user)
       = link_to_function "Settings", edit_user_registration_path
       = link_to "Sign Out", destroy_user_session_path, :method => :delete
