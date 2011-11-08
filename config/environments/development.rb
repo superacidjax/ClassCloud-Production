@@ -29,8 +29,8 @@ Tes::Application.configure do
     :address              => "smtp.gmail.com",
     :port                 => 587,
     :domain               => 'gmail.com',
-    :user_name            => 'dummy@41studio.com',
-    :password             => 'ssstsecret',
+    :user_name            => 'brian@classcloud.me',
+    :password             => 'reuters00',
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
   config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
