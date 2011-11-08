@@ -97,18 +97,17 @@
             
   
   - elsif current_user.is_teacher?
-  #container
+  #sitewrapper
     .header
-      = link_to image_tag('cclogo_xsmall.png'), root_path
-      .right
-        %h3
-          = user_full_name(current_user)
-          = link_to_function "Settings", edit_user_registration_path
-          = link_to "Sign Out", destroy_user_session_path, :method => :delete
-  #main_content
-    .headline
-      .headings
-        %h1 Welcome to ClassCloud!
+      .nav
+      = user_full_name(current_user)
+      = link_to_function "Settings", edit_user_registration_path
+      = link_to "Sign Out", destroy_user_session_path, :method => :delete
+      %div{:class => "clear"}
+      %br
+      %br
+      %div{:style => "text-align:left"}
+        %h2 Welcome to ClassCloud!
         %h3 To get started, you'll need to add a class.
         = form_tag(class_rooms_path, :method => :post) do
           - if !@error_messages.blank?
