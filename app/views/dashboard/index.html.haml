@@ -127,6 +127,7 @@
             = text_field_tag "class_room[name]", params[:class_room][:name],:class =>'class_name',:onkeyup=>"addClassRoom();"
           - else
             = text_field_tag "class_room[name]", nil,:class =>'class_name',:onkeyup=>"addClassRoom();"
+        %div#submit
           = submit_tag "submit",:onclick =>'return checkTextField()',:id=>'submit_class_name'
 
   - elsif (current_user.is_observer? and current_user.class_room_observers.blank?)
