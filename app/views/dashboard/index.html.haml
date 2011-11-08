@@ -97,39 +97,36 @@
             
   
   - elsif current_user.is_teacher?
-    #container
-      .header
-        = link_to image_tag('cclogo_xsmall.png'), root_path
-        .right
-          %h3
-            = user_full_name(current_user)
-            = link_to_function "Settings", edit_user_registration_path
-            = link_to "Sign Out", destroy_user_session_path, :method => :delete
-    #main_content
-      .headline
-        .headings
-          %br
-          %h1 Welcome to ClassCloud!
-          %br
-          %h3 To get started, you'll need to add a class. You can add more classes later.
-          %br
-          = form_tag(class_rooms_path, :method => :post) do
-            - if !@error_messages.blank?
-              #error_explanation
-                %h2
-                  = pluralize(@error_messages.count, "error")
-                  prohibited this create class from being saved:
-                %ul
-                  - @error_messages.each do |msg|
-                    %li= msg
-          %h4
-            = "Enter the class name"
-            %br
-          - unless params[:class_room].blank?
-            = f.text_field "class_room[name]", params[:class_room][:name],:class =>'class_name'
-          - else
-            = f.text_field "class_room[name]", nil,:class =>'class_name',:onkeyup=>"addClassRoom();"
-          = f.submit "submit",:onclick =>'return checkTextField()',:id=>'submit_class_name'
+  #container
+    .header
+      = link_to image_tag('cclogo_xsmall.png'), root_path
+      .right
+        %h3
+          = user_full_name(current_user)
+          = link_to_function "Settings", edit_user_registration_path
+          = link_to "Sign Out", destroy_user_session_path, :method => :delete
+  #main_content
+    .headline
+      .headings
+        %h1 Welcome to ClassCloud!
+        %h3 To get started, you'll need to add a class.
+        = form_tag(class_rooms_path, :method => :post) do
+          - if !@error_messages.blank?
+            #error_explanation
+              %h2
+                = pluralize(@error_messages.count, "error")
+                prohibited this create class from being saved:
+              %ul
+                - @error_messages.each do |msg|
+                  %li= msg
+          %div
+            = "Add a class"
+            - unless params[:class_room].blank?
+              = text_field_tag "class_room[name]", params[:class_room][:name],:class =>'class_name',:onkeyup=>"addClassRoom();"
+            - else
+              = text_field_tag "class_room[name]", nil,:class =>'class_name',:onkeyup=>"addClassRoom();"
+          %div#submit{:style => "text-align:right;display:none;"}
+            = submit_tag "submit",:onclick =>'return checkTextField()',:id=>'submit_class_name'
 
   - elsif (current_user.is_observer? and current_user.class_room_observers.blank?)
 
