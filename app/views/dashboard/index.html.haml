@@ -103,13 +103,15 @@
         .right
           %h3
             = user_full_name(current_user)
-            = link_to_function "Settings", edit_user_registration_path
+            |
             = link_to "Sign Out", destroy_user_session_path, :method => :delete
     #main_content
       .headline
         .headings
           %h2 Welcome to ClassCloud!
+          %br
           %h3 To get started, you'll need to add a class.
+          %br
           = form_tag(class_rooms_path, :method => :post) do
             - if !@error_messages.blank?
               #error_explanation
@@ -120,13 +122,21 @@
                   - @error_messages.each do |msg|
                     %li= msg
             %div
-              = "Add a class"
+              %h3
+              = "Enter a name for your class. (i.e. 4th Period English II)"
+              %br
+              %br
               - unless params[:class_room].blank?
                 = text_field_tag "class_room[name]", params[:class_room][:name],:class =>'class_name',:onkeyup=>"addClassRoom();"
               - else
                 = text_field_tag "class_room[name]", nil,:class =>'class_name',:onkeyup=>"addClassRoom();"
             %div#submit{:style => "display:none;"}
+              %br
               = submit_tag "submit",:onclick =>'return checkTextField()',:id=>'submit_class_name'
+              %br
+              %br
+              %h3
+                After you add a class, you add your students from the "People" tab in your classroom.
 
   - elsif (current_user.is_observer? and current_user.class_room_observers.blank?)
 

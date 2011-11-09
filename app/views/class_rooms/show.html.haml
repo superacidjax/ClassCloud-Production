@@ -7,7 +7,7 @@
 %br
 .headings
   %h1
-    The Calender
+    The Calendar
 .above_calendar
   - if current_user.is_teacher?
     = link_to image_tag('add_event_button.png'), new_class_room_calendar_path(@class.id)

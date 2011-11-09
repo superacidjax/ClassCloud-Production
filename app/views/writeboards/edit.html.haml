@@ -1,6 +1,12 @@
-#main_content_area
-  %h3 Editing CloudPad for #{@assignment.title}
+.standard_text
+  %h2 Editing Assignment for #{@assignment.title}
+  %br
+  %h4 Created by #{user_full_name(@writeboard.user)} #{distance_of_time_in_words(@writeboard.created_at, Time.now)} ago.
+  %br
+  %h3 
   %hr
+  %h1
+    != @writeboard.title
 
   = render 'form'
 
