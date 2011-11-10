@@ -285,7 +285,8 @@ body {
       -webkit-font-smoothing: anti-aliased;
       color: #3f3d32; }
   #main_content .headings {
-    text-align: left; margin-top: 9px }
+    text-align: left;
+    margin-top: 36px; }
     #main_content .headings h1 {
       font: normal 36px museo-sans, sans-serif;
       -webkit-font-smoothing: anti-aliased;

@@ -1,5 +1,8 @@
-%h1 New upload_file
+.headings
+  %h1 Upload a File
+  %br
 
-= render 'form'
-
-= link_to 'Back', class_room_upload_files_path(@class.id)
+  = render 'form'
+ 
+  %br
+  = link_to 'Cancel and go back', class_room_upload_files_path(@class.id)

@@ -55,7 +55,7 @@ class UploadFilesController < ApplicationController
 
     respond_to do |format|
       if @upload_file.save
-        format.html { redirect_to class_room_upload_files_url(@class.id), notice: 'Upload file was successfully created.' }
+        format.html { redirect_to class_room_upload_files_url(@class.id), notice: 'Your file was successfully uploaded!' }
       else
         format.html { render action: "new" }
       end
@@ -67,7 +67,7 @@ class UploadFilesController < ApplicationController
 
     respond_to do |format|
       if @upload_file.update_attributes(params[:upload_file])
-        format.html { redirect_to class_room_upload_files_url(@class.id), notice: 'Upload file was successfully updated.' }
+        format.html { redirect_to class_room_upload_files_url(@class.id), notice: 'Your file was successfully updated!' }
       else
         format.html { render action: "edit" }
       end

@@ -17,14 +17,11 @@ class UploadFile < ActiveRecord::Base
   scope :document_category,where("file_content_type = ? OR  file_content_type = ? OR file_content_type = ? OR file_content_type = ?", DOCUMENT_TYPE[0] ,DOCUMENT_TYPE[1],DOCUMENT_TYPE[2],DOCUMENT_TYPE[3])
 
   has_attached_file :file,
-    :content_type => ['image/png' ,'image/jpeg', 'image/gif', 'application/pdf' , 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' , 'text/plain'  ,'application/zip' , 'application/x-rar' ,'application/msword' , 'application/vnd.ms-excel' ],
     :url => ':basename.:extension',
     :path => ':rails_root/tmp/data/:basename.:extension '
   validates :title,  :presence => true
   validates_attachment_presence :file
-  validates_attachment_content_type :file, :content_type =>
-    ['image/png' ,'image/jpeg', 'image/gif', 'application/pdf' , 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ,'text/plain' ,'application/zip' , 'application/x-rar',  'application/msword' , 'application/vnd.ms-excel' ]
-  validates_attachment_size :file, :less_than => 10.megabytes
+  validates_attachment_size :file, :less_than => 15.megabytes
 
   acts_as_commentable
  
