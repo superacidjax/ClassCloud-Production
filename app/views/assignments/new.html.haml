@@ -1,13 +1,13 @@
 /- content_for :middle_content do
-.standard_text
-%h1 New assignment
-= render 'form'
-%br
-= link_to 'Back', class_room_assignments_path(@class.id)
+.headings
+  %h1 New assignment
+  = render 'form'
+  %br
+  = link_to 'Go Back', class_room_assignments_path(@class.id)
   
 .textile_explanation
   %h2 Basic Textile Formatting Guide
-  %hr
+  %br
   %ul
     %li _italics_
     %li *bold*

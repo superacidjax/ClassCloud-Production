@@ -1,7 +1,7 @@
-%h1 Editing note
-
+.headings
+  %h1 Editing Class Notes
+%br
 = render 'form'
 
-= link_to 'Show', class_room_note_path(@class.id, @note)
-\|
-= link_to 'Back', class_room_notes_path(@class.id)
+%br
+= link_to 'Go Back', class_room_notes_path(@class.id)

@@ -1,7 +1,7 @@
 .standard_text
-  %h2 Editing Assignment for #{@assignment.title}
+  %h2 Editing #{user_full_name(@writeboard.user)}'s submission for #{@assignment.title}
   %br
-  %h4 Created by #{user_full_name(@writeboard.user)} #{distance_of_time_in_words(@writeboard.created_at, Time.now)} ago.
+  %h4 Created #{distance_of_time_in_words(@writeboard.created_at, Time.now)} ago.
   %br
   %h3 
   %hr
@@ -9,5 +9,5 @@
     != @writeboard.title
 
   = render 'form'
-
-  = link_to 'Back', class_room_writeboards_path(@class.id)
+  %br
+  = link_to 'Go Back', class_room_writeboards_path(@class.id)
