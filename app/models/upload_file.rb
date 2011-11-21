@@ -17,8 +17,12 @@ class UploadFile < ActiveRecord::Base
   scope :document_category,where("file_content_type = ? OR  file_content_type = ? OR file_content_type = ? OR file_content_type = ?", DOCUMENT_TYPE[0] ,DOCUMENT_TYPE[1],DOCUMENT_TYPE[2],DOCUMENT_TYPE[3])
 
   has_attached_file :file,
-    :url => ':basename.:extension',
-    :path => ':basename.:extension '
+    :storage => :s3,
+    :bucket => 'classcloudusa',
+    :s3_credentials => {
+        :access_key_id => ENV['AKIAJMOCSSVBYA3DP5EQ'],
+        :secret_access_key => ENV['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']
+    }
   validates :title,  :presence => true
   validates_attachment_presence :file
   validates_attachment_size :file, :less_than => 15.megabytes
