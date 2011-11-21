@@ -17,9 +17,8 @@ class UploadFile < ActiveRecord::Base
   scope :document_category,where("file_content_type = ? OR  file_content_type = ? OR file_content_type = ? OR file_content_type = ?", DOCUMENT_TYPE[0] ,DOCUMENT_TYPE[1],DOCUMENT_TYPE[2],DOCUMENT_TYPE[3])
 
   has_attached_file :file,
-    :url => 'https://s3.amazonaws.com/classcloudbetausa/',':basename.:extension',
-    :storage => :s3, :s3_credentials => "#{RAILS_ROOT}/config/s3.yml"
-    :path => ':basename.:extension'
+    :url => ':basename.:extension',
+    :path => ':basename.:extension '
   validates :title,  :presence => true
   validates_attachment_presence :file
   validates_attachment_size :file, :less_than => 15.megabytes
