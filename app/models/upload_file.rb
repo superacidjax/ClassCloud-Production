@@ -18,7 +18,7 @@ class UploadFile < ActiveRecord::Base
 
   has_attached_file :file,
     :url => ':basename.:extension',
-    :path => ':rails_root/tmp/data/:basename.:extension '
+    :path => ':basename.:extension '
   validates :title,  :presence => true
   validates_attachment_presence :file
   validates_attachment_size :file, :less_than => 15.megabytes
