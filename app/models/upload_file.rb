@@ -20,8 +20,8 @@ class UploadFile < ActiveRecord::Base
     :storage => :s3,
     :bucket => 'classcloudusa',
     :s3_credentials => {
-        :access_key_id => ENV['AKIAJMOCSSVBYA3DP5EQ'],
-        :secret_access_key => ENV['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']
+        :access_key_id => ENV[AKIAJMOCSSVBYA3DP5EQ],
+        :secret_access_key => ENV[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]
     }
   validates :title,  :presence => true
   validates_attachment_presence :file
