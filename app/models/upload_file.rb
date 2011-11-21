@@ -18,6 +18,7 @@ class UploadFile < ActiveRecord::Base
 
   has_attached_file :file,
     :url => 'https://s3.amazonaws.com/classcloudbetausa/',':basename.:extension',
+    :storage => :s3, :s3_credentials => "#{RAILS_ROOT}/config/s3.yml"
     :path => ':basename.:extension'
   validates :title,  :presence => true
   validates_attachment_presence :file
