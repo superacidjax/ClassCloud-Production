@@ -27,6 +27,7 @@ gem 'paperclip-s3'
 gem "jquery-rails"
 gem "paperclip", "~> 2.3.11"
 gem 'thumbs_up'
+gem 'aws-s3', '~> 0.6.2'
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'

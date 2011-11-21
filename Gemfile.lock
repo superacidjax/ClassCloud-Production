@@ -232,6 +232,7 @@ DEPENDENCIES
   RedCloth
   acts-as-messageable
   acts_as_commentable
+  aws-s3 (~> 0.6.2)
   barista
   cancan
   dalli
