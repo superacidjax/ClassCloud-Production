@@ -23,9 +23,9 @@ gem 'acts_as_commentable'
 gem "haml", "~> 3.1.2"
 gem "haml-rails"
 gem "rack", "~> 1.3.5"
-
+gem 'paperclip-s3'
 gem "jquery-rails"
-gem "paperclip", "~> 2.4"
+gem "paperclip", "~> 2.3.11"
 gem 'thumbs_up'
 # Bundle the extra gems:
 # gem 'bj'
